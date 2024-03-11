@@ -16,7 +16,7 @@ mvn exec:exec
 ```
 
 ## Contributing
-- **Project Structure** See [Maven Docs](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html) on project layout.k
+- **Project Structure** See [Maven Docs](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html) on project layout.
 - **Tests** Run unit tests with `mvn test`
 - **Formatting** Apply code formatting with `mvn spotless:apply`
 - **Documentation** Generate Documentation with `mvn javadoc:javadoc`
