@@ -1,4 +1,3 @@
-
 # SC2002 Assignment Class Diagram
 ```mermaid
 ---
@@ -9,12 +8,14 @@ classDiagram
         -String name
         -double price
         -String description
+        -boolean available
         -String[] categories
-        
+
         +name() String
         +price() double 
         +description() String 
         +categories() String[]
+        +isAvailable() boolean
     }
 
     class Order {
@@ -48,22 +49,22 @@ classDiagram
     class NewStatus {
         +process() OrderStatus 
     }
-    NewStatus --|> OrderStatus: implements
+    NewStatus ..|> OrderStatus: implements
     
     class PickupStatus {
         -LocalDateTime expiresOn
         +step(timestamp) OrderStatus 
         +collect() OrderStatus 
     }
-    PickupStatus --|> OrderStatus: implements
+    PickupStatus ..|> OrderStatus: implements
     
     class CanceledStatus {
     }
-    CanceledStatus --|> OrderStatus: implements
+    CanceledStatus ..|> OrderStatus: implements
     
     class CompletedStatus {
     }
-    CompletedStatus --|> OrderStatus: implements
+    CompletedStatus ..|> OrderStatus: implements
 
     %% Payment methods
     class PaymentMethod {
@@ -75,48 +76,48 @@ classDiagram
         -String email
         +pay(int amountCents) boolean 
     }
-    PaypalMethod --|> PaymentMethod: implements
+    PaypalMethod ..|> PaymentMethod: implements
 
     class BankCardMethod {
         -String number
         -Date expiry
         -String cvc
     }
-    BankCardMethod --|> PaymentMethod: implements
+    BankCardMethod ..|> PaymentMethod: implements
 
     %% Actions
     class Action {
+        <<interface>>
         +title() String 
         +execute(Scanner in, Chain chain) Chain 
     }
     Action --> Chain: applied on
 
-    class OrderMethod {
-        <<enumeration>>
-        %% placing order includes menu browsing
-        PLACE,
-        %% collecting an order includes payment processing
-        COLLECT,
-        LIST,
-        VIEW,
-        PROCESS,
-        GET_STATUS
-    }
-    
-    class OrderAction {
-        -OrderMethod method
+    class ViewMenuAction {
         +title() String 
         +execute(Scanner in, Chain chain) Chain 
     }
-    OrderAction --|> Action: implements
-    OrderAction *-- OrderMethod
+    ViewMenuAction ..|> Action: implements
     
+    class CustomerMethod {
+        <<enumeration>>
+        ORDER,
+        GET_STATUS,
+        PICKUP
+    }
+    
+    class CustomerAction {
+        -CustomerMethod method
+        +title() String 
+        +execute(Scanner in, Chain chain) Chain 
+    }
+    CustomerAction ..|> Action: implements
+    CustomerAction *-- CustomerMethod
+
     class StaffMethod {
         <<enumeration>>
-        PROMOTE,
-        ADD,
-        REMOVE,
-        LIST,
+        SET_STATUS,
+        VIEW_ORDER
     }
 
     class StaffAction {
@@ -124,38 +125,44 @@ classDiagram
         +title() String 
         +execute(Scanner in, Chain chain) Chain 
     }
-    StaffAction --|> Action: implements
+    StaffAction ..|> Action: implements
     StaffAction *-- StaffMethod
-
-    class BranchMethod {
-        <<enumeration>>
-        ASSIGN,
-        OPEN,
-        CLOSE,
-        LIST_STAFF,
-    }
     
-    class BranchAction {
-        -BranchMethod method
+    class ManagerMethod {
+        <<enumeration>>
+        ADD_MENU,
+        EDIT_MENU,
+        REMOVE_MENU
+        LIST_STAFF_BRANCH
+    }
+
+    class ManagerAction {
+        -ManagerMethod method
         +title() String 
         +execute(Scanner in, Chain chain) Chain 
     }
-    BranchAction --|> Action: implements
-    BranchAction *-- BranchMethod
-
-    class PaymentActionMethod {
+    ManagerAction ..|> Action: implements
+    ManagerAction *-- ManagerMethod
+    
+    class AdminMethod {
         <<enumeration>>
-        ADD,
-        REMOVE
+        OPEN_BRANCH,
+        CLOSE_BRANCH,
+        ADD_PAYMENT,
+        REMOVE_PAYMENT,
+        LIST_STAFF_ALL,
+        ADD_STAFF,
+        REMOVE_STAFF,
+        ASSIGN_STAFF
     }
     
-    class PaymentAction {
-        -PaymentActionMethod method
-        +title() String
+    class AdminAction {
+        -AdminMethod method
+        +title() String 
         +execute(Scanner in, Chain chain) Chain 
     }
-    PaymentAction --|> Action: implements
-    PaymentAction *-- PaymentActionMethod
+    AdminAction ..|> Action: implements
+    AdminAction *-- AdminMethod
 
     %% Identity & Access
     class Role {
@@ -169,25 +176,25 @@ classDiagram
         +char code()
         +getActions() Set~Action~
     }
-    CustomerRole --|> Role: implements
+    CustomerRole ..|> Role: implements
 
     class StaffRole {
         +char code()
         +getActions() Set~Action~
     }
-    StaffRole --|> Role: implements
+    StaffRole ..|> Role: implements
     
     class ManagerRole {
         +char code()
         +getActions() Set~Action~
     }
-    ManagerRole --|> Role: implements
+    ManagerRole ..|> Role: implements
 
     class AdminRole {
         +char code()
         +getActions() Set~Action~
     }
-    AdminRole --|> Role: implements
+    AdminRole ..|> Role: implements
 
     class User {
         -String username
@@ -210,7 +217,7 @@ classDiagram
         +getName() String 
         +getLocation() String 
         +getStaff() List~User~
-        +getMenu() Set~User~
+        +getMenu() Set~Item~
     }
     Branch "0..1" o-- "*" User: assigned
     Branch "1" *-- "*" Item: offers
@@ -232,6 +239,8 @@ classDiagram
 
     %% Application
     class Application {
+        -Role role
+        -Optional~User~ user
         -Chain chain
         +main(String[] args)$
     }
@@ -239,11 +248,8 @@ classDiagram
 ```
 
 ## Design Considerations
-
 ### Order Status: State Pattern
 
-### Payment Method:  Strategy Pattern
-
-### Action: Command Pattern
+### Payment Method & Action: Strategy Pattern
 
 ### Persistence: Java Serialisation
