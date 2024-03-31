@@ -1,7 +1,8 @@
+
 # SC2002 Assignment Class Diagram
 ```mermaid
 ---
-title: Fastfood Ordering Managment System
+title: Fastfood Ordering Management System
 ---
 classDiagram
     class Item {
@@ -27,6 +28,7 @@ classDiagram
         +getDiningOption() DiningOption 
         +getStatus() OrderStatus 
         +process()
+        +collect()
     }
     Order "1" o-- "*" Item: contains
     Order "1" *-- "1" DiningOption: selects
@@ -52,8 +54,8 @@ classDiagram
     NewStatus ..|> OrderStatus: implements
     
     class PickupStatus {
-        -LocalDateTime expiresOn
-        +step(timestamp) OrderStatus 
+        -Date expiresOn
+        +step(Date timestamp) OrderStatus 
         +collect() OrderStatus 
     }
     PickupStatus ..|> OrderStatus: implements
@@ -82,6 +84,7 @@ classDiagram
         -String number
         -Date expiry
         -String cvc
+        +pay(int amountCents) boolean 
     }
     BankCardMethod ..|> PaymentMethod: implements
 
@@ -173,25 +176,25 @@ classDiagram
     Role "0..1" o-- "*" Action: allowed
 
     class CustomerRole {
-        +char code()
+        +code() char()
         +getActions() Set~Action~
     }
     CustomerRole ..|> Role: implements
 
     class StaffRole {
-        +char code()
+        +code() char()
         +getActions() Set~Action~
     }
     StaffRole ..|> Role: implements
     
     class ManagerRole {
-        +char code()
+        +code() char()
         +getActions() Set~Action~
     }
     ManagerRole ..|> Role: implements
 
     class AdminRole {
-        +char code()
+        +code() char()
         +getActions() Set~Action~
     }
     AdminRole ..|> Role: implements
