@@ -34,3 +34,17 @@ jobs:
         run: mvn compile
       - name: Test FOMS
         run: mvn test
+
+  publish-javadoc:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write  
+    steps:
+      - name: Publish JavaDoc
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc
+          java-version: 21
+          target-folder: ""
+          project: maven
