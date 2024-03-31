@@ -1,7 +1,7 @@
 /*
-* NTU SC2002 project
-* Dining Option
-*/
+ * NTU SC2002 project
+ * Dining Option
+ */
 
 package sg.edu.ntu.sc2002;
 

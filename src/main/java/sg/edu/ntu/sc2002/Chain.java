@@ -1,7 +1,7 @@
 /*
  * NTU SC2002 project
  * Fast Food Chain
-*/
+ */
 
 package sg.edu.ntu.sc2002;
 
@@ -14,7 +14,8 @@ public class Chain {
     Set<Branch> branches;
     Set<PaymentMethod> paymentMethods;
 
-    public Chain(User admin, Set<User> staff, Set<Branch> branches, Set<PaymentMethod> paymentMethods) {
+    public Chain(
+            User admin, Set<User> staff, Set<Branch> branches, Set<PaymentMethod> paymentMethods) {
         this.admin = admin;
         this.staff = staff;
         this.branches = branches;
@@ -32,5 +33,4 @@ public class Chain {
     public Set<PaymentMethod> getPaymentMethods() {
         return paymentMethods;
     }
-
 }

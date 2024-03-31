@@ -1,7 +1,7 @@
 /*
-* NTU SC2002 project
-* Branch
-*/
+ * NTU SC2002 project
+ * Branch
+ */
 
 package sg.edu.ntu.sc2002;
 
@@ -10,7 +10,7 @@ import java.util.Set;
 
 /** Defines a Branch of Fast Food Restaurant {@link Chain}. */
 public class Branch implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private String name;
     private String location;
     private Set<User> staff;

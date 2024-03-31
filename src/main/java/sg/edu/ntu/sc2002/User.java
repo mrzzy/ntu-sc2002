@@ -1,15 +1,13 @@
 /*
  * NTU SC2002 project
  * User
-*/
+ */
 
 package sg.edu.ntu.sc2002;
 
 import java.io.Serializable;
 
-/**
- * Defines a authenticated user of the FOMS system.
- */
+/** Defines a authenticated user of the FOMS system. */
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String DEFAULT_PASSWORD = "password";
@@ -25,7 +23,7 @@ public class User implements Serializable {
 
     /**
      * Attempt to Login as user with given credentials
-     * 
+     *
      * @param username Username credential.
      * @param password Password credential.
      * @return {@code true} if login was successful, {@code false} otherwise.

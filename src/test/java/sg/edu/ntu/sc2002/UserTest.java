@@ -1,8 +1,8 @@
 /*
-* NTU SC2002 project
-* User
-* Unit Test
-*/
+ * NTU SC2002 project
+ * User
+ * Unit Test
+ */
 
 package sg.edu.ntu.sc2002;
 

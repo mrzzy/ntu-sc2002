@@ -1,7 +1,7 @@
 /*
-* NTU SC2002 project
-* Payment Method
-*/
+ * NTU SC2002 project
+ * Payment Method
+ */
 
 package sg.edu.ntu.sc2002;
 
@@ -9,7 +9,7 @@ package sg.edu.ntu.sc2002;
 public interface PaymentMethod {
     /**
      * Charge the payment method to pay for given amount.
-     * 
+     *
      * @param amountCents Amount to charge in cents.
      * @return {@code true} If the charge was successful, false otherwise.
      */

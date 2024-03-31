@@ -1,7 +1,7 @@
 /*
-* NTU SC2002 project
-* Order
-*/
+ * NTU SC2002 project
+ * Order
+ */
 
 package sg.edu.ntu.sc2002;
 
@@ -15,18 +15,12 @@ public class Order implements Serializable {
     private DiningOption diningOption;
     private OrderStatus status;
 
-    /**
-     * Process the items in this Order.
-     * Performed by Staff.
-     */
+    /** Process the items in this Order. Performed by Staff. */
     public void process() {
         status = status.process();
     }
 
-    /**
-     * Collect this Order.
-     * Performed by Customer.
-     */
+    /** Collect this Order. Performed by Customer. */
     public void collect() {
         status = status.collect();
     }
@@ -42,5 +36,4 @@ public class Order implements Serializable {
     public OrderStatus getStatus() {
         return status;
     }
-
 }
