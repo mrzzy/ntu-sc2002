@@ -46,4 +46,4 @@ buildNumber.properties
 
 # vim
 # vim-projectionist
-/.projections.json
+.idea/
