@@ -1,5 +1,6 @@
 # ntu-sc2002
 NTU SC2002 Project: Fastfood Ordering and Management System (FOMS).
+- [Class Diagram](docs/class_diagram.md)
 - [Javadoc Documentation](https://mrzzy.github.io/ntu-sc2002/)
 
 ## Installation
