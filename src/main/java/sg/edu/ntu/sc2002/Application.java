@@ -4,78 +4,73 @@
  */
 package sg.edu.ntu.sc2002;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 /** Entrypoint of the Fastfood Ordering &amp; Management System. */
 public class Application {
     public static void main(String[] args) {
-        Role role = null;
-        Optional<User> user = Optional.empty();
-        Chain chain = new Chain(
-                new User("admin", new AdminRole()),
-                new HashSet<User>(),
-                new HashSet<Branch>(),
-                new HashSet<PaymentMethod>()
-        );
+        // TODO: load chain from serialised state or init data
+        User admin = new User("admin", new AdminRole());
+        Chain chain =
+                new Chain(
+                        admin,
+                        new HashMap<String, User>(Map.of(admin.getUsername(), admin)),
+                        new HashSet<Branch>(),
+                        new HashSet<PaymentMethod>());
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Fastfood Ordering & Management System");
 
-        // Determine if the user is a customer
-        System.out.println("Are you a customer or a admin/staff?");
-        System.out.println("1) Customer");
-        System.out.println("2) Admin/Staff");
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1: {
-                // TODO : For when we get customer
-                // role = new CustomerRole();
+        // authentication loop
+        Session session;
+        while (true) {
+            try {
+                session = Session.authenticate(chain.getStaffs(), in);
                 break;
-            }
-            case 2: {
-                // Login ask them to login
-                System.out.println("Please enter username : ");
-                String username = scanner.next().strip();
-                System.out.println("Please enter password : ");
-                String password = scanner.next().strip();
-
-                // Check if it's the admin user
-                if (username.equals(chain.getAdmin().username) && password.equals(chain.getAdmin().password)) {
-                    role = new AdminRole();
-                    user = Optional.of(chain.getAdmin());
-                    System.out.println("Found");
-                } else {
-                    for (User staff: chain.getStaffs()) {
-                        if (staff.login(username, password)) {
-                            // TODO : Add this in
-                            // role = new StaffRole();
-                            user = Optional.of(staff);
-                        }
-                    }
-                }
-
-                // TODO : Some post-failure-authentication measures
-                if (user.isEmpty()) {
-                    System.out.println("Username and password not found");
-                }
-
-                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Failed to authenticate: " + e.getMessage());
             }
         }
+        session.role().getAction();
 
         // Core loop
         while (true) {
-            // TODO : Deal with customers
             // Print available actions
-            Set<Action> actions = role.getAction();
-            for (Action action : actions) {
-                System.out.println(action.title());
+            // quit action
+            System.out.println("0) Quit");
+            // role actions
+            ArrayList<Action> actions = new ArrayList<>(session.role().getAction());
+            for (int i = 0; i < actions.size(); i++) {
+                System.out.println(String.format("%d) %s", i + 1, actions.get(i).title()));
             }
-            // TODO : How to deal with which of action to pass in?
+            // session action: reset password
+            if (session.user().isPresent()) {
+                System.out.printf("%d) Reset password\n", actions.size() + 1);
+            }
 
-            break;
+            System.out.print("Option: ");
+            int choice = in.nextInt();
+            if (choice <= 0) {
+                // quit
+                break;
+            }
+            if (choice <= actions.size()) {
+                // execute action
+                chain = actions.get(choice - 1).execute(in, chain);
+                continue;
+            }
+            if (choice == actions.size() + 1) {
+                // reset password
+                session.changePassword(in);
+                continue;
+            }
+            System.out.println("Invalid option.");
         }
+
+        in.close();
     }
 }

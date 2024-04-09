@@ -5,17 +5,21 @@
 
 package sg.edu.ntu.sc2002;
 
+import java.util.Map;
 import java.util.Set;
 
 /** Defines a Fast Food Restaurant Chain */
 public class Chain {
     private User admin;
-    Set<User> staffs;
+    Map<String, User> staffs;
     Set<Branch> branches;
     Set<PaymentMethod> paymentMethods;
 
     public Chain(
-            User admin, Set<User> staffs, Set<Branch> branches, Set<PaymentMethod> paymentMethods) {
+            User admin,
+            Map<String, User> staffs,
+            Set<Branch> branches,
+            Set<PaymentMethod> paymentMethods) {
         this.admin = admin;
         this.staffs = staffs;
         this.branches = branches;
@@ -26,15 +30,15 @@ public class Chain {
         return admin;
     }
 
-    public Set<User> getStaffs() {
-        return staffs;
-    }
-
     public Set<Branch> getBranches() {
         return branches;
     }
 
     public Set<PaymentMethod> getPaymentMethods() {
         return paymentMethods;
+    }
+
+    public Map<String, User> getStaffs() {
+        return staffs;
     }
 }

@@ -10,10 +10,10 @@ import java.io.Serializable;
 /** Defines a authenticated user of the FOMS system. */
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static final String DEFAULT_PASSWORD = "password";
-    String username;
-    String password;
-    Role role;
+    public static final String DEFAULT_PASSWORD = "password";
+    private String username;
+    private String password;
+    private Role role;
 
     public User(String username, Role role) {
         this.username = username;
@@ -29,7 +29,7 @@ public class User implements Serializable {
      * @return {@code true} if login was successful, {@code false} otherwise.
      */
     public boolean login(String username, String password) {
-        return this.username == username && this.password == password;
+        return this.username.equals(username) && this.password.equals(password);
     }
 
     public void setPassword(String password) {
@@ -38,5 +38,17 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }

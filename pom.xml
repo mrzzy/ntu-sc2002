@@ -77,7 +77,7 @@
               also adding the project build directory -->
               <argument>-classpath</argument>
               <classpath/>
-              <argument>sg.edu.ntu.sc2002.App</argument>
+              <argument>sg.edu.ntu.sc2002.Application</argument>
             </arguments>
             <environmentVariables>
             </environmentVariables>

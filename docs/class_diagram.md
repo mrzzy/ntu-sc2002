@@ -1,4 +1,3 @@
-
 # SC2002 Assignment Class Diagram
 ```mermaid
 ---
@@ -173,7 +172,7 @@ classDiagram
         +code() char 
         +getActions() Set~Action~
     }
-    Role "0..1" o-- "*" Action: allowed
+    Role "0." o-- "*" Action: allowed
 
     class CustomerRole {
         +code() char()
@@ -219,35 +218,44 @@ classDiagram
         +remove(User staff)
         +getName() String 
         +getLocation() String 
-        +getStaff() List~User~
+        +getStaffs() List~User~
         +getMenu() Set~Item~
     }
-    Branch "0..1" o-- "*" User: assigned
+    Branch "0." o-- "*" User: assigned
     Branch "1" *-- "*" Item: offers
 
     class Chain {
         -User admin
-        -Set~User~ staff
+        -Map~String, User~ staff
         -Set~Branch~ branches
         -Set~PaymentMethod~ paymentMethods
         
         +getBranches() List~Branch~
-        +getStaff() Set~User~
+        +getStaffs() Collection~User~
         +getPaymentMethods() Set~PaymentMethod~
     }
     Chain "1" *-- "*" User: employs
-    Chain "1" *-- "1" User: adminsters
+    Chain "1" *-- "1" User: administers
     Chain "1" *-- "*" Branch: branches
     Chain "1" *-- "*" PaymentMethod: supports
 
+    %% Session
+    class Session {
+        -Optional~User~ user
+        -Role role
+        
+        +getUser() Optional~User~
+        +getRole() Role
+    }
+    Session "1" *-- "*" User: used by
+    Session "1" *-- "1" Role: authorised
+
     %% Application
     class Application {
-        -Role role
-        -Optional~User~ user
-        -Chain chain
         +main(String[] args)$
     }
-    Application "1" *-- "*" Chain: hosted by
+    Application "1" ..> "1" Session: session
+    Application "1" ..> "1" Chain: chain
 ```
 
 ## Design Considerations
