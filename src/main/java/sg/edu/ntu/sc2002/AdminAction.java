@@ -12,7 +12,15 @@ public class AdminAction implements Action {
      */
     @Override
     public String title() {
-        return "";
+        return """
+        1) Open Branch
+        2) Close Branch
+        3) Add Payment
+        4) Remove Payment
+        5) List Staff
+        6) Add Staff
+        7) Remove Staff
+        8) Assign Staff""";
     }
 
     /**

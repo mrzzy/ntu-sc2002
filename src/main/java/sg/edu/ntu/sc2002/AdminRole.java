@@ -20,6 +20,6 @@ public class AdminRole implements Role {
      */
     @Override
     public Set<Action> getAction() {
-        return Set.of();
+        return Set.of(new AdminAction());
     }
 }
