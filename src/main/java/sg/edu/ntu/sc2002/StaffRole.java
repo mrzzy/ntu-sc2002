@@ -1,13 +1,13 @@
 /*
  * NTU SC2002 project
- * Customer Role
+ * Staff Role
  */
 package sg.edu.ntu.sc2002;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class CustomerRole implements Role {
+public class StaffRole implements Role {
     @Override
     public char code() {
         // TODO Auto-generated method stub
