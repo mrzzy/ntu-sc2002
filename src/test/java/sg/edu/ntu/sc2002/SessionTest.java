@@ -23,7 +23,7 @@ public class SessionTest {
 
     @Test
     public void authenticateValidUser() {
-        User user = new User("john", null);
+        User user = new User("john", "John", null);
         Scanner in =
                 new Scanner("2" + "\n" + user.getUsername() + "\n" + User.DEFAULT_PASSWORD + "\n");
         Session.authenticate(Map.of(user.getUsername(), user), in);
@@ -37,7 +37,7 @@ public class SessionTest {
 
     @Test
     public void authenticateInvalidUserCredentials() {
-        User user = new User("john", null);
+        User user = new User("john", "John", null);
         Scanner in = new Scanner("2" + "\n" + user.getUsername() + "\n" + "bad password" + "\n");
         assertThrows(
                 IllegalArgumentException.class,
@@ -46,7 +46,7 @@ public class SessionTest {
 
     @Test
     void changePasswordValidUser() {
-        User user = new User("john", null);
+        User user = new User("john", "John", null);
         Session session = new Session(user.getRole(), Optional.of(user));
         String newPassword = "alice";
         session.changePassword(new Scanner(newPassword));

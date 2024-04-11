@@ -4,17 +4,11 @@
  */
 package sg.edu.ntu.sc2002;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import org.dhatim.fastexcel.reader.ReadableWorkbook;
-import org.dhatim.fastexcel.reader.Row;
 
 /** Entrypoint of the Fastfood Ordering &amp; Management System. */
 public class Application {

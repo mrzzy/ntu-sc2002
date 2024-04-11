@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class UserTest {
     @Test
     public void loginCorrect() {
-        User user = new User("john", null);
+        User user = new User("john", "John", null);
         assertTrue(user.login("john", "password"));
         user.setPassword("abc");
         assertTrue(user.login("john", "abc"));
@@ -22,7 +22,7 @@ public class UserTest {
 
     @Test
     public void loginWrong() {
-        User user = new User("john", null);
+        User user = new User("john", "John", null);
         // wrong username
         assertFalse(user.login("phil", "password"));
         // wrong password

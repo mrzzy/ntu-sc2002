@@ -49,13 +49,13 @@ public class Branch implements Serializable {
     public void assign(User user) throws LimitExceededException {
         switch (user.getRole()) {
             case StaffRole r -> {
-                if (getStaffQuota() >= getStaffs().size()) {
+                if (getStaffQuota() <= getStaffs().size()) {
                     throw new LimitExceededException("Staff assignment exceeds quota.");
                 }
                 getStaffs().add(user);
             }
             case ManagerRole r -> {
-                if (getManagerQuota() >= getManagers().size()) {
+                if (getManagerQuota() <= getManagers().size()) {
                     throw new LimitExceededException("Manager assignment exceeds quota.");
                 }
                 getManagers().add(user);
