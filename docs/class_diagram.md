@@ -9,12 +9,12 @@ classDiagram
         -double price
         -String description
         -boolean available
-        -String[] categories
+        -String category
 
         +name() String
         +price() double 
         +description() String 
-        +categories() String[]
+        +category() String
         +isAvailable() boolean
     }
 
