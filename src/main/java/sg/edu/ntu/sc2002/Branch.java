@@ -29,11 +29,16 @@ public class Branch implements Serializable {
         return name;
     }
 
+    /** Get the staff quota for this branch.
+     * Note that staff quota is excludes managers in the branch.
+    */
     public int getStaffQuota() {
         return staffQuota;
     }
 
-    /** Derives manager quota based on staff quota. */
+    /** Derives manager quota for this branch based on staff quota.
+     * Note that manager quota is indedpendent of staff quota.
+    */
     public int getManagerQuota() {
         if (staffQuota >= 1 && staffQuota <= 4) {
             return 1;
