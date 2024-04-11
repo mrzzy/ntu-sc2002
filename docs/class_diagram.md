@@ -212,7 +212,8 @@ classDiagram
     class Branch {
         -String name
         -String location
-        -Set~User~ staff
+        -Set~User~ staffs
+        -Set~User~ managers
         -Set~Item~ menu
 
         +assign(User staff)
@@ -220,6 +221,7 @@ classDiagram
         +getName() String 
         +getLocation() String 
         +getStaffs() List~User~
+        +getManagers() List~User~
         +getMenu() Set~Item~
         +getStaffQuota() int
         +getManagerQuota() int

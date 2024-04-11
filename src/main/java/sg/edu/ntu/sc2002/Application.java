@@ -4,17 +4,23 @@
  */
 package sg.edu.ntu.sc2002;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import org.dhatim.fastexcel.reader.ReadableWorkbook;
+import org.dhatim.fastexcel.reader.Row;
 
 /** Entrypoint of the Fastfood Ordering &amp; Management System. */
 public class Application {
     public static void main(String[] args) {
         // TODO: load chain from serialised state or init data
-        User admin = new User("admin", new AdminRole());
+        User admin = new User("admin", "Admin", new AdminRole());
         Chain chain =
                 new Chain(
                         admin,

@@ -63,5 +63,4 @@ public class User implements Serializable {
         // users are unique by username
         return username.hashCode();
     }
-
 }
