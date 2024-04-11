@@ -12,11 +12,13 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final String DEFAULT_PASSWORD = "password";
     private String username;
+    private String name;
     private String password;
     private Role role;
 
-    public User(String username, Role role) {
+    public User(String username, String name, Role role) {
         this.username = username;
+        this.name = name;
         this.password = DEFAULT_PASSWORD;
         this.role = role;
     }
@@ -50,5 +52,9 @@ public class User implements Serializable {
 
     public Role getRole() {
         return role;
+    }
+
+    public String getName() {
+        return name;
     }
 }

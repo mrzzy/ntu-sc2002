@@ -14,7 +14,7 @@ classDiagram
         +name() String
         +price() double 
         +description() String 
-        +category() String
+        +categories() String
         +isAvailable() boolean
     }
 
@@ -200,6 +200,7 @@ classDiagram
 
     class User {
         -String username
+        -String name
         -String password
         -Role role
         +login(String username, String Password) boolean 
