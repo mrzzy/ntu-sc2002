@@ -57,4 +57,11 @@ public class User implements Serializable {
     public String getName() {
         return name;
     }
+
+    @Override
+    public int hashCode() {
+        // users are unique by username
+        return username.hashCode();
+    }
+
 }
