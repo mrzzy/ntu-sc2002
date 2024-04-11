@@ -220,6 +220,8 @@ classDiagram
         +getLocation() String 
         +getStaffs() List~User~
         +getMenu() Set~Item~
+        +getStaffQuota() int
+        +getManagerQuota() int
     }
     Branch "0." o-- "*" User: assigned
     Branch "1" *-- "*" Item: offers
