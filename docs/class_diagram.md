@@ -198,15 +198,28 @@ classDiagram
     }
     AdminRole ..|> Role: implements
 
+    class Gender {
+        <<enumeration>>
+        MALE,
+        FEMALE
+    }
     class User {
         -String username
         -String name
+        -int age
         -String password
+        -Gender gender
         -Role role
         +login(String username, String Password) boolean 
         +setRole(Role role)
+        +getUsername() String
+        +getName() String
+        +getAge() int
+        +getPassword() String
+        +getGender() String
     }
     User o-- Role: assigned
+    User *-- Gender: gender
 
     %% Fast Food Chain & Branch
     class Branch {

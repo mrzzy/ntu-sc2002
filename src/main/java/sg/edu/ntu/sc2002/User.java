@@ -13,13 +13,21 @@ public class User implements Serializable {
     public static final String DEFAULT_PASSWORD = "password";
     private String username;
     private String name;
+    private int age;
+    private Gender gender;
     private String password;
     private Role role;
 
-    public User(String username, String name, Role role) {
+    public User(String username, Role role) {
+        this(username, username, -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
+    }
+
+    public User(String username, String name, int age, Gender gender, String password, Role role) {
         this.username = username;
         this.name = name;
-        this.password = DEFAULT_PASSWORD;
+        this.age = age;
+        this.gender = gender;
+        this.password = password;
         this.role = role;
     }
 
@@ -62,5 +70,13 @@ public class User implements Serializable {
     public int hashCode() {
         // users are unique by username
         return username.hashCode();
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 }
