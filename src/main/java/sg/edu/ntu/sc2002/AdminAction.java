@@ -34,7 +34,14 @@ public class AdminAction implements Action {
             }
         }
 
-        Branch branch = new Branch(name, location, quota, new HashSet<User>(), new HashSet<User>(), new HashSet<Item>());
+        Branch branch =
+                new Branch(
+                        name,
+                        location,
+                        quota,
+                        new HashSet<User>(),
+                        new HashSet<User>(),
+                        new HashSet<Item>());
         chain.getBranches().add(branch);
 
         System.out.printf("Successfully opened branch %s\n", name);
@@ -47,14 +54,15 @@ public class AdminAction implements Action {
         System.out.print("Please enter branch location: ");
         String location = in.next();
 
-        boolean removed = chain.getBranches().removeIf(
-                b -> b.getName().equals(name) && b.getLocation().equals(location)
-        );
+        boolean removed =
+                chain.getBranches()
+                        .removeIf(
+                                b -> b.getName().equals(name) && b.getLocation().equals(location));
 
-        if (removed)
-            System.out.printf("Successfully closed branch %s\n", name);
+        if (removed) System.out.printf("Successfully closed branch %s\n", name);
         else
-            System.out.println("Branch name and location does not exist in our records to be closed");
+            System.out.println(
+                    "Branch name and location does not exist in our records to be closed");
     }
 
     /**
@@ -66,7 +74,8 @@ public class AdminAction implements Action {
      */
     @Override
     public Chain execute(Scanner in, Chain chain) {
-        System.out.println("""
+        System.out.println(
+                """
                 1) Open Branch
                 2) Close Branch
                 3) Add Payment
