@@ -65,6 +65,18 @@ public class AdminAction implements Action {
                     "Branch name and location does not exist in our records to be closed");
     }
 
+    private void listAllStaff(Scanner in, Chain chain) {
+        System.out.println("List all staff");
+
+        // TODO : filter branch / role / gender / age
+        for (Branch branch : chain.getBranches()) {
+            for (User staff : branch.getStaffs()) {
+                System.out.printf("%s, %s, %s, %d, %s, %s\n",
+                        branch.getName(), branch.getLocation(), staff.getName(), staff.getAge(), staff.getGender(), staff.getRole().toString());
+            }
+        }
+    }
+
     /**
      * Execute Action on the given Fast Food Chain.
      *
@@ -76,15 +88,14 @@ public class AdminAction implements Action {
     public Chain execute(Scanner in, Chain chain) {
         System.out.println(
                 """
-                1) Open Branch
-                2) Close Branch
-                3) Add Payment
-                4) Remove Payment
-                5) List All Staff
-                6) Add Staff
-                7) Remove Staff
-                8) Assign Staff
-                """);
+                   1) Open Branch
+                   2) Close Branch
+                   3) Add Payment
+                   4) Remove Payment
+                   5) List All Staff
+                   6) Add Staff
+                   7) Remove Staff
+                   8) Assign Staff""");
         int option = in.nextInt();
 
         switch (option) {
@@ -93,6 +104,15 @@ public class AdminAction implements Action {
                 break;
             case 2:
                 closeBranch(in, chain);
+                break;
+            case 3:
+            case 4:
+            case 5:
+                listAllStaff(in, chain);
+                break;
+            case 6:
+                break;
+            default:
                 break;
         }
 
