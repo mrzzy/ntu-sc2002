@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Application {
     public static void main(String[] args) {
         // TODO: load chain from serialised state or init data
-        User admin = new User("admin", "Admin", new AdminRole());
+        User admin = new User("admin", new AdminRole());
         Chain chain =
                 new Chain(
                         admin,
