@@ -17,36 +17,36 @@ public class BranchTest {
 
     @Test
     public void assignStaff() throws LimitExceededException {
-        branch.assign(new User("phil", "Phil", new StaffRole()));
+        branch.assign(new User("phil", new StaffRole()));
     }
 
     @Test
     public void assignManager() throws LimitExceededException {
-        branch.assign(new User("phil", "Phil", new ManagerRole()));
+        branch.assign(new User("phil", new ManagerRole()));
     }
 
     @Test
     public void assignBadRole() throws LimitExceededException {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> branch.assign(new User("phil", "Phil", new CustomerRole())));
+                () -> branch.assign(new User("phil", new CustomerRole())));
     }
 
     @Test
     public void assignStaffExceedQuota() throws LimitExceededException {
-        branch.assign(new User("john", "John", new StaffRole()));
+        branch.assign(new User("john", new StaffRole()));
         assertThrows(
                 LimitExceededException.class,
-                () -> branch.assign(new User("john", "John", new StaffRole())));
+                () -> branch.assign(new User("john", new StaffRole())));
     }
 
     @Test
     public void assignManagerExceedQuota() throws LimitExceededException {
-        branch.assign(new User("john", "John", new StaffRole()));
+        branch.assign(new User("john", new StaffRole()));
 
-        branch.assign(new User("phil", "Phil", new ManagerRole()));
+        branch.assign(new User("phil", new ManagerRole()));
         assertThrows(
                 LimitExceededException.class,
-                () -> branch.assign(new User("phil", "Phil", new ManagerRole())));
+                () -> branch.assign(new User("phil", new ManagerRole())));
     }
 }
