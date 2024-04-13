@@ -71,8 +71,14 @@ public class AdminAction implements Action {
         // TODO : filter branch / role / gender / age
         for (Branch branch : chain.getBranches()) {
             for (User staff : branch.getStaffs()) {
-                System.out.printf("%s, %s, %s, %d, %s, %s\n",
-                        branch.getName(), branch.getLocation(), staff.getName(), staff.getAge(), staff.getGender(), staff.getRole().toString());
+                System.out.printf(
+                        "%s, %s, %s, %d, %s, %s\n",
+                        branch.getName(),
+                        branch.getLocation(),
+                        staff.getName(),
+                        staff.getAge(),
+                        staff.getGender(),
+                        staff.getRole().toString());
             }
         }
     }
@@ -88,14 +94,14 @@ public class AdminAction implements Action {
     public Chain execute(Scanner in, Chain chain) {
         System.out.println(
                 """
-                   1) Open Branch
-                   2) Close Branch
-                   3) Add Payment
-                   4) Remove Payment
-                   5) List All Staff
-                   6) Add Staff
-                   7) Remove Staff
-                   8) Assign Staff""");
+                1) Open Branch
+                2) Close Branch
+                3) Add Payment
+                4) Remove Payment
+                5) List All Staff
+                6) Add Staff
+                7) Remove Staff
+                8) Assign Staff""");
         int option = in.nextInt();
 
         switch (option) {
