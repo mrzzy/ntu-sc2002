@@ -1,5 +1,6 @@
 package sg.edu.ntu.sc2002;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class AdminAction implements Action {
@@ -15,6 +16,47 @@ public class AdminAction implements Action {
         return "Admin Actions: Manipulate Branch, Payment Methods, Staff.";
     }
 
+    // TODO : Exception here is not intended long term
+    private void openBranch(Scanner in, Chain chain) {
+        System.out.println("Open branch");
+        System.out.print("Please enter branch name: ");
+        String name = in.next();
+        System.out.print("Please enter branch location: ");
+        String location = in.next();
+        System.out.print("Please enter branch staff quota: ");
+        int quota = in.nextInt();
+
+        // TODO : Handle this case
+        // Check that no existing branch has the same name AND location
+        for (Branch branch : chain.getBranches()) {
+            if (branch.getName().equals(name) && branch.getLocation().equals(location)) {
+                System.out.println("Cannot have same branch names and locations");
+            }
+        }
+
+        Branch branch = new Branch(name, location, quota, new HashSet<User>(), new HashSet<User>(), new HashSet<Item>());
+        chain.getBranches().add(branch);
+
+        System.out.printf("Successfully opened branch %s\n", name);
+    }
+
+    private void closeBranch(Scanner in, Chain chain) {
+        System.out.println("Close branch");
+        System.out.print("Please enter branch name: ");
+        String name = in.next();
+        System.out.print("Please enter branch location: ");
+        String location = in.next();
+
+        boolean removed = chain.getBranches().removeIf(
+                b -> b.getName().equals(name) && b.getLocation().equals(location)
+        );
+
+        if (removed)
+            System.out.printf("Successfully closed branch %s\n", name);
+        else
+            System.out.println("Branch name and location does not exist in our records to be closed");
+    }
+
     /**
      * Execute Action on the given Fast Food Chain.
      *
@@ -24,6 +66,27 @@ public class AdminAction implements Action {
      */
     @Override
     public Chain execute(Scanner in, Chain chain) {
-        return null;
+        System.out.println("""
+                1) Open Branch
+                2) Close Branch
+                3) Add Payment
+                4) Remove Payment
+                5) List All Staff
+                6) Add Staff
+                7) Remove Staff
+                8) Assign Staff
+                """);
+        int option = in.nextInt();
+
+        switch (option) {
+            case 1:
+                openBranch(in, chain);
+                break;
+            case 2:
+                closeBranch(in, chain);
+                break;
+        }
+
+        return chain;
     }
 }
