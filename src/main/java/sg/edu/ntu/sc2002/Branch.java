@@ -112,4 +112,35 @@ public class Branch implements Serializable {
     public Set<User> getManagers() {
         return managers;
     }
+
+    @Override
+    public int hashCode() {
+        // branches are unique by username
+        return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Branch other = (Branch) obj;
+        if (name == null) {
+            if (other.name != null) return false;
+        } else if (!name.equals(other.name)) return false;
+        if (location == null) {
+            if (other.location != null) return false;
+        } else if (!location.equals(other.location)) return false;
+        if (staffQuota != other.staffQuota) return false;
+        if (staffs == null) {
+            if (other.staffs != null) return false;
+        } else if (!staffs.equals(other.staffs)) return false;
+        if (managers == null) {
+            if (other.managers != null) return false;
+        } else if (!managers.equals(other.managers)) return false;
+        if (menu == null) {
+            if (other.menu != null) return false;
+        } else if (!menu.equals(other.menu)) return false;
+        return true;
+    }
 }

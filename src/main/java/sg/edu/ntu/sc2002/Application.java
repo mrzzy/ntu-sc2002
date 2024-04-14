@@ -5,23 +5,12 @@
 package sg.edu.ntu.sc2002;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Scanner;
 
 /** Entrypoint of the Fastfood Ordering &amp; Management System. */
 public class Application {
     public static void main(String[] args) {
-        // TODO: load chain from serialised state or init data
-        User admin = new User("admin", new AdminRole());
-        Chain chain =
-                new Chain(
-                        admin,
-                        new HashMap<String, User>(Map.of(admin.getUsername(), admin)),
-                        new HashSet<Branch>(),
-                        new HashSet<PaymentMethod>());
-
+        Chain chain = Init.initChain();
         Scanner in = new Scanner(System.in);
         System.out.println("Fastfood Ordering & Management System");
 

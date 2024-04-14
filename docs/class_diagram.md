@@ -201,7 +201,8 @@ classDiagram
     class Gender {
         <<enumeration>>
         MALE,
-        FEMALE
+        FEMALE,
+        UNKNOWN
     }
     class User {
         -String username
@@ -268,12 +269,24 @@ classDiagram
     Session "1" *-- "*" User: used by
     Session "1" *-- "1" Role: authorised
 
+    %% Application Init
+    class Init {
+        +initChain() Chain$
+        -parseMenus(List~Row~ rows) Map~String, Set~$
+        -parseStaffs(List~Row~ rows) Map~String, Set~$
+        -parseBranches(List~Row~ rows) Map~String, Branch~$
+        -readInitWorkbook(String path) List~Row~$
+    }
+    Init "1" ..> "1" Chain: initialises
+    
     %% Application
     class Application {
         +main(String[] args)$
     }
     Application "1" ..> "1" Session: session
     Application "1" ..> "1" Chain: chain
+    Application "1" ..> "1" Init: initialise
+
 ```
 
 ## Design Considerations

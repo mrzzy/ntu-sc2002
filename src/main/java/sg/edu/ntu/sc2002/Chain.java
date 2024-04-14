@@ -11,9 +11,9 @@ import java.util.Set;
 /** Defines a Fast Food Restaurant Chain */
 public class Chain {
     private User admin;
-    Map<String, User> staffs;
-    Set<Branch> branches;
-    Set<PaymentMethod> paymentMethods;
+    private Map<String, User> staffs;
+    private Set<Branch> branches;
+    private Set<PaymentMethod> paymentMethods;
 
     public Chain(
             User admin,

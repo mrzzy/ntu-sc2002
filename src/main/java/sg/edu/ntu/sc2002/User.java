@@ -79,4 +79,19 @@ public class User implements Serializable {
     public Gender getGender() {
         return gender;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        User other = (User) obj;
+        return getUsername().equals(other.getUsername())
+                && getName().equals(other.getName())
+                && getAge() == (other.getAge())
+                && getGender().equals(other.getGender())
+                && getPassword().equals(other.getPassword())
+                && getRole().code() == getRole().code();
+    }
 }
