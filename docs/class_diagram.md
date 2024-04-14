@@ -173,31 +173,31 @@ classDiagram
     class Role {
         <<interface>>
         +code() char 
-        +getActions() Set~Action~
+        +getActions() List~Action~
     }
     Role "0." o-- "*" Action: allowed
 
     class CustomerRole {
         +code() char()
-        +getActions() Set~Action~
+        +getActions() List~Action~
     }
     CustomerRole ..|> Role: implements
 
     class StaffRole {
         +code() char()
-        +getActions() Set~Action~
+        +getActions() List~Action~
     }
     StaffRole ..|> Role: implements
     
     class ManagerRole {
         +code() char()
-        +getActions() Set~Action~
+        +getActions() List~Action~
     }
     ManagerRole ..|> Role: implements
 
     class AdminRole {
         +code() char()
-        +getActions() Set~Action~
+        +getActions() List~Action~
     }
     AdminRole ..|> Role: implements
 

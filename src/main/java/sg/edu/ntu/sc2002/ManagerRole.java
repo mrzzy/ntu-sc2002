@@ -4,8 +4,8 @@
  */
 package sg.edu.ntu.sc2002;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManagerRole implements Role {
     @Override
@@ -15,8 +15,8 @@ public class ManagerRole implements Role {
     }
 
     @Override
-    public Set<Action> getAction() {
+    public List<Action> getAction() {
         // TODO Auto-generated method stub
-        return new HashSet<>();
+        return new ArrayList<>();
     }
 }

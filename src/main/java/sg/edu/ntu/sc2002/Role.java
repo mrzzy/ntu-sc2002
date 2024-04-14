@@ -5,7 +5,7 @@
 
 package sg.edu.ntu.sc2002;
 
-import java.util.Set;
+import java.util.List;
 
 /** Role held by a {@link User} defines the actions the User is authorised to take. */
 public interface Role {
@@ -21,5 +21,5 @@ public interface Role {
      *
      * @return Set of actions that the role is authorised to take.
      */
-    public Set<Action> getAction();
+    public List<Action> getAction();
 }
