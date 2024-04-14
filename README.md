@@ -17,6 +17,8 @@ Run FOMS:
 mvn exec:exec
 ```
 
+- **Program Arguments** Open pom.xml and add `<argument>` tags to `exec-maven-plugin`'s `<arguments>` tag.
+
 ## Contributing
 - **Project Structure** See [Maven Docs](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html) on project layout.
 - **Tests** Run unit tests with `mvn test`

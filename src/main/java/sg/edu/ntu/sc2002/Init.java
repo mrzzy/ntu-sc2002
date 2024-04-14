@@ -29,7 +29,7 @@ public class Init {
     /**
      * Read initial Fast Food Chain state from initial Excel Workbooks in resources.
      *
-     * @returns Initial Fast Food Chain state.
+     * @return Initial Fast Food Chain state.
      */
     public static Chain initChain() {
         Map<String, Branch> branches = parseBranches(Init.readInitWorkbook("branch_list.xlsx"));
