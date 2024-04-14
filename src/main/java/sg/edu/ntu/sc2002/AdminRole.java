@@ -21,8 +21,16 @@ public class AdminRole implements Role {
     @Override
     public Set<Action> getAction() {
         return Set.of(
+                new AdminAction(AdminMethod.ADD_STAFF),
+                new AdminAction(AdminMethod.EDIT_STAFF),
+                new AdminAction(AdminMethod.REMOVE_STAFF),
+                new AdminAction(AdminMethod.LIST_STAFF_ALL),
+                new AdminAction(AdminMethod.ASSIGN_STAFF),
+                new AdminAction(AdminMethod.PROMOTE_STAFF),
+                new AdminAction(AdminMethod.TRANSFER_STAFF),
+                new AdminAction(AdminMethod.ADD_PAYMENT),
+                new AdminAction(AdminMethod.REMOVE_PAYMENT),
                 new AdminAction(AdminMethod.OPEN_BRANCH),
-                new AdminAction(AdminMethod.CLOSE_BRANCH),
-                new AdminAction(AdminMethod.LIST_STAFF_ALL));
+                new AdminAction(AdminMethod.CLOSE_BRANCH));
     }
 }

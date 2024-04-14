@@ -18,33 +18,18 @@ public class AdminAction implements Action {
     @Override
     public String title() {
         switch (method) {
-            case OPEN_BRANCH -> {
-                return "Open Branch";
-            }
-            case CLOSE_BRANCH -> {
+            case ADD_STAFF: return "Add Staff";
+            case EDIT_STAFF: return "Edit Staff";
+            case REMOVE_STAFF: return "Remove Staff";
+            case LIST_STAFF_ALL: return "List All Staff";
+            case ASSIGN_STAFF: return "Assign Staff";
+            case PROMOTE_STAFF: return "Promote Staff";
+            case TRANSFER_STAFF: return "Transfer Staff";
+            case ADD_PAYMENT: return "Add Payment";
+            case REMOVE_PAYMENT: return "Remove Payment";
+            case OPEN_BRANCH: return "Open Branch";
+            default: // Last possible case
                 return "Close Branch";
-            }
-            case ADD_PAYMENT -> {
-                return "Add Payment";
-            }
-            case REMOVE_PAYMENT -> {
-                return "Remove Payment";
-            }
-            case LIST_STAFF_ALL -> {
-                return "List All Staff";
-            }
-            case ADD_STAFF -> {
-                return "Add Staff";
-            }
-            case REMOVE_STAFF -> {
-                return "Remove Staff";
-            }
-            case ASSIGN_STAFF -> {
-                return "Assign Staff";
-            }
-            default -> {
-                return "";
-            }
         }
     }
 
