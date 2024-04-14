@@ -149,11 +149,34 @@ public class AdminAction implements Action {
     private void assignManager(Scanner in, Chain chain) {
         System.out.println("Assign manager");
 
-        chain.getStaffs().forEach((k, v) -> {
-            if (v.getRole().code() == 'M') {
-                System.out.println(k.toString());
+        System.out.print("Please enter manager username: ");
+        String username = in.next();
+
+        if (!chain.getStaffs().containsKey(username)) {
+            System.out.println("This user does not exist");
+        }
+
+        User user = chain.getStaffs().get(username);
+        if (user.getRole().code() != 'M') {
+            System.out.println("This user is not a manager");
+            return;
+        }
+
+        System.out.println("Please enter branch name: ");
+        String branch = in.next();
+
+        for (Branch b : chain.getBranches()) {
+            if (b.getName().equals(branch)) {
+                // Check how many branch managers exist in this branch
+                if (b.getManagers().size() >= b.getManagerQuota()) {
+                    System.out.println("This branch has hit it's total number of branch managers and is unable to add more");
+                    return;
+                }
+
+                // Add the new manager in
+                b.getManagers().add(user);
             }
-        });
+        }
     }
 
     // TODO : Exception here is not intended long term
