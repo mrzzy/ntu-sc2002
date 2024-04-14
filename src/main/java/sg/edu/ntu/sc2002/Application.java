@@ -4,17 +4,36 @@
  */
 package sg.edu.ntu.sc2002;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** Entrypoint of the Fastfood Ordering &amp; Management System. */
+/** Fastfood Ordering &amp; Management System application. */
 public class Application {
+    /**
+     * Entrypoint of Fastfood Ordering &amp; Management System
+     *
+     * @param args Optional. User may pass the path of serialization file to save / restore Fast
+     *     Food {@link Chain} state. Otherwise, Chain stat will be saved to a temporary file.
+     */
     public static void main(String[] args) {
-        Chain chain = Init.initChain();
-        Scanner in = new Scanner(System.in);
         System.out.println("Fastfood Ordering & Management System");
+        // init or restore chain state
+        Chain chain;
+        if (args.length >= 1 && Files.exists(Path.of(args[0]))) {
+            // restore chain state from serialised file
+            chain = Serialize.restore(args[0]);
+            System.out.println("Restored application state: " + args[0]);
+        } else {
+            // initialize chain state from resources
+            chain = Init.initChain();
+        }
 
         // authentication loop
+        Scanner in = new Scanner(System.in);
         Session session;
         while (true) {
             try {
@@ -24,7 +43,6 @@ public class Application {
                 System.out.println("Failed to authenticate: " + e.getMessage());
             }
         }
-        session.role().getAction();
 
         // Core loop
         while (true) {
@@ -60,6 +78,19 @@ public class Application {
             System.out.println("Invalid option.");
         }
 
+        // save chain state
+        String savePath;
+        if (args.length >= 1) {
+            savePath = args[0];
+        } else {
+            try {
+                savePath = File.createTempFile("chain", "").getPath();
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create save file.", e);
+            }
+        }
+        Serialize.save(chain, savePath);
+        System.out.println("Saved application state: " + savePath);
         in.close();
     }
 }
