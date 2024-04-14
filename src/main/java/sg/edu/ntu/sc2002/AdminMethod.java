@@ -5,7 +5,7 @@ public enum AdminMethod {
     EDIT_STAFF, // Edit existing staff
     REMOVE_STAFF, // Remove a staff
     LIST_STAFF_ALL, // Filter by branch/role/gender/age
-    ASSIGN_STAFF, // Assign managers to each branch within quota constraint
+    ASSIGN_MANAGER, // Assign managers to each branch within quota constraint
     PROMOTE_STAFF, // Promote staff to a branch manager
     TRANSFER_STAFF, // Transfer a staff/manager among branches
     ADD_PAYMENT, // Add a payment method

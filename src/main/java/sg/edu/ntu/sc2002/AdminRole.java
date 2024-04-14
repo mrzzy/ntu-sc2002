@@ -25,7 +25,7 @@ public class AdminRole implements Role {
                 new AdminAction(AdminMethod.EDIT_STAFF),
                 new AdminAction(AdminMethod.REMOVE_STAFF),
                 new AdminAction(AdminMethod.LIST_STAFF_ALL),
-                new AdminAction(AdminMethod.ASSIGN_STAFF),
+                new AdminAction(AdminMethod.ASSIGN_MANAGER),
                 new AdminAction(AdminMethod.PROMOTE_STAFF),
                 new AdminAction(AdminMethod.TRANSFER_STAFF),
                 new AdminAction(AdminMethod.ADD_PAYMENT),

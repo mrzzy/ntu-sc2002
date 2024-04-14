@@ -26,8 +26,8 @@ public class AdminAction implements Action {
                 return "Remove Staff";
             case LIST_STAFF_ALL:
                 return "List All Staff";
-            case ASSIGN_STAFF:
-                return "Assign Staff";
+            case ASSIGN_MANAGER:
+                return "Assign Manager";
             case PROMOTE_STAFF:
                 return "Promote Staff";
             case TRANSFER_STAFF:
@@ -128,6 +128,28 @@ public class AdminAction implements Action {
         chain.getStaffs().remove(username);
     }
 
+    private void listAllStaff(Scanner in, Chain chain) {
+        System.out.println("List all staff");
+
+        // TODO : filter branch / role / gender / age
+        for (Branch branch : chain.getBranches()) {
+            for (User staff : branch.getStaffs()) {
+                System.out.printf(
+                        "%s, %s, %s, %d, %s, %s\n",
+                        branch.getName(),
+                        branch.getLocation(),
+                        staff.getName(),
+                        staff.getAge(),
+                        staff.getGender(),
+                        staff.getRole().toString());
+            }
+        }
+    }
+
+    private void assignManager(Scanner in, Chain chain) {
+        System.out.println("Assign manager");
+    }
+
     // TODO : Exception here is not intended long term
     private void openBranch(Scanner in, Chain chain) {
         System.out.println("Open branch");
@@ -177,24 +199,6 @@ public class AdminAction implements Action {
                     "Branch name and location does not exist in our records to be closed");
     }
 
-    private void listAllStaff(Scanner in, Chain chain) {
-        System.out.println("List all staff");
-
-        // TODO : filter branch / role / gender / age
-        for (Branch branch : chain.getBranches()) {
-            for (User staff : branch.getStaffs()) {
-                System.out.printf(
-                        "%s, %s, %s, %d, %s, %s\n",
-                        branch.getName(),
-                        branch.getLocation(),
-                        staff.getName(),
-                        staff.getAge(),
-                        staff.getGender(),
-                        staff.getRole().toString());
-            }
-        }
-    }
-
     /**
      * Execute Action on the given Fast Food Chain.
      *
@@ -208,9 +212,10 @@ public class AdminAction implements Action {
             case ADD_STAFF -> addStaff(in, chain);
             case EDIT_STAFF -> editStaff(in, chain);
             case REMOVE_STAFF -> removeStaff(in, chain);
+            case LIST_STAFF_ALL -> listAllStaff(in, chain);
+            case ASSIGN_MANAGER -> assignManager(in, chain);
             case OPEN_BRANCH -> openBranch(in, chain);
             case CLOSE_BRANCH -> closeBranch(in, chain);
-            case LIST_STAFF_ALL -> listAllStaff(in, chain);
         }
 
         return chain;
