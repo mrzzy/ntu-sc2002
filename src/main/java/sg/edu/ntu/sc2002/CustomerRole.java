@@ -11,7 +11,7 @@ public class CustomerRole implements Role {
     @Override
     public char code() {
         // TODO Auto-generated method stub
-        return 0;
+        return 'C';
     }
 
     @Override

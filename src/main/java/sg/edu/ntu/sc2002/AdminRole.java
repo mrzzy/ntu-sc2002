@@ -10,7 +10,7 @@ public class AdminRole implements Role {
      */
     @Override
     public char code() {
-        return 0;
+        return 'A';
     }
 
     /**

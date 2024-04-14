@@ -148,6 +148,12 @@ public class AdminAction implements Action {
 
     private void assignManager(Scanner in, Chain chain) {
         System.out.println("Assign manager");
+
+        chain.getStaffs().forEach((k, v) -> {
+            if (v.getRole().code() == 'M') {
+                System.out.println(k.toString());
+            }
+        });
     }
 
     // TODO : Exception here is not intended long term
