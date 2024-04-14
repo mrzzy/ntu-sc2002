@@ -18,16 +18,26 @@ public class AdminAction implements Action {
     @Override
     public String title() {
         switch (method) {
-            case ADD_STAFF: return "Add Staff";
-            case EDIT_STAFF: return "Edit Staff";
-            case REMOVE_STAFF: return "Remove Staff";
-            case LIST_STAFF_ALL: return "List All Staff";
-            case ASSIGN_STAFF: return "Assign Staff";
-            case PROMOTE_STAFF: return "Promote Staff";
-            case TRANSFER_STAFF: return "Transfer Staff";
-            case ADD_PAYMENT: return "Add Payment";
-            case REMOVE_PAYMENT: return "Remove Payment";
-            case OPEN_BRANCH: return "Open Branch";
+            case ADD_STAFF:
+                return "Add Staff";
+            case EDIT_STAFF:
+                return "Edit Staff";
+            case REMOVE_STAFF:
+                return "Remove Staff";
+            case LIST_STAFF_ALL:
+                return "List All Staff";
+            case ASSIGN_STAFF:
+                return "Assign Staff";
+            case PROMOTE_STAFF:
+                return "Promote Staff";
+            case TRANSFER_STAFF:
+                return "Transfer Staff";
+            case ADD_PAYMENT:
+                return "Add Payment";
+            case REMOVE_PAYMENT:
+                return "Remove Payment";
+            case OPEN_BRANCH:
+                return "Open Branch";
             default: // Last possible case
                 return "Close Branch";
         }
@@ -66,7 +76,7 @@ public class AdminAction implements Action {
         System.out.print("Please enter staff username: ");
         String username = in.next();
 
-        if(!chain.getStaffs().containsKey(username)) {
+        if (!chain.getStaffs().containsKey(username)) {
             System.out.println("This user does not exist");
         }
 
@@ -80,8 +90,7 @@ public class AdminAction implements Action {
             System.out.println("4) Edit password");
             int choice = in.nextInt();
 
-            if (choice == 0)
-                break;
+            if (choice == 0) break;
             if (choice == 1) {
                 System.out.println("Please enter new name: ");
                 String newName = in.next();
@@ -112,7 +121,7 @@ public class AdminAction implements Action {
         System.out.print("Please enter staff username: ");
         String username = in.next();
 
-        if(!chain.getStaffs().containsKey(username)) {
+        if (!chain.getStaffs().containsKey(username)) {
             System.out.println("This user does not exist");
         }
 
