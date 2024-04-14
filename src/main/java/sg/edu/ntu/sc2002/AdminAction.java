@@ -33,6 +33,92 @@ public class AdminAction implements Action {
         }
     }
 
+    private void addStaff(Scanner in, Chain chain) {
+        System.out.println("Add Staff");
+
+        System.out.print("Please enter staff name: ");
+        String name = in.next();
+        System.out.print("Please enter staff username: ");
+        String username = in.next();
+        System.out.print("Please enter staff age: ");
+        int age = in.nextInt();
+        System.out.println("Please enter gender (M|F): ");
+        // TODO : Parse / Strip
+        char genderCode = in.next().charAt(0);
+        Gender gender = Gender.fromCode(genderCode);
+        System.out.println("Please enter password: ");
+        String password = in.next();
+
+        // Create staff
+        User user = new User(username, name, age, gender, password, new StaffRole());
+
+        if (chain.getStaffs().containsKey(username)) {
+            System.out.println("The current staff already exists");
+            return;
+        }
+
+        chain.getStaffs().put(username, user);
+    }
+
+    private void editStaff(Scanner in, Chain chain) {
+        System.out.println("Edit Staff");
+
+        System.out.print("Please enter staff username: ");
+        String username = in.next();
+
+        if(!chain.getStaffs().containsKey(username)) {
+            System.out.println("This user does not exist");
+        }
+
+        User user = chain.getStaffs().get(username);
+
+        while (true) {
+            System.out.println("0) Quit");
+            System.out.println("1) Edit name");
+            System.out.println("2) Edit age");
+            System.out.println("3) Edit gender");
+            System.out.println("4) Edit password");
+            int choice = in.nextInt();
+
+            if (choice == 0)
+                break;
+            if (choice == 1) {
+                System.out.println("Please enter new name: ");
+                String newName = in.next();
+                user.setName(newName);
+            }
+            if (choice == 2) {
+                System.out.println("Please enter new age: ");
+                int newAge = in.nextInt();
+                user.setAge(newAge);
+            }
+            if (choice == 3) {
+                System.out.println("Please enter new gender: ");
+                // TODO : foolproof this
+                char genderCode = in.next().charAt(0);
+                user.setGender(Gender.fromCode(genderCode));
+            }
+            if (choice == 4) {
+                System.out.println("Please enter new password: ");
+                String newPassword = in.next();
+                user.setPassword(newPassword);
+            }
+        }
+    }
+
+    private void removeStaff(Scanner in, Chain chain) {
+        System.out.println("Remove Staff");
+
+        System.out.print("Please enter staff username: ");
+        String username = in.next();
+
+        if(!chain.getStaffs().containsKey(username)) {
+            System.out.println("This user does not exist");
+        }
+
+        chain.getStaffs().remove(username);
+    }
+
     // TODO : Exception here is not intended long term
     private void openBranch(Scanner in, Chain chain) {
         System.out.println("Open branch");
@@ -110,6 +196,9 @@ public class AdminAction implements Action {
     @Override
     public Chain execute(Scanner in, Chain chain) {
         switch (this.method) {
+            case ADD_STAFF -> addStaff(in, chain);
+            case EDIT_STAFF -> editStaff(in, chain);
+            case REMOVE_STAFF -> removeStaff(in, chain);
             case OPEN_BRANCH -> openBranch(in, chain);
             case CLOSE_BRANCH -> closeBranch(in, chain);
             case LIST_STAFF_ALL -> listAllStaff(in, chain);
