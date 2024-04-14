@@ -169,7 +169,9 @@ public class AdminAction implements Action {
             if (b.getName().equals(branch)) {
                 // Check how many branch managers exist in this branch
                 if (b.getManagers().size() >= b.getManagerQuota()) {
-                    System.out.println("This branch has hit it's total number of branch managers and is unable to add more");
+                    System.out.println(
+                            "This branch has hit it's total number of branch managers and is unable"
+                                    + " to add more");
                     return;
                 }
 

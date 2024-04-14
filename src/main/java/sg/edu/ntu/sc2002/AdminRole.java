@@ -3,7 +3,6 @@ package sg.edu.ntu.sc2002;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class AdminRole implements Role {
     /**
@@ -35,7 +34,6 @@ public class AdminRole implements Role {
                         new AdminAction(AdminMethod.ADD_PAYMENT),
                         new AdminAction(AdminMethod.REMOVE_PAYMENT),
                         new AdminAction(AdminMethod.OPEN_BRANCH),
-                        new AdminAction(AdminMethod.CLOSE_BRANCH)
-                ));
+                        new AdminAction(AdminMethod.CLOSE_BRANCH)));
     }
 }

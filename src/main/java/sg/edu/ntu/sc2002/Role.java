@@ -5,8 +5,8 @@
 
 package sg.edu.ntu.sc2002;
 
-import java.util.List;
 import java.io.Serializable;
+import java.util.List;
 
 /** Role held by a {@link User} defines the actions the User is authorised to take. */
 public interface Role extends Serializable {
