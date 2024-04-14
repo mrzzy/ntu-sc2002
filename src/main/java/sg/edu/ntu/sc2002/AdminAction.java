@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class AdminAction implements Action {
     private AdminMethod method;
 
+    public AdminAction(AdminMethod method) {
+        this.method = method;
+    }
+
     /**
      * Title of the Action displayed in the user interface.
      *
@@ -13,7 +17,35 @@ public class AdminAction implements Action {
      */
     @Override
     public String title() {
-        return "Admin Actions: Manipulate Branch, Payment Methods, Staff.";
+        switch (method) {
+            case OPEN_BRANCH -> {
+                return "Open Branch";
+            }
+            case CLOSE_BRANCH -> {
+                return "Close Branch";
+            }
+            case ADD_PAYMENT -> {
+                return "Add Payment";
+            }
+            case REMOVE_PAYMENT -> {
+                return "Remove Payment";
+            }
+            case LIST_STAFF_ALL -> {
+                return "List All Staff";
+            }
+            case ADD_STAFF -> {
+                return "Add Staff";
+            }
+            case REMOVE_STAFF -> {
+                return "Remove Staff";
+            }
+            case ASSIGN_STAFF -> {
+                return "Assign Staff";
+            }
+            default -> {
+                return "";
+            }
+        }
     }
 
     // TODO : Exception here is not intended long term
@@ -92,34 +124,10 @@ public class AdminAction implements Action {
      */
     @Override
     public Chain execute(Scanner in, Chain chain) {
-        System.out.println(
-                """
-                1) Open Branch
-                2) Close Branch
-                3) Add Payment
-                4) Remove Payment
-                5) List All Staff
-                6) Add Staff
-                7) Remove Staff
-                8) Assign Staff""");
-        int option = in.nextInt();
-
-        switch (option) {
-            case 1:
-                openBranch(in, chain);
-                break;
-            case 2:
-                closeBranch(in, chain);
-                break;
-            case 3:
-            case 4:
-            case 5:
-                listAllStaff(in, chain);
-                break;
-            case 6:
-                break;
-            default:
-                break;
+        switch (this.method) {
+            case OPEN_BRANCH -> openBranch(in, chain);
+            case CLOSE_BRANCH -> closeBranch(in, chain);
+            case LIST_STAFF_ALL -> listAllStaff(in, chain);
         }
 
         return chain;

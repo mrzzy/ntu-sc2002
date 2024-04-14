@@ -20,6 +20,9 @@ public class AdminRole implements Role {
      */
     @Override
     public Set<Action> getAction() {
-        return Set.of(new AdminAction());
+        return Set.of(
+                new AdminAction(AdminMethod.OPEN_BRANCH),
+                new AdminAction(AdminMethod.CLOSE_BRANCH),
+                new AdminAction(AdminMethod.LIST_STAFF_ALL));
     }
 }
