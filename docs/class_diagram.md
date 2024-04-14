@@ -148,14 +148,17 @@ classDiagram
     
     class AdminMethod {
         <<enumeration>>
-        OPEN_BRANCH,
-        CLOSE_BRANCH,
+        ADD_STAFF,
+        EDIT_STAFF
+        REMOVE_STAFF,
+        LIST_STAFF_ALL,
+        ASSIGN_MANAGER,
+        PROMOTE_STAFF,
+        TRANSFER_STAFF,
         ADD_PAYMENT,
         REMOVE_PAYMENT,
-        LIST_STAFF_ALL,
-        ADD_STAFF,
-        REMOVE_STAFF,
-        ASSIGN_STAFF
+        OPEN_BRANCH,
+        CLOSE_BRANCH,
     }
     
     class AdminAction {
