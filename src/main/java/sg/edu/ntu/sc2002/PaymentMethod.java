@@ -23,8 +23,8 @@ public class PaymentMethod implements Serializable {
      * Charge the payment method to pay for given amount.
      *
      * @param amountCents Amount to charge in cents.
-     * @return {@code true} If the charge was successful, false otherwise.
-     *  TODO : Add a general payment procedure for all payment methods
+     * @return {@code true} If the charge was successful, false otherwise. TODO : Add a general
+     *     payment procedure for all payment methods
      */
     public boolean pay(int amountCents) {
         return false;

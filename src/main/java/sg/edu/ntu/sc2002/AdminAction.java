@@ -204,7 +204,8 @@ public class AdminAction implements Action {
         // Once the branch is selected, check that there is space for
         // staff -> manager promotion, under the quota
         if (selectedBranch.getManagers().size() >= selectedBranch.getManagerQuota()) {
-            System.out.println("Selected branch does not have enough quota to contain more managers");
+            System.out.println(
+                    "Selected branch does not have enough quota to contain more managers");
             return;
         }
 
@@ -236,7 +237,9 @@ public class AdminAction implements Action {
         selectedBranch.getStaffs().remove(selectedUser);
         selectedBranch.getManagers().add(selectedUser);
 
-        System.out.printf("%s has been promoted from staff to manager at branch %s\n", selectedUser.getUsername(), selectedBranch.getName());
+        System.out.printf(
+                "%s has been promoted from staff to manager at branch %s\n",
+                selectedUser.getUsername(), selectedBranch.getName());
     }
 
     private void transferStaff(Scanner in, Chain chain) {
@@ -245,7 +248,7 @@ public class AdminAction implements Action {
         // Get branch FROM
         System.out.println("Please select from which branch you want to transfer from: ");
         System.out.println("Available branches : ");
-        for (Branch b: chain.getBranches()) {
+        for (Branch b : chain.getBranches()) {
             System.out.println(b.getName());
         }
 
@@ -296,7 +299,7 @@ public class AdminAction implements Action {
         // Get branch To
         System.out.println("Please select from which branch you want to transfer to:");
         System.out.println("Available branches : ");
-        for (Branch b: chain.getBranches()) {
+        for (Branch b : chain.getBranches()) {
             System.out.println(b.getName());
         }
 
@@ -323,7 +326,9 @@ public class AdminAction implements Action {
         // If it's a staff, check the quota limit
         if (selectedUser.getRole().code() == 'S') {
             if (selectedToBranch.getStaffs().size() >= selectedToBranch.getStaffQuota()) {
-                System.out.println("The branch you selected to transfer to has already has maxed out their staff quota");
+                System.out.println(
+                        "The branch you selected to transfer to has already has maxed out their"
+                                + " staff quota");
                 return;
             }
             // Transfer
@@ -333,14 +338,20 @@ public class AdminAction implements Action {
         // If it's a manager, check the manager quota limit
         if (selectedUser.getRole().code() == 'M') {
             if (selectedToBranch.getManagers().size() >= selectedToBranch.getManagerQuota()) {
-                System.out.println("The branch you selected to transfer to has already haxed out their manager quota");
+                System.out.println(
+                        "The branch you selected to transfer to has already haxed out their manager"
+                                + " quota");
                 return;
             }
             selectedToBranch.getManagers().add(selectedUser);
             selectedFromBranch.getStaffs().remove(selectedUser);
         }
 
-        System.out.printf("Successfully transferred %s from %s to %s\n", selectedUser.getUsername(), selectedFromBranch.getName(), selectedToBranch.getName());
+        System.out.printf(
+                "Successfully transferred %s from %s to %s\n",
+                selectedUser.getUsername(),
+                selectedFromBranch.getName(),
+                selectedToBranch.getName());
     }
 
     private void addPayment(Scanner in, Chain chain) {
@@ -349,7 +360,7 @@ public class AdminAction implements Action {
         System.out.println("Please enter payment method name");
         String paymentName = in.next();
 
-        for (PaymentMethod paymentMethod: chain.getPaymentMethods()) {
+        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
             if (paymentMethod.getName().equals(paymentName)) {
                 System.out.println("Payment method already exists!");
                 return;
@@ -385,7 +396,8 @@ public class AdminAction implements Action {
         }
 
         chain.getPaymentMethods().remove(selectedPaymentMethod);
-        System.out.printf("Removed %s from existing payment methods\n", selectedPaymentMethod.getName());
+        System.out.printf(
+                "Removed %s from existing payment methods\n", selectedPaymentMethod.getName());
     }
 
     // TODO : Exception here is not intended long term
@@ -455,7 +467,7 @@ public class AdminAction implements Action {
             case PROMOTE_STAFF -> promoteStaff(in, chain);
             case TRANSFER_STAFF -> transferStaff(in, chain);
             case ADD_PAYMENT -> addPayment(in, chain);
-            case  REMOVE_PAYMENT-> removePayment(in, chain);
+            case REMOVE_PAYMENT -> removePayment(in, chain);
             case OPEN_BRANCH -> openBranch(in, chain);
             case CLOSE_BRANCH -> closeBranch(in, chain);
         }
