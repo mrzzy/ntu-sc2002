@@ -1,4 +1,4 @@
-# SC2002 Assignment Class Diagram
+# Class Diagram
 ```mermaid
 ---
 title: Fastfood Ordering Management System
@@ -291,10 +291,3 @@ classDiagram
     Application "1" ..> "1" Init: initialise
 
 ```
-
-## Design Considerations
-### Order Status: State Pattern
-
-### Payment Method & Action: Strategy Pattern
-
-### Persistence: Java Serialisation
