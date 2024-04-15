@@ -343,6 +343,24 @@ public class AdminAction implements Action {
         System.out.printf("Successfully transferred %s from %s to %s\n", selectedUser.getUsername(), selectedFromBranch.getName(), selectedToBranch.getName());
     }
 
+    private void addPayment(Scanner in, Chain chain) {
+        System.out.println("Add payment");
+
+        System.out.println("Please enter payment method name");
+        String paymentName = in.next();
+
+        for (PaymentMethod paymentMethod: chain.getPaymentMethods()) {
+            if (paymentMethod.getName().equals(paymentName)) {
+                System.out.println("Payment method already exists!");
+                return;
+            }
+        }
+
+        chain.getPaymentMethods().add(new PaymentMethod(paymentName));
+
+        System.out.printf("Added %s to payment methods\n", paymentName);
+    }
+
     // TODO : Exception here is not intended long term
     private void openBranch(Scanner in, Chain chain) {
         System.out.println("Open branch");
@@ -409,6 +427,7 @@ public class AdminAction implements Action {
             case ASSIGN_MANAGER -> assignManager(in, chain);
             case PROMOTE_STAFF -> promoteStaff(in, chain);
             case TRANSFER_STAFF -> transferStaff(in, chain);
+            case ADD_PAYMENT -> addPayment(in, chain);
             case OPEN_BRANCH -> openBranch(in, chain);
             case CLOSE_BRANCH -> closeBranch(in, chain);
         }
