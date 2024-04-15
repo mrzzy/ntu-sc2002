@@ -1,4 +1,5 @@
 # Class Diagram
+
 ```mermaid
 ---
 title: Fastfood Ordering Management System
@@ -12,8 +13,8 @@ classDiagram
         -String category
 
         +name() String
-        +price() double 
-        +description() String 
+        +price() double
+        +description() String
         +categories() String
         +isAvailable() boolean
     }
@@ -22,17 +23,17 @@ classDiagram
         -List~Item~ items
         -DiningOption diningOption
         -OrderStatus status
-    
+
         +getItems() List~Item~
-        +getDiningOption() DiningOption 
-        +getStatus() OrderStatus 
+        +getDiningOption() DiningOption
+        +getStatus() OrderStatus
         +process()
         +collect()
     }
     Order "1" o-- "*" Item: contains
     Order "1" *-- "1" DiningOption: selects
     Order "1" *-- "1" OrderStatus: status
-    
+
     class DiningOption {
         <<enumeration>>
         DINE_IN
@@ -42,48 +43,50 @@ classDiagram
     %% Order Statuses
     class OrderStatus {
         <<interface>>
-        +step(timestamp) OrderStatus* 
-        +process() OrderStatus 
-        +collect() OrderStatus 
+        +step(timestamp) OrderStatus*
+        +process() OrderStatus
+        +collect() OrderStatus
     }
 
     class NewStatus {
-        +process() OrderStatus 
+        +process() OrderStatus
     }
     NewStatus ..|> OrderStatus: implements
-    
+
     class PickupStatus {
         -Date expiresOn
-        +step(Date timestamp) OrderStatus 
-        +collect() OrderStatus 
+        +step(Date timestamp) OrderStatus
+        +collect() OrderStatus
     }
     PickupStatus ..|> OrderStatus: implements
-    
+
     class CanceledStatus {
     }
     CanceledStatus ..|> OrderStatus: implements
-    
+
     class CompletedStatus {
     }
     CompletedStatus ..|> OrderStatus: implements
 
     %% Payment methods
     class PaymentMethod {
-        <<interface>>
+        %% <<interface>>
+        -String name
+        +getName() String
         +pay(int amountCents) boolean*
     }
-    
-    class Payment {
-        -String name
-        +getName() String;
-        +pay(int amountCents) boolean 
-    }
-    
+
+    %% class Payment {
+    %%     -String name
+    %%     +getName() String
+    %%     +pay(int amountCents) boolean
+    %% }
+
     Payment ..|> PaymentMethod: implements
 
     %% class PaypalMethod {
     %%     -String email
-    %%     +pay(int amountCents) boolean 
+    %%     +pay(int amountCents) boolean
     %% }
     %% PaypalMethod ..|> PaymentMethod: implements
 
@@ -91,35 +94,35 @@ classDiagram
     %%     -String number
     %%     -Date expiry
     %%     -String cvc
-    %%     +pay(int amountCents) boolean 
+    %%     +pay(int amountCents) boolean
     %% }
     %% BankCardMethod ..|> PaymentMethod: implements
 
     %% Actions
     class Action {
         <<interface>>
-        +title() String 
-        +execute(Scanner in, Chain chain) Chain 
+        +title() String
+        +execute(Scanner in, Chain chain) Chain
     }
     Action --> Chain: applied on
 
     class ViewMenuAction {
-        +title() String 
-        +execute(Scanner in, Chain chain) Chain 
+        +title() String
+        +execute(Scanner in, Chain chain) Chain
     }
     ViewMenuAction ..|> Action: implements
-    
+
     class CustomerMethod {
         <<enumeration>>
         ORDER,
         GET_STATUS,
         PICKUP
     }
-    
+
     class CustomerAction {
         -CustomerMethod method
-        +title() String 
-        +execute(Scanner in, Chain chain) Chain 
+        +title() String
+        +execute(Scanner in, Chain chain) Chain
     }
     CustomerAction ..|> Action: implements
     CustomerAction *-- CustomerMethod
@@ -132,12 +135,12 @@ classDiagram
 
     class StaffAction {
         -StaffMethod method
-        +title() String 
-        +execute(Scanner in, Chain chain) Chain 
+        +title() String
+        +execute(Scanner in, Chain chain) Chain
     }
     StaffAction ..|> Action: implements
     StaffAction *-- StaffMethod
-    
+
     class ManagerMethod {
         <<enumeration>>
         ADD_MENU,
@@ -148,12 +151,12 @@ classDiagram
 
     class ManagerAction {
         -ManagerMethod method
-        +title() String 
-        +execute(Scanner in, Chain chain) Chain 
+        +title() String
+        +execute(Scanner in, Chain chain) Chain
     }
     ManagerAction ..|> Action: implements
     ManagerAction *-- ManagerMethod
-    
+
     class AdminMethod {
         <<enumeration>>
         ADD_STAFF,
@@ -168,11 +171,11 @@ classDiagram
         OPEN_BRANCH,
         CLOSE_BRANCH,
     }
-    
+
     class AdminAction {
         -AdminMethod method
-        +title() String 
-        +execute(Scanner in, Chain chain) Chain 
+        +title() String
+        +execute(Scanner in, Chain chain) Chain
     }
     AdminAction ..|> Action: implements
     AdminAction *-- AdminMethod
@@ -180,7 +183,7 @@ classDiagram
     %% Identity & Access
     class Role {
         <<interface>>
-        +code() char 
+        +code() char
         +getActions() List~Action~
     }
     Role "0." o-- "*" Action: allowed
@@ -196,7 +199,7 @@ classDiagram
         +getActions() List~Action~
     }
     StaffRole ..|> Role: implements
-    
+
     class ManagerRole {
         +code() char()
         +getActions() List~Action~
@@ -222,7 +225,7 @@ classDiagram
         -String password
         -Gender gender
         -Role role
-        +login(String username, String Password) boolean 
+        +login(String username, String Password) boolean
         +setRole(Role role)
         +getUsername() String
         +getName() String
@@ -243,8 +246,8 @@ classDiagram
 
         +assign(User staff)
         +remove(User staff)
-        +getName() String 
-        +getLocation() String 
+        +getName() String
+        +getLocation() String
         +getStaffs() List~User~
         +getManagers() List~User~
         +getMenu() Set~Item~
@@ -259,7 +262,7 @@ classDiagram
         -Map~String, User~ staff
         -Set~Branch~ branches
         -Set~PaymentMethod~ paymentMethods
-        
+
         +getBranches() List~Branch~
         +getStaffs() Collection~User~
         +getPaymentMethods() Set~PaymentMethod~
@@ -273,7 +276,7 @@ classDiagram
     class Session {
         -Optional~User~ user
         -Role role
-        
+
         +getUser() Optional~User~
         +getRole() Role
     }
@@ -289,7 +292,7 @@ classDiagram
         -readInitWorkbook(String path) List~Row~$
     }
     Init "1" ..> "1" Chain: initialises
-    
+
     %% Application
     class Application {
         +main(String[] args)$
