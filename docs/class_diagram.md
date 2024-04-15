@@ -81,8 +81,7 @@ classDiagram
     %%     +getName() String
     %%     +pay(int amountCents) boolean
     %% }
-
-    Payment ..|> PaymentMethod: implements
+    %% Payment ..|> PaymentMethod: implements
 
     %% class PaypalMethod {
     %%     -String email
