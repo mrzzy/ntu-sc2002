@@ -154,6 +154,7 @@ public class AdminAction implements Action {
 
         if (!chain.getStaffs().containsKey(username)) {
             System.out.println("This user does not exist");
+            return;
         }
 
         User user = chain.getStaffs().get(username);
@@ -179,6 +180,63 @@ public class AdminAction implements Action {
                 b.getManagers().add(user);
             }
         }
+    }
+
+    private void promoteStaff(Scanner in, Chain chain) {
+        System.out.println("Promote staff");
+
+        System.out.print("Please enter the branch that you want to promote the staff from: ");
+        String branch = in.next();
+
+        Branch selectedBranch = null;
+        for (Branch b : chain.getBranches()) {
+            if (b.getName().equals(branch)) {
+                selectedBranch = b;
+                break;
+            }
+        }
+
+        if (selectedBranch == null) {
+            System.out.println("This branch does not exist");
+            return;
+        }
+
+        // Once the branch is selected, check that there is space for
+        // staff -> manager promotion, under the quota
+        if (selectedBranch.getManagers().size() >= selectedBranch.getManagerQuota()) {
+            System.out.println("Selected branch does not have enough quota to contain more managers");
+            return;
+        }
+
+        System.out.println("Please enter the username of the staff you want to promote:");
+        System.out.println("Available staff:");
+        // Print out all available staff that is not a manger
+        for (User staff : selectedBranch.getStaffs()) {
+            System.out.printf("%s \n", staff.getUsername());
+        }
+
+        String username = in.next();
+        User selectedUser = null;
+        for (User staff : selectedBranch.getStaffs()) {
+            if (staff.getUsername().equals(username)) {
+                selectedUser = staff;
+                break;
+            }
+        }
+
+        if (selectedUser == null) {
+            System.out.println("Invalid username selected!");
+            return;
+        }
+
+        // Change to manager role
+        selectedUser.setRole(new ManagerRole());
+        // Remove from existing staff set
+        // Add to branch manager set
+        selectedBranch.getStaffs().remove(selectedUser);
+        selectedBranch.getManagers().add(selectedUser);
+
+        System.out.printf("%s has been promoted from staff to manager at branch %s\n", selectedUser.getUsername(), selectedBranch.getName());
     }
 
     // TODO : Exception here is not intended long term
@@ -245,6 +303,7 @@ public class AdminAction implements Action {
             case REMOVE_STAFF -> removeStaff(in, chain);
             case LIST_STAFF_ALL -> listAllStaff(in, chain);
             case ASSIGN_MANAGER -> assignManager(in, chain);
+            case PROMOTE_STAFF -> promoteStaff(in, chain);
             case OPEN_BRANCH -> openBranch(in, chain);
             case CLOSE_BRANCH -> closeBranch(in, chain);
         }
