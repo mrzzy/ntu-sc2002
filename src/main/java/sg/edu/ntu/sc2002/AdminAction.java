@@ -361,6 +361,33 @@ public class AdminAction implements Action {
         System.out.printf("Added %s to payment methods\n", paymentName);
     }
 
+    private void removePayment(Scanner in, Chain chain) {
+        System.out.println("Remove payment");
+
+        System.out.println("Please select which payment method you want to remove");
+        System.out.println("Here are the available payment methods:");
+        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+            System.out.println(paymentMethod.getName());
+        }
+
+        String paymentName = in.next();
+        PaymentMethod selectedPaymentMethod = null;
+        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+            if (paymentMethod.getName().equals(paymentName)) {
+                selectedPaymentMethod = paymentMethod;
+                break;
+            }
+        }
+
+        if (selectedPaymentMethod == null) {
+            System.out.println("Selected payment name does not exist!");
+            return;
+        }
+
+        chain.getPaymentMethods().remove(selectedPaymentMethod);
+        System.out.printf("Removed %s from existing payment methods\n", selectedPaymentMethod.getName());
+    }
+
     // TODO : Exception here is not intended long term
     private void openBranch(Scanner in, Chain chain) {
         System.out.println("Open branch");
@@ -428,6 +455,7 @@ public class AdminAction implements Action {
             case PROMOTE_STAFF -> promoteStaff(in, chain);
             case TRANSFER_STAFF -> transferStaff(in, chain);
             case ADD_PAYMENT -> addPayment(in, chain);
+            case  REMOVE_PAYMENT-> removePayment(in, chain);
             case OPEN_BRANCH -> openBranch(in, chain);
             case CLOSE_BRANCH -> closeBranch(in, chain);
         }
