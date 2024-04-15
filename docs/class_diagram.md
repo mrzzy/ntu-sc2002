@@ -72,20 +72,28 @@ classDiagram
         <<interface>>
         +pay(int amountCents) boolean*
     }
-
-    class PaypalMethod {
-        -String email
+    
+    class Payment {
+        -String name
+        +getName() String;
         +pay(int amountCents) boolean 
     }
-    PaypalMethod ..|> PaymentMethod: implements
+    
+    Payment ..|> PaymentMethod: implements
 
-    class BankCardMethod {
-        -String number
-        -Date expiry
-        -String cvc
-        +pay(int amountCents) boolean 
-    }
-    BankCardMethod ..|> PaymentMethod: implements
+    %% class PaypalMethod {
+    %%     -String email
+    %%     +pay(int amountCents) boolean 
+    %% }
+    %% PaypalMethod ..|> PaymentMethod: implements
+
+    %% class BankCardMethod {
+    %%     -String number
+    %%     -Date expiry
+    %%     -String cvc
+    %%     +pay(int amountCents) boolean 
+    %% }
+    %% BankCardMethod ..|> PaymentMethod: implements
 
     %% Actions
     class Action {
