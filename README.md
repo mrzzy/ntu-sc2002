@@ -2,6 +2,7 @@
 NTU SC2002 Project: Fastfood Ordering and Management System (FOMS).
 - [Class Diagram](docs/class_diagram.md)
 - [Javadoc Documentation](https://mrzzy.github.io/ntu-sc2002/)
+- [Design Considerations](docs/design.md)
 
 ## Installation
 1. Ensure Java JDK 21 & Maven are installed first.
