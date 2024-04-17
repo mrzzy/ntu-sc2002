@@ -413,7 +413,9 @@ public class AdminAction implements Action {
         // Check that no existing branch has the same name AND location
         for (Branch branch : chain.getBranches()) {
             if (branch.getName().equals(name) && branch.getLocation().equals(location)) {
-                System.out.printf("Branch name %s and location %s already exists!\n", branch.getName(), branch.getLocation());
+                System.out.printf(
+                        "Branch name %s and location %s already exists!\n",
+                        branch.getName(), branch.getLocation());
                 return;
             }
         }
@@ -443,7 +445,8 @@ public class AdminAction implements Action {
                         .removeIf(
                                 b -> b.getName().equals(name) && b.getLocation().equals(location));
 
-        if (removed) System.out.printf("Successfully closed branch %s at location %s\n", name, location);
+        if (removed)
+            System.out.printf("Successfully closed branch %s at location %s\n", name, location);
         else
             System.out.println(
                     "Branch name and location does not exist in the records to be closed");
