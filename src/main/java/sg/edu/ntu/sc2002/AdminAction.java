@@ -410,11 +410,11 @@ public class AdminAction implements Action {
         System.out.print("Please enter branch staff quota: ");
         int quota = in.nextInt();
 
-        // TODO : Handle this case
         // Check that no existing branch has the same name AND location
         for (Branch branch : chain.getBranches()) {
             if (branch.getName().equals(name) && branch.getLocation().equals(location)) {
-                System.out.println("Cannot have same branch names and locations");
+                System.out.printf("Branch name %s and location %s already exists!\n", branch.getName(), branch.getLocation());
+                return;
             }
         }
 
@@ -428,7 +428,7 @@ public class AdminAction implements Action {
                         new HashSet<Item>());
         chain.getBranches().add(branch);
 
-        System.out.printf("Successfully opened branch %s\n", name);
+        System.out.printf("Successfully opened branch %s at location %s\n", name, location);
     }
 
     private void closeBranch(Scanner in, Chain chain) {
@@ -443,10 +443,10 @@ public class AdminAction implements Action {
                         .removeIf(
                                 b -> b.getName().equals(name) && b.getLocation().equals(location));
 
-        if (removed) System.out.printf("Successfully closed branch %s\n", name);
+        if (removed) System.out.printf("Successfully closed branch %s at location %s\n", name, location);
         else
             System.out.println(
-                    "Branch name and location does not exist in our records to be closed");
+                    "Branch name and location does not exist in the records to be closed");
     }
 
     /**
