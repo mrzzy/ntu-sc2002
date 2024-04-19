@@ -17,6 +17,12 @@ public class StaffRole implements Role {
     @Override
     public List<Action> getAction() {
         // TODO Auto-generated method stub
-        return new ArrayList<>();
+        return new ArrayList<>(
+            Arrays.asList(
+                new StaffOrderAction(StaffOrderMethod.VIEW_ORDERS),
+                new StaffOrderAction(StaffOrderMethod.VIEW_ORDER_DETAILS),
+                new StaffOrderAction(StaffOrderMethod.SET_ORDER_STATUS)
+            )
+        );
     }
 }

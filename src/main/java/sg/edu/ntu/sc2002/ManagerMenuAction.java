@@ -1,0 +1,125 @@
+/*
+ * NTU SC2002 project
+ * Manager Menu Action
+ */
+package sg.edu.ntu.sc2002;
+
+public class ManagerMenuAction {
+
+    public void addItem(Scanner in, Branch branch) {
+        while (true) {
+            System.out.println("Enter item name:");
+            String name = in.nextLine();
+            
+            System.out.println("Enter item price:");
+            double price = 0.0;
+            boolean validPrice = false;
+            while (!validPrice) {
+                if (in.hasNextDouble()) {
+                    price = in.nextDouble();
+                    validPrice = true;
+                } else {
+                    System.out.println("Invalid input! Please enter a valid price.");
+                    in.next(); // Consume the invalid input to avoid an infinite loop
+                }
+            }
+
+            System.out.println("Enter item availability (Y/N):");
+            boolean available = false;
+            String availability = in.nextLine();
+            if (availability.equalsIgnoreCase("Y")) {
+                available = true;
+            } else if (availability.equalsIgnoreCase("N")) {
+                available = false;
+            } else {
+                System.out.println("Invalid input! Please enter either Y or N.");
+                continue; // Restart the loop to allow the user to input again
+            }
+
+            System.out.println("Enter item category:");
+            String category = in.nextLine();
+
+            // Create and add the item to the menu
+            Item item = new Item(name, price, available, category);
+            branch.getMenu().add(item);
+
+            // Exit the loop after adding the item
+            break;
+        }
+    }
+
+
+    public void removeItem(Scanner in, Branch branch) {
+        System.out.println("Enter item name:");
+        String name = in.nextLine();
+        Item itemToRemove = null;
+        for (Item item : branch.getMenu()) {
+            if (item.name().equals(name)){
+                itemToRemove = item;
+            }
+        }
+        // Check if the item exists in the menu
+        if (itemToRemove == null) {
+            System.out.println("This item does not exist");
+        } else {
+            branch.getMenu().remove(itemToRemove);
+            System.out.println("Item removed successfully");
+        }
+    }
+
+
+    public void updateMenu(Scanner in, Branch branch){
+        System.out.println("What item do you want to update?");
+        String name = in.nextLine();
+        Item itemToUpdate = null;
+        for (Item item : branch.getMenu()) {
+            if (item.name().equals(name)){
+                itemToUpdate = item;
+            }
+        }
+        // Check if the item exists in the menu
+        if (itemToUpdate == null) {
+            System.out.println("This item does not exist");
+        } else {
+            while(true){
+                System.out.println("What do you want to update?");
+                System.out.println("0) Quit");
+                System.out.println("1) Price");
+                System.out.println("2) Availability");
+                int choice = in.nextInt();
+                switch(choice){
+                    case 0:
+                        return;
+                    case 1:
+                        System.out.println("Enter new price:");
+                        double price = 0.0;
+                        boolean validPrice = false;
+                        while (!validPrice) {
+                            if (in.hasNextDouble()) {
+                                price = in.nextDouble();
+                                validPrice = true;
+                                itemToUpdate.setPrice(price);
+                            } else {
+                                System.out.println("Invalid input! Please enter a valid price.");
+                                in.next(); // Consume the invalid input to avoid an infinite loop
+                            }
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Enter new availability (Y/N):");
+                        boolean available = false;
+                        String availability = in.nextLine();
+                        if (availability.equalsIgnoreCase("Y")) {
+                            available = true;
+                        } else if (availability.equalsIgnoreCase("N")) {
+                            available = false;
+                        } else {
+                            System.out.println("Invalid input! Please enter either Y or N.");
+                            continue; // Restart the loop to allow the user to input again
+                        }
+                }
+                System.out.println("Invalid option.");
+            }
+        }
+    }
+}
