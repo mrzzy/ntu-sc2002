@@ -23,11 +23,12 @@ public abstract class OrderStatus {
     /**
      * Transition order status by processing order.
      *
-     * @throws UnsupportedOperationException If processing order in an unsupported status
+     * @throws UnsupportedOperationException If processing order in an unsupported status.
      * @return Next order status post transition (if any).
      */
     OrderStatus process() {
-        throw new UnsupportedOperationException("Processing Order in status is unsupported: " + this);
+        throw new UnsupportedOperationException(
+                "Processing Order in status is unsupported: " + this);
     }
 
     /**
@@ -37,6 +38,7 @@ public abstract class OrderStatus {
      * @return Next order status post transition (if any).
      */
     OrderStatus collect() {
-        throw new UnsupportedOperationException("Collecting Order in status is unsupported: " + this);
+        throw new UnsupportedOperationException(
+                "Collecting Order in status is unsupported: " + this);
     }
 }
