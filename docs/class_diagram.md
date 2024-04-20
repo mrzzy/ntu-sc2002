@@ -48,25 +48,25 @@ classDiagram
         +collect() OrderStatus*
     }
 
-    class NewStatus {
+    class NewOrderStatus {
         +process() OrderStatus
     }
-    NewStatus ..|> OrderStatus: implements
+    NewOrderStatus ..|> OrderStatus: implements
 
-    class PickupStatus {
+    class PickupOrderStatus {
         -Date expiresOn
         +step(Date timestamp) OrderStatus
         +collect() OrderStatus
     }
-    PickupStatus ..|> OrderStatus: implements
+    PickupOrderStatus ..|> OrderStatus: implements
 
-    class CanceledStatus {
+    class CanceledOrderStatus {
     }
-    CanceledStatus ..|> OrderStatus: implements
+    CanceledOrderStatus ..|> OrderStatus: implements
 
-    class CompletedStatus {
+    class CompletedOrderStatus {
     }
-    CompletedStatus ..|> OrderStatus: implements
+    CompletedOrderStatus ..|> OrderStatus: implements
 
     %% Payment methods
     class PaymentMethod {
