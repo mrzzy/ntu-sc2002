@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /** Fastfood Ordering &amp; Management System application. */
@@ -44,38 +43,58 @@ public class Application {
             }
         }
 
-        // Core loop
-        while (true) {
-            // Print available actions
-            // quit action
-            System.out.println("0) Quit");
-            // role actions
-            ArrayList<Action> actions = new ArrayList<>(session.role().getAction());
-            for (int i = 0; i < actions.size(); i++) {
-                System.out.println(String.format("%d) %s", i + 1, actions.get(i).title()));
+        // select the branch
+        Branch selectedBranch = null;
+
+        if (session.role().code() =='C'){
+            System.out.println("Select a branch:");
+            for (Branch branch : chain.getBranches()){
+                System.out.println(String.format("%s", branch.getName()));
+            }
+            String choice = in.nextLine();
+            for (Branch branch : chain.getBranches()){
+                if (branch.getName().equals(choice)){
+                    selectedBranch = branch;
+                    break;
+                }
+            }
+        } else if (session.user().isPresent()){
+            if (session.role().code() =='M' || session.role().code() =='S'){
+                for (Branch branch : chain.getBranches()){
+                    if (branch.getName().equals(session.user().get().getBranchBelongTo())){
+                        selectedBranch = branch;
+                        break;
+                    }
+                }
             }
             // session action: reset password
-            if (session.user().isPresent()) {
-                System.out.printf("%d) Reset password\n", actions.size() + 1);
-            }
-
-            System.out.print("Option: ");
-            int choice = in.nextInt();
-            if (choice <= 0) {
-                // quit
-                break;
-            }
-            if (choice <= actions.size()) {
-                // execute action
-                chain = actions.get(choice - 1).execute(in, chain);
-                continue;
-            }
-            if (choice == actions.size() + 1) {
-                // reset password
+            System.out.printf("Reset password (Y)?");
+            String choice = in.nextLine();
+            if (choice.toLowerCase().equals("y")) {
                 session.changePassword(in);
-                continue;
-            }
-            System.out.println("Invalid option.");
+            } 
+        }
+
+        // Check if order has expired for all branches, runs in background
+        for (Branch branch : chain.getBranches()){
+            branch.checkExpired();
+        }
+
+        // Print available role actions
+        char role = session.role().code();
+        switch(role){
+            case 'A':
+                AdminActionHandler.actionDispatcher(in, chain);
+                break;
+            case 'M':
+                ManagerActionHandler.actionDispatcher(in, selectedBranch);
+                break;
+            case 'S':
+                StaffActionHandler.actionDispatcher(in, selectedBranch);
+                break;
+            case 'C':
+                CustomerActionHandler.actionDispatcher(in, selectedBranch, chain.getPaymentMethods());
+                break;
         }
 
         // save chain state

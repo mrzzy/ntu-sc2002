@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.naming.LimitExceededException;
@@ -83,6 +84,7 @@ public class Init {
                                                 new User(
                                                         row.getCellAsString(1).get(),
                                                         row.getCellAsString(0).get(),
+                                                        row.getCellAsString(5).get(),
                                                         row.getCellAsNumber(4).get().intValue(),
                                                         Gender.fromCode(
                                                                 row.getCellAsString(3)
@@ -90,6 +92,7 @@ public class Init {
                                                                         .charAt(0)),
                                                         User.DEFAULT_PASSWORD,
                                                         ROLES.get(row.getCellAsString(2).get())),
+                                                        
                                         Collectors.toSet())));
     }
 
@@ -126,7 +129,11 @@ public class Init {
                                             row.getCellAsNumber(2).get().intValue(),
                                             new HashSet<>(),
                                             new HashSet<>(),
-                                            new HashSet<>());
+                                            new HashSet<>(),
+                                            new ArrayList<>(),
+                                            new ArrayList<>(),
+                                            new ArrayList<>(),
+                                            new ArrayList<>());
                                 }));
     }
 

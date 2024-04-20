@@ -13,18 +13,20 @@ public class User implements Serializable {
     public static final String DEFAULT_PASSWORD = "password";
     private String username;
     private String name;
+    private String branchBelongTo;
     private int age;
     private Gender gender;
     private String password;
     private Role role;
 
     public User(String username, Role role) {
-        this(username, username, -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
+        this(username, username, "", -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
     }
 
-    public User(String username, String name, int age, Gender gender, String password, Role role) {
+    public User(String username, String name, String branchBelongTo, int age, Gender gender, String password, Role role) {
         this.username = username;
         this.name = name;
+        this.branchBelongTo = branchBelongTo;
         this.age = age;
         this.gender = gender;
         this.password = password;
@@ -41,6 +43,8 @@ public class User implements Serializable {
     public boolean login(String username, String password) {
         return this.username.equals(username) && this.password.equals(password);
     }
+
+    //setter
 
     public void setPassword(String password) {
         this.password = password;
@@ -62,12 +66,21 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
+    public void setBranchBelongTo(String branchBelongTo) {
+        this.branchBelongTo = branchBelongTo;
+    }
+
+    //getter
     public String getUsername() {
         return username;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getBranchBelongTo() {
+        return branchBelongTo;
     }
 
     public Role getRole() {

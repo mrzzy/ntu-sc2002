@@ -20,20 +20,50 @@ public class AdminRole implements Role {
      *
      * @return Set of actions that the role is authorised to take.
      */
-    @Override
-    public List<Action> getAction() {
-        return new ArrayList<Action>(
+
+    public static List<AdminAction> getTransferAction() {
+        return new ArrayList<AdminAction>(
                 Arrays.asList(
-                        new AdminAction(AdminMethod.ADD_STAFF),
-                        new AdminAction(AdminMethod.EDIT_STAFF),
-                        new AdminAction(AdminMethod.REMOVE_STAFF),
-                        new AdminAction(AdminMethod.LIST_STAFF_ALL),
-                        new AdminAction(AdminMethod.ASSIGN_MANAGER),
-                        new AdminAction(AdminMethod.PROMOTE_STAFF),
-                        new AdminAction(AdminMethod.TRANSFER_STAFF),
-                        new AdminAction(AdminMethod.ADD_PAYMENT),
-                        new AdminAction(AdminMethod.REMOVE_PAYMENT),
-                        new AdminAction(AdminMethod.OPEN_BRANCH),
-                        new AdminAction(AdminMethod.CLOSE_BRANCH)));
+                        new AdminTransferAction(AdminTransferMethod.TRANSFER_STAFF)
+                )
+        );
+    }
+
+    public static List<AdminAction> getPromotionAction() {
+        return new ArrayList<AdminAction>(
+                Arrays.asList(
+                        new AdminPromotionAction(AdminPromotionMethod.ASSIGN_MANAGER),
+                        new AdminPromotionAction(AdminPromotionMethod.PROMOTE_STAFF)
+                )
+        );
+    }
+
+    public static List<AdminAction> getStaffAction() {
+        return new ArrayList<AdminAction>(
+                Arrays.asList(
+                        new AdminStaffAction(AdminStaffMethod.ADD_STAFF),
+                        new AdminStaffAction(AdminStaffMethod.EDIT_STAFF),
+                        new AdminStaffAction(AdminStaffMethod.REMOVE_STAFF),
+                        new AdminStaffAction(AdminStaffMethod.LIST_STAFF_ALL)
+                )
+        );
+    }
+
+    public static List<AdminAction> getPaymentAction() {
+        return new ArrayList<AdminAction>(
+                Arrays.asList(
+                        new AdminPaymentAction(AdminPaymentMethod.ADD_PAYMENT),
+                        new AdminPaymentAction(AdminPaymentMethod.REMOVE_PAYMENT)
+                )
+        );
+    }
+
+    public static List<AdminAction> getBranchAction() {
+        return new ArrayList<AdminAction>(
+                Arrays.asList(
+                        new AdminBranchAction(AdminBranchMethod.OPEN_BRANCH),
+                        new AdminBranchAction(AdminBranchMethod.CLOSE_BRANCH)
+                )
+        );
     }
 }

@@ -27,35 +27,49 @@ public class CustomerCollectAction implements CustomerAction {
         System.out.println("Enter your order ID:");
         int orderId = in.nextInt();
         
-        for (Order order : branch.getOrderList()){
+        for (Order order : branch.getReadyToPickupList()){
             if (order.getId() == orderId){
-                OrderStatusType currentStatus = order.getOrderStatus().getStatus();
-                switch (currentStatus) {
-                    case OrderStatusType.NEW:
-                        System.out.println("Your order is still processing...");
-                        return;
-                    case OrderStatusType.READY_TO_PICKUP:
-                        System.out.println("Your order is ready to pickup!");
-                        return;  
-                    default:
-                        break;
-                }
-            }
+                System.out.println("Your order is ready to pickup!");
+                return;  
+            } 
         }
-        System.out.println("Your order does not exist. Check with our staff if you have not collected your order.");
+        for (Order order : branch.getNewOrderList()){
+            if (order.getId() == orderId){
+                System.out.println("Your order is still preparing...");
+                return;  
+            } 
+        }
+        for (Order order : branch.getCompletedOrderList()){
+            if (order.getId() == orderId){
+                System.out.println("Your order has been completed.");
+                return;  
+            } 
+        }
+        for (Order order : branch.getCancelledOrderList()){
+            if (order.getId() == orderId){
+                System.out.println("Your order was cancelled.");
+                return;  
+            } 
+        }
+        System.out.println("Invalid order ID.");
     }
 
     public void collect(Scanner in, Branch branch){
         System.out.println("Enter your order ID:");
         int orderId = in.nextInt();
-        for (Order order : branch.getOrderList()){
+        for (Order order : branch.getReadyToPickupList()){
             if (order.getId() == orderId){
-                if (order.getOrderStatus().getStatus() == OrderStatusType.READY_TO_PICKUP){
-                    order.collect();
-                } else{
-                    System.out.println("Your food is not ready to be collected.");
-                }
+                order.collect();
+                branch.getCompletedOrderList().add(order);
+                branch.getReadyToPickupList().remove(order);
+                return;
             }
+        }
+        for (Order order : branch.getNewOrderList()){
+            if (order.getId() == orderId){
+                System.out.println("Your order is still preparing...");
+                return;  
+            } 
         }
         System.out.println("Your order does not exist. Check with our staff if you have not collected your order.");
     }

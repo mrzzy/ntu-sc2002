@@ -16,7 +16,7 @@ public class ManagerActionHandler {
         ArrayList<ManagerAction> managerStaffActions = new ArrayList<>(ManagerRole.getStaffAction());
 
         // staff methods
-        ArrayList<StaffAction> managerOrderActions = new ArrayList<>(staffRole.getOrderAction());
+        ArrayList<StaffAction> managerOrderActions = new ArrayList<>(StaffRole.getOrderAction());
 
         while (true) {
             System.out.println("0) Quit");
@@ -35,7 +35,7 @@ public class ManagerActionHandler {
                     branch = handleAction(managerStaffActions, in, branch);
                     break;
                 case 3:
-                    branch.setOrderList(handleAction(managerOrderActions, in, branch.getOrderList()));
+                    branch = handleOrderAction(managerOrderActions, in, branch);
                     break;
                 default:
                     System.out.println("Invalid choice");
@@ -65,8 +65,7 @@ public class ManagerActionHandler {
         }
     }
 
-    private static ArrayList<Order> handleAction(ArrayList<StaffAction> staffActions, Scanner in,
-            ArrayList<Order> orderList) {
+    private static Branch handleOrderAction(ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action
@@ -77,11 +76,11 @@ public class ManagerActionHandler {
             int choice = in.nextInt();
             if (choice <= 0) {
                 // quit
-                return orderList;
+                return branch;
             }
             if (choice <= staffActions.size()) {
                 // execute action
-                orderList = staffActions.get(choice - 1).execute(in, orderList);
+                branch = staffActions.get(choice - 1).execute(in, branch);
                 continue;
             }
             System.out.println("Invalid option.");

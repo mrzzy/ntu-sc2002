@@ -105,7 +105,7 @@ public class CustomerOrderAction implements CustomerAction{
 
         if (paymentSuccess){
             Order myOrder = createOrder(in, branch);
-            branch.getOrderList().add(myOrder);
+            branch.getNewOrderList().add(myOrder);
             return true;
         } else {
             return false;

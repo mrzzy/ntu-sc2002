@@ -21,7 +21,10 @@ public class Branch implements Serializable {
     private Set<User> staffs;
     private Set<User> managers;
     private Set<Item> menu;
-    private List<Order> orderList;
+    private List<Order> newOrderList;
+    private List<Order> readyToPickupList;
+    private List<Order> completedOrderList;
+    private List<Order> cancelledOrderList;
     private int orderId;
 
     public Branch(
@@ -31,19 +34,25 @@ public class Branch implements Serializable {
             Set<User> staffs,
             Set<User> managers,
             Set<Item> menu,
-            List<Order> orderList) {
+            List<Order> newOrderList,
+            List<Order> readyToPickupList,
+            List<Order> completedOrderList,
+            List<Order> cancelledOrderList) {
         this.name = name;
         this.location = location;
         this.staffQuota = staffQuota;
         this.staffs = staffs;
         this.managers = managers;
         this.menu = menu;
-        this.orderList = orderList;
-        this.orderId = orderList.get(orderList.size()-1).getId()+1;
+        this.newOrderList = newOrderList;
+        this.readyToPickupList = readyToPickupList;
+        this.completedOrderList = completedOrderList;
+        this.cancelledOrderList = cancelledOrderList;
+        this.orderId = newOrderList.size() + readyToPickupList.size() + completedOrderList.size() + cancelledOrderList.size();
     }
 
     public Branch(String name, String location, int staffQuota) {
-        this(name, location, staffQuota, new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        this(name, location, staffQuota, new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
     /**
@@ -123,8 +132,20 @@ public class Branch implements Serializable {
         return managers;
     }
 
-    public List<Order> getOrderList(){
-        return this.orderList;
+    public List<Order> getReadyToPickupList(){
+        return this.readyToPickupList;
+    }
+
+    public List<Order> getNewOrderList(){
+        return this.newOrderList;
+    }
+
+    public List<Order> getCompletedOrderList(){
+        return this.completedOrderList;
+    }
+
+    public List<Order> getCancelledOrderList(){
+        return this.cancelledOrderList;
     }
 
     public int getOrderId(){
@@ -164,5 +185,10 @@ public class Branch implements Serializable {
             if (other.menu != null) return false;
         } else if (!menu.equals(other.menu)) return false;
         return true;
+    }
+
+    public void checkExpired() {
+        Expired expired = new Expired();
+        expired.cancelChecker(this);
     }
 }
