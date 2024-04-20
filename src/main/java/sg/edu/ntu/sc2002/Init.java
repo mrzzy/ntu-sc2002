@@ -36,6 +36,11 @@ public class Init {
         Map<String, Set<Item>> menus = parseMenus(Init.readInitWorkbook("menu_list.xlsx"));
         Map<String, Set<User>> staffs = parseStaffs(Init.readInitWorkbook("staff_list.xlsx"));
 
+        // add available payment methods
+        HashSet<PaymentMethod> paymentMethods = new HashSet<PaymentMethod>();
+        paymentMethods.add(new PaypalMethod());
+        paymentMethods.add(new BankCardMethod());
+
         // assign menus & staffs to branches
         branches.forEach(
                 (branchName, branch) -> {
@@ -61,7 +66,7 @@ public class Init {
                         .flatMap(Set::stream)
                         .collect(Collectors.toMap(User::getUsername, Function.identity()));
 
-        return new Chain(admin, staffsByName, new HashSet<>(branches.values()), new HashSet<>());
+        return new Chain(admin, staffsByName, new HashSet<>(branches.values()), paymentMethods);
     }
 
     protected static Map<String, Set<User>> parseStaffs(List<Row> rows) {
@@ -141,4 +146,6 @@ public class Init {
             throw new RuntimeException("Unexpected exception reading init excel" + " files", e);
         }
     }
+    
+    
 }

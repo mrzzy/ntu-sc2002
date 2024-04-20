@@ -6,6 +6,7 @@ import java.util.Set;
 public class CustomerOrderAction implements CustomerAction{
     private CustomerOrderMethod method;
     private Cart myCart;
+    private double totalPrice;
 
     @Override
     public String title() {
@@ -26,10 +27,17 @@ public class CustomerOrderAction implements CustomerAction{
     public CustomerOrderAction(CustomerOrderMethod method){
         this.method = method;
         this.myCart = new Cart();
+        this.totalPrice = 0;
     }
 
     public void viewCart(){
         myCart.viewCart();
+        int totalPrice = 0;
+        for (Item item:myCart.getCart()){
+            totalPrice += item.getPrice();
+        }
+        System.out.println(totalPrice);
+        this.totalPrice = totalPrice;
     }
 
     public boolean addToCart(Scanner in, Set<Item> menu){
@@ -79,8 +87,49 @@ public class CustomerOrderAction implements CustomerAction{
         return true;
     }
 
-    public void pay(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods){
+    public boolean pay(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods){
+        for (PaymentMethod paymentMethod : paymentMethods){
+            System.out.println(paymentMethod.getName());
+        }
+        String name = in.nextLine();
+        PaymentMethod paymentMethodSelected = null;
+        for (PaymentMethod paymentMethod : paymentMethods){
+            if (paymentMethod.getName() == name){
+                paymentMethodSelected = paymentMethod;
+            } else {
+                return false;
+            }
+        }
+        int amountCents = (int)this.totalPrice * 100;
+        boolean paymentSuccess = paymentMethodSelected.pay(amountCents, in);
 
+        if (paymentSuccess){
+            Order myOrder = createOrder(in, branch);
+            branch.getOrderList().add(myOrder);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Order createOrder(Scanner in, Branch branch){
+        System.out.println("Select Dine-in Option: 1. Dine-in 2. Takeaway");
+        int choice = in.nextInt();
+        DiningOption myOption = null;
+        if (choice == 1){
+            myOption = DiningOption.DINE_IN;
+        }
+        else if (choice == 2){
+            myOption = DiningOption.DINE_OUT;
+        }
+        else{
+            System.out.println("Invalid choice.");
+        }
+
+        branch.setOrderId();
+        Order myOrder = new Order(myCart.getCart(), myOption, branch.getOrderId());
+        
+        return myOrder;
     }
 
     @Override

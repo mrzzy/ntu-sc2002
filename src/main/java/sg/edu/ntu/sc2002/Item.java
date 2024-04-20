@@ -19,7 +19,15 @@ public class Item implements Serializable {
     public Item(String name, double price, boolean available, String category){
         this.name = name;
         this.price = price;
-        this.description = null;
+        this.description = "";
+        this.available = available;
+        this.category = category;
+    }
+
+    public Item(String name, double price, String description, boolean available, String category){
+        this.name = name;
+        this.price = price;
+        this.description = description;
         this.available = available;
         this.category = category;
     }

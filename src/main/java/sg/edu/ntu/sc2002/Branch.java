@@ -8,6 +8,8 @@ package sg.edu.ntu.sc2002;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.LimitExceededException;
 
 /** Defines a Branch of Fast Food Restaurant {@link Chain}. */
@@ -19,6 +21,8 @@ public class Branch implements Serializable {
     private Set<User> staffs;
     private Set<User> managers;
     private Set<Item> menu;
+    private List<Order> orderList;
+    private int orderId;
 
     public Branch(
             String name,
@@ -26,17 +30,20 @@ public class Branch implements Serializable {
             int staffQuota,
             Set<User> staffs,
             Set<User> managers,
-            Set<Item> menu) {
+            Set<Item> menu,
+            List<Order> orderList) {
         this.name = name;
         this.location = location;
         this.staffQuota = staffQuota;
         this.staffs = staffs;
         this.managers = managers;
         this.menu = menu;
+        this.orderList = orderList;
+        this.orderId = orderList.get(orderList.size()-1).getId()+1;
     }
 
     public Branch(String name, String location, int staffQuota) {
-        this(name, location, staffQuota, new HashSet<>(), new HashSet<>(), new HashSet<>());
+        this(name, location, staffQuota, new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>());
     }
 
     /**
@@ -94,6 +101,8 @@ public class Branch implements Serializable {
                 "Expected Staff quota assigned to branch to be within 1 - 15");
     }
 
+    // getter
+
     public String getName() {
         return name;
     }
@@ -112,6 +121,18 @@ public class Branch implements Serializable {
 
     public Set<User> getManagers() {
         return managers;
+    }
+
+    public List<Order> getOrderList(){
+        return this.orderList;
+    }
+
+    public int getOrderId(){
+        return this.orderId;
+    }
+
+    public void setOrderId(){
+        this.orderId++;
     }
 
     @Override

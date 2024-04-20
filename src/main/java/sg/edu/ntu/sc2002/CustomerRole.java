@@ -19,18 +19,10 @@ public class CustomerRole implements Role {
 
         return new ArrayList<CustomerAction>(
             Arrays.asList(
-                new CustomerOrderMethod(CustomerOrderMethod.ADD_TO_CART),
-                new CustomerOrderMethod(CustomerOrderMethod.REMOVE_FROM_CART),
-                new CustomerOrderMethod(CustomerOrderMethod.VIEW_CART)
-            )
-        );
-    }
-
-    public static List<CustomerAction> getPaymentAction() {
-
-        return new ArrayList<CustomerAction>(
-            Arrays.asList(
-                new CustomerPaymentAction(CustomerPaymentMethod.PAY)
+                new CustomerOrderAction(CustomerOrderMethod.ADD_TO_CART),
+                new CustomerOrderAction(CustomerOrderMethod.REMOVE_FROM_CART),
+                new CustomerOrderAction(CustomerOrderMethod.VIEW_CART),
+                new CustomerOrderAction(CustomerOrderMethod.PAY)
             )
         );
     }

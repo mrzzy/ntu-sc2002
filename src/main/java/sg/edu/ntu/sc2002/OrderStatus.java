@@ -7,27 +7,40 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Date;
 
+
 /** Defines a status an {@link Order} can have. */
-public interface OrderStatus {
-    /**
-     * Transition order status based on current time.
-     *
-     * @param timestamp Current time timestamp.
-     * @return Next order status post transition (if any).
-     */
-    OrderStatus step(Date timestamp);
+enum OrderStatusType {
+    NEW,
+    READY_TO_PICKUP,
+    CANCELLED,
+    COMPLETED
+}
 
-    /**
-     * Transition order status by processing order.
-     *
-     * @return Next order status post transition (if any).
-     */
-    OrderStatus process();
+public class OrderStatus {
 
-    /**
-     * Transition order status by processing collecting order.
-     *
-     * @return Next order status post transition (if any).
-     */
-    OrderStatus collect();
+    private OrderStatusType status;
+    private Date timestamp;
+
+    public OrderStatus(){
+        this.status = OrderStatusType.NEW;
+        this.timestamp = new Date();
+    }
+
+    //getter
+    public OrderStatusType getStatus(){
+        return this.status;
+    }
+
+    public Date getTimestamp(){
+        return this.timestamp;
+    }
+
+    //setter
+    public void setStatus(OrderStatusType newStatus){
+        this.status = newStatus;
+    }
+
+    public void setTimestamp(Date newTimestamp){
+        this.timestamp = newTimestamp;
+    }
 }
