@@ -6,6 +6,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class ManagerRole implements Role extends StaffRole {
     @Override
@@ -14,9 +15,9 @@ public class ManagerRole implements Role extends StaffRole {
         return 'M';
     }
 
-    public List<Action> getMenuAction() {
+    public static List<ManagerAction> getMenuAction() {
         // TODO Auto-generated method stub
-        return new ArrayList<>(
+        return new ArrayList<ManagerAction>(
             Arrays.asList(
                 new ManagerMenuAction(ManagerMenuMethod.ADD_ITEM),
                 new ManagerMenuAction(ManagerMenuMethod.REMOVE_ITEM),
@@ -25,9 +26,9 @@ public class ManagerRole implements Role extends StaffRole {
         );
     }
 
-    public List<Action> getStaffAction() {
+    public static List<ManagerAction> getStaffAction() {
         // TODO Auto-generated method stub
-        return new ArrayList<>(
+        return new ArrayList<ManagerAction>(
             Arrays.asList(
                 new ManagerStaffAction(ManagerStaffMethod.LIST_STAFF_ALL)
             )

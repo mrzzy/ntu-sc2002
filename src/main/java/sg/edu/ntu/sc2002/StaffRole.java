@@ -15,14 +15,12 @@ public class StaffRole implements Role {
     }
 
     @Override
-    public List<Action> getAction() {
+    public List<StaffAction> getAction() {
         // TODO Auto-generated method stub
-        return new ArrayList<>(
-            Arrays.asList(
-                new StaffOrderAction(StaffOrderMethod.VIEW_ORDERS),
-                new StaffOrderAction(StaffOrderMethod.VIEW_ORDER_DETAILS),
-                new StaffOrderAction(StaffOrderMethod.SET_ORDER_STATUS)
-            )
-        );
+        return new ArrayList<StaffAction>(
+                Arrays.asList(
+                        new StaffOrderAction(StaffOrderMethod.VIEW_ORDERS),
+                        new StaffOrderAction(StaffOrderMethod.VIEW_ORDER_DETAILS),
+                        new StaffOrderAction(StaffOrderMethod.SET_ORDER_STATUS)));
     }
 }

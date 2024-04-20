@@ -4,13 +4,20 @@
  */
 package sg.edu.ntu.sc2002;
 
-public class ManagerMenuAction {
+import java.util.Scanner;
+
+public class ManagerMenuAction implements ManagerAction {
+    private ManagerMenuMethod method;
+
+    public ManagerMenuAction(ManagerMenuMethod method) {
+        this.method = method;
+    }
 
     public void addItem(Scanner in, Branch branch) {
         while (true) {
             System.out.println("Enter item name:");
             String name = in.nextLine();
-            
+
             System.out.println("Enter item price:");
             double price = 0.0;
             boolean validPrice = false;
@@ -48,13 +55,12 @@ public class ManagerMenuAction {
         }
     }
 
-
     public void removeItem(Scanner in, Branch branch) {
         System.out.println("Enter item name:");
         String name = in.nextLine();
         Item itemToRemove = null;
         for (Item item : branch.getMenu()) {
-            if (item.name().equals(name)){
+            if (item.name().equals(name)) {
                 itemToRemove = item;
             }
         }
@@ -67,13 +73,12 @@ public class ManagerMenuAction {
         }
     }
 
-
-    public void updateMenu(Scanner in, Branch branch){
+    public void updateMenu(Scanner in, Branch branch) {
         System.out.println("What item do you want to update?");
         String name = in.nextLine();
         Item itemToUpdate = null;
         for (Item item : branch.getMenu()) {
-            if (item.name().equals(name)){
+            if (item.name().equals(name)) {
                 itemToUpdate = item;
             }
         }
@@ -81,13 +86,13 @@ public class ManagerMenuAction {
         if (itemToUpdate == null) {
             System.out.println("This item does not exist");
         } else {
-            while(true){
+            while (true) {
                 System.out.println("What do you want to update?");
                 System.out.println("0) Quit");
                 System.out.println("1) Price");
                 System.out.println("2) Availability");
                 int choice = in.nextInt();
-                switch(choice){
+                switch (choice) {
                     case 0:
                         return;
                     case 1:
