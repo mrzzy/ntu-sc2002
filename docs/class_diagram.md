@@ -42,10 +42,10 @@ classDiagram
 
     %% Order Statuses
     class OrderStatus {
-        <<interface>>
+        <<Abstract>>
         +step(timestamp) OrderStatus*
-        +process() OrderStatus
-        +collect() OrderStatus
+        +process() OrderStatus*
+        +collect() OrderStatus*
     }
 
     class NewStatus {
@@ -242,6 +242,7 @@ classDiagram
         -Set~User~ staffs
         -Set~User~ managers
         -Set~Item~ menu
+        -Map~String, Order~ orders
 
         +assign(User staff)
         +remove(User staff)
@@ -250,6 +251,7 @@ classDiagram
         +getStaffs() List~User~
         +getManagers() List~User~
         +getMenu() Set~Item~
+        +getOrders() Map~String, Order~
         +getStaffQuota() int
         +getManagerQuota() int
     }
@@ -299,5 +301,4 @@ classDiagram
     Application "1" ..> "1" Session: session
     Application "1" ..> "1" Chain: chain
     Application "1" ..> "1" Init: initialise
-
 ```
