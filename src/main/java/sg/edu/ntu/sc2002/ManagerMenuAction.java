@@ -122,8 +122,11 @@ public class ManagerMenuAction implements ManagerAction {
                             System.out.println("Invalid input! Please enter either Y or N.");
                             continue; // Restart the loop to allow the user to input again
                         }
+                        itemToUpdate.setAvailable(available);
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
                 }
-                System.out.println("Invalid option.");
             }
         }
     }
