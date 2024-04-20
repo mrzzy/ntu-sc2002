@@ -16,11 +16,4 @@ public interface Role extends Serializable {
      * @return Single character code for role.
      */
     public char code();
-
-    /**
-     * Get actions that the role is authorised to take.
-     *
-     * @return Set of actions that the role is authorised to take.
-     */
-    public List<Action> getAction();
 }

@@ -48,18 +48,19 @@ public class Branch implements Serializable {
      */
     public void assign(User user) throws LimitExceededException {
         switch (user.getRole()) {
-            case StaffRole r -> {
-                if (getStaffQuota() <= getStaffs().size()) {
-                    throw new LimitExceededException("Staff assignment exceeds quota.");
-                }
-                getStaffs().add(user);
-            }
             case ManagerRole r -> {
                 if (getManagerQuota() <= getManagers().size()) {
                     throw new LimitExceededException("Manager assignment exceeds quota.");
                 }
                 getManagers().add(user);
             }
+            case StaffRole r -> {
+                if (getStaffQuota() <= getStaffs().size()) {
+                    throw new LimitExceededException("Staff assignment exceeds quota.");
+                }
+                getStaffs().add(user);
+            }
+            
             default ->
                     throw new IllegalArgumentException(
                             "Refusing to assign unsupported role: " + user.getRole());
@@ -76,7 +77,7 @@ public class Branch implements Serializable {
 
     /**
      * Derives manager quota for this branch based on staff quota. Note that manager quota is
-     * indedpendent of staff quota.
+     * independent of staff quota.
      */
     public int getManagerQuota() {
         if (staffQuota >= 1 && staffQuota <= 4) {

@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-public class ManagerRole implements Role extends StaffRole {
+public class ManagerRole extends StaffRole implements Role{
     @Override
     public char code() {
-        // TODO Auto-generated method stub
         return 'M';
     }
 
     public static List<ManagerAction> getMenuAction() {
-        // TODO Auto-generated method stub
+
         return new ArrayList<ManagerAction>(
             Arrays.asList(
                 new ManagerMenuAction(ManagerMenuMethod.ADD_ITEM),
@@ -27,7 +26,6 @@ public class ManagerRole implements Role extends StaffRole {
     }
 
     public static List<ManagerAction> getStaffAction() {
-        // TODO Auto-generated method stub
         return new ArrayList<ManagerAction>(
             Arrays.asList(
                 new ManagerStaffAction(ManagerStaffMethod.LIST_STAFF_ALL)

@@ -13,6 +13,21 @@ public class ManagerMenuAction implements ManagerAction {
         this.method = method;
     }
 
+    @Override
+    public String title() {
+        switch (method) {
+            case ADD_ITEM:
+                return "Add Item";
+            case REMOVE_ITEM:
+                return "Remove Item";
+            case UPDATE_ITEM:
+                return "Update Item";
+            default: // Last possible case
+                return "";
+        }
+    }
+
+
     public void addItem(Scanner in, Branch branch) {
         while (true) {
             System.out.println("Enter item name:");
@@ -60,7 +75,7 @@ public class ManagerMenuAction implements ManagerAction {
         String name = in.nextLine();
         Item itemToRemove = null;
         for (Item item : branch.getMenu()) {
-            if (item.name().equals(name)) {
+            if (item.getName().equals(name)) {
                 itemToRemove = item;
             }
         }
@@ -73,12 +88,12 @@ public class ManagerMenuAction implements ManagerAction {
         }
     }
 
-    public void updateMenu(Scanner in, Branch branch) {
+    public void updateItem(Scanner in, Branch branch) {
         System.out.println("What item do you want to update?");
         String name = in.nextLine();
         Item itemToUpdate = null;
         for (Item item : branch.getMenu()) {
-            if (item.name().equals(name)) {
+            if (item.getName().equals(name)) {
                 itemToUpdate = item;
             }
         }
@@ -129,5 +144,15 @@ public class ManagerMenuAction implements ManagerAction {
                 }
             }
         }
+    }
+
+    @Override
+    public Branch execute(Scanner in, Branch branch) {
+        switch (this.method) {
+            case ADD_ITEM -> addItem(in, branch);
+            case REMOVE_ITEM -> removeItem(in, branch);
+            case UPDATE_ITEM -> updateItem(in, branch);
+        }
+        return branch;
     }
 }
