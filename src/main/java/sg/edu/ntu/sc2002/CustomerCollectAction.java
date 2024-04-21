@@ -25,7 +25,7 @@ public class CustomerCollectAction implements CustomerAction {
 
     public void viewOrderStatus(Scanner in, Branch branch){
         System.out.println("Enter your order ID:");
-        int orderId = in.nextInt();
+        int orderId = Input.nextInt(in);
         
         for (Order order : branch.getReadyToPickupList()){
             if (order.getId() == orderId){
@@ -56,7 +56,7 @@ public class CustomerCollectAction implements CustomerAction {
 
     public void collect(Scanner in, Branch branch){
         System.out.println("Enter your order ID:");
-        int orderId = in.nextInt();
+        int orderId = Input.nextInt(in);
         for (Order order : branch.getReadyToPickupList()){
             if (order.getId() == orderId){
                 order.collect();

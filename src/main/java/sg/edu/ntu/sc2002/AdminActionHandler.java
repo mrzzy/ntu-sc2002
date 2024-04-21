@@ -21,7 +21,7 @@ public class AdminActionHandler {
             System.out.println("4) Payment action");
             System.out.println("5) Branch action");
 
-            int actionChoice = in.nextInt();
+            int actionChoice = Input.nextInt(in);
             switch (actionChoice) {
                 case 0:
                     return chain;
@@ -55,7 +55,7 @@ public class AdminActionHandler {
             for (int i = 0; i < adminActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, adminActions.get(i).title()));
             }
-            int choice = in.nextInt();
+            int choice = Input.nextInt(in);
             if (choice <= 0) {
                 // quit
                 return chain;

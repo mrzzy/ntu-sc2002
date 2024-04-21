@@ -60,11 +60,11 @@ public class StaffOrderAction implements StaffAction {
 
     public void viewOrderDetails(Scanner in, Branch branch){
         System.out.println("Enter order ID:");
-        int orderId = in.nextInt();
+        int orderId = Input.nextInt(in);
         for (Order order: branch.getNewOrderList()){
             if (order.getId() == orderId){
                 for (Item item: order.getItems()){
-                    System.out.println(String.format("Name: %s, Description: %s", item.getName(), item.getDescription()));
+                    System.out.println(String.format("Name: %s, Customisation: %s", item.getName(), item.getCustomisation()));
                 }
                 return;
             }
@@ -75,7 +75,7 @@ public class StaffOrderAction implements StaffAction {
     public Branch processOrder(Scanner in, Branch branch) {
         try {
             System.out.println("Enter order ID:");
-            int orderId = in.nextInt();
+            int orderId = Input.nextInt(in);
             
             // Check if the entered order ID is negative or zero
             if (orderId <= 0) {

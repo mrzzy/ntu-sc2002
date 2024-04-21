@@ -49,7 +49,7 @@ public class Application {
                 for (Branch branch : chain.getBranches()){
                     System.out.println(String.format("%d) %s", i++, branch.getName()));
                 }
-                int choice = in.nextInt();
+                int choice = Input.nextInt(in);
                 i = 1;
                 for (Branch branch : chain.getBranches()){
                     if (i == choice){

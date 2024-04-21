@@ -26,7 +26,7 @@ public class ManagerActionHandler {
             System.out.println("3) Staff action");
             System.out.println("4) Order action");
 
-            int actionChoice = in.nextInt();
+            int actionChoice = Input.nextInt(in);
             switch (actionChoice) {
                 case 0:
                     return branch;
@@ -57,7 +57,7 @@ public class ManagerActionHandler {
             for (int i = 0; i < managerActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, managerActions.get(i).title()));
             }
-            int choice = in.nextInt();
+            int choice = Input.nextInt(in);
             if (choice <= 0) {
                 // quit
                 return branch;
@@ -80,7 +80,7 @@ public class ManagerActionHandler {
             for (int i = 0; i < staffActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, staffActions.get(i).title()));
             }
-            int choice = in.nextInt();
+            int choice = Input.nextInt(in);
             if (choice <= 0) {
                 // quit
                 return branch;

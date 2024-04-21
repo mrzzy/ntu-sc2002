@@ -26,7 +26,7 @@ public record Session(Role role, Optional<User> user) {
         System.out.println("1) Customer");
         System.out.println("2) Admin/Staff");
         System.out.print("Option: ");
-        int choice = in.nextInt();
+        int choice = Input.nextInt(in);
 
         if (choice == 1) {
             return new Session(new CustomerRole(), Optional.empty());

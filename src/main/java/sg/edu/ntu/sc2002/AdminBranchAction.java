@@ -36,7 +36,7 @@ public class AdminBranchAction implements AdminAction{
         System.out.print("Please enter branch location: ");
         String location = in.next();
         System.out.print("Please enter branch staff quota: ");
-        int quota = in.nextInt();
+        int quota = Input.nextInt(in);
 
         // Check that no existing branch has the same name AND location
         for (Branch branch : chain.getBranches()) {

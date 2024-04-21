@@ -29,48 +29,51 @@ public class ManagerMenuAction implements ManagerAction {
 
 
     public void addItem(Scanner in, Branch branch) {
+        System.out.println("-------------------------");
         while (true) {
 
             String name = null;
             while (name == null){
-                in.nextLine();
                 System.out.println("Enter item name:");
                 name = in.nextLine();
             }
            
             double price = 0.0;
-            while (price == 0.0){
+            while (price <= 0.0){
                 System.out.println("Enter item price:");
-                while (true) {
-                    if (in.hasNextDouble()) {
-                        price = in.nextDouble();
-                        in.nextLine(); // Consume newline left by nextDouble()
-                        break;
-                    } else {
-                        System.out.println("Invalid input! Please enter a valid price.");
-                        in.nextLine(); // Consume the invalid input to avoid an infinite loop
-                    }
+                price = Input.nextDouble(in);
+            }
+
+            String description = null;
+            while (description == null){
+                in.nextLine();
+                System.out.println("Enter item description:");
+                description = in.nextLine();
+            }
+
+            boolean available = false;
+            while (true){
+                System.out.println("Enter item availability (Y/N):");
+                String availability = in.next();
+                if (availability.equalsIgnoreCase("Y")) {
+                    available = true;
+                    break;
+                } else if (availability.equalsIgnoreCase("N")) {
+                    available = false;
+                    break;
+                } else {
+                    System.out.println("Invalid input! Please enter either Y or N.");
+                    continue; // Restart the loop to allow the user to input again
                 }
             }
             
-            System.out.println("Enter item availability (Y/N):");
-            boolean available = false;
-            String availability = in.next();
-            if (availability.equalsIgnoreCase("Y")) {
-                available = true;
-            } else if (availability.equalsIgnoreCase("N")) {
-                available = false;
-            } else {
-                System.out.println("Invalid input! Please enter either Y or N.");
-                continue; // Restart the loop to allow the user to input again
-            }
-
             System.out.println("Enter item category:");
             String category = in.next();
 
             // Create and add the item to the menu
-            Item item = new Item(name, price, available, category);
+            Item item = new Item(name, price, description, available, category);
             branch.getMenu().add(item);
+            System.out.println("Item added successfully.");
 
             // Exit the loop after adding the item
             break;
@@ -78,13 +81,17 @@ public class ManagerMenuAction implements ManagerAction {
     }
 
     public void removeItem(Scanner in, Branch branch) {
-        System.out.println("Enter item name:");
-        String name = in.next();
+        System.out.println("-------------------------");
+        System.out.println("Enter item number:");
+        int choice = Input.nextInt(in);
         Item itemToRemove = null;
+        int i = 1;
         for (Item item : branch.getMenu()) {
-            if (item.getName().equals(name)) {
+            if (choice == i) {
                 itemToRemove = item;
+                break;
             }
+            i++;
         }
         // Check if the item exists in the menu
         if (itemToRemove == null) {
@@ -96,55 +103,50 @@ public class ManagerMenuAction implements ManagerAction {
     }
 
     public void updateItem(Scanner in, Branch branch) {
-        System.out.println("What item do you want to update?");
-        String name = in.next();
+        System.out.println("-------------------------");
+        System.out.println("What item number do you want to update?");
+        int itemChoice = Input.nextInt(in);
         Item itemToUpdate = null;
+        int i = 1;
         for (Item item : branch.getMenu()) {
-            if (item.getName().equals(name)) {
+            if (itemChoice == i) {
                 itemToUpdate = item;
+                break;
             }
+            i++;
         }
         // Check if the item exists in the menu
         if (itemToUpdate == null) {
-            System.out.println("This item does not exist");
+            System.out.println("Invalid choice.");
         } else {
             while (true) {
+                System.out.println("-------------------------");
                 System.out.println("What do you want to update?");
                 System.out.println("0) Quit");
                 System.out.println("1) Price");
-                System.out.println("2) Availability");
-                int choice = in.nextInt();
+                System.out.println("2) Description");
+                int choice = Input.nextInt(in);
                 switch (choice) {
                     case 0:
                         return;
                     case 1:
                         System.out.println("Enter new price:");
                         double price = 0.0;
-                        boolean validPrice = false;
-                        while (!validPrice) {
-                            if (in.hasNextDouble()) {
-                                price = in.nextDouble();
-                                validPrice = true;
-                                itemToUpdate.setPrice(price);
-                            } else {
-                                System.out.println("Invalid input! Please enter a valid price.");
-                                in.next(); // Consume the invalid input to avoid an infinite loop
-                            }
+                        while (price <= 0.0) {
+                            price = Input.nextDouble(in);
                         }
+                        itemToUpdate.setPrice(price);
+                        System.out.println("Price updated successfully.");
                         break;
                     case 2:
-                        System.out.println("Enter new availability (Y/N):");
-                        boolean available = false;
-                        String availability = in.next();
-                        if (availability.equalsIgnoreCase("Y")) {
-                            available = true;
-                        } else if (availability.equalsIgnoreCase("N")) {
-                            available = false;
-                        } else {
-                            System.out.println("Invalid input! Please enter either Y or N.");
-                            continue; // Restart the loop to allow the user to input again
+                        System.out.println("Enter new description:");
+                        String description = null;
+                        while (description == null){
+                            in.nextLine();
+                            description = in.nextLine();
+                            itemToUpdate.setDescription(description);
+                            System.out.println("Description updated successfully.");
                         }
-                        itemToUpdate.setAvailable(available);
                         break;
                     default:
                         System.out.println("Invalid option.");

@@ -42,7 +42,7 @@ public class AdminStaffAction implements AdminAction{
         String branchBelongTo = in.next();
 
         System.out.print("Please enter staff age: ");
-        int age = in.nextInt();
+        int age = Input.nextInt(in);
         System.out.println("Please enter gender (M|F): ");
         // TODO : Parse / Strip
         char genderCode = in.next().charAt(0);
@@ -79,7 +79,7 @@ public class AdminStaffAction implements AdminAction{
             System.out.println("2) Edit age");
             System.out.println("3) Edit gender");
             System.out.println("4) Edit password");
-            int choice = in.nextInt();
+            int choice = Input.nextInt(in);
 
             if (choice == 0) break;
             if (choice == 1) {
@@ -89,7 +89,7 @@ public class AdminStaffAction implements AdminAction{
             }
             if (choice == 2) {
                 System.out.println("Please enter new age: ");
-                int newAge = in.nextInt();
+                int newAge = Input.nextInt(in);
                 user.setAge(newAge);
             }
             if (choice == 3) {

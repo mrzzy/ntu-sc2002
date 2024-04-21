@@ -19,15 +19,15 @@ public class Cart {
             System.out.println("No items in cart.");
             return;
         }
-
+        int i = 1;
         for (Item item: this.cartItems){
             String name = item.getName();
             Double price = item.getPrice();
-            String description = item.getDescription();
+            String customisation = item.getCustomisation();
             boolean available = item.getAvailable();
             String availability = available? "Yes":"No";
             String category = item.getCategory();
-            System.out.println(String.format("Name: %s, Price: %f, Description: %s, Available: %s, Category: %s", name, price, description, availability, category));
+            System.out.println(String.format("%d) Name: %s, Price: %.2f, Customisation: %s, Available: %s, Category: %s", i++, name, price, customisation, availability, category));
         }
     }
 

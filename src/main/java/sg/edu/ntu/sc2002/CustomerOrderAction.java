@@ -48,27 +48,29 @@ public class CustomerOrderAction implements CustomerAction{
             }
         }
         System.out.println("Type item number to add:");
-        int itemNumber = in.nextInt();
+        int itemNumber = Input.nextInt(in);
+        in.nextLine();
 
         System.out.println("Any customisation?");
-        String itemDescription = in.next();
-
+        String itemCustomisation = in.nextLine();
+        
         i = 1;
         Item itemToAdd = null;
         for (Item item:menu){
             if (itemNumber == i){
                 itemToAdd = item.copy();
-                itemToAdd.setDescription(itemDescription);
+                itemToAdd.setCustomisation(itemCustomisation);
                 break;
             }
             i++;
         }
+
         if (itemToAdd != null){
             myCart.addCart(itemToAdd);
             System.out.println("Item added successfully.");
             return true;
         } else {
-            System.out.println("Invalid Item.");
+            System.out.println("Invalid choice.");
             return false;
         }
     }
@@ -77,10 +79,10 @@ public class CustomerOrderAction implements CustomerAction{
         System.out.println("-------------------------");
         int i = 1;
         for (Item item:myCart.getCart()){
-            System.out.println(String.format("%d: Name: %s, Price: %f, Description: %s, Category: %s", i++, item.getName(), item.getPrice(), item.getDescription(), item.getCategory()));
+            System.out.println(String.format("%d: Name: %s, Price: %.2f, Customisation: %s, Category: %s", i++, item.getName(), item.getPrice(), item.getCustomisation(), item.getCategory()));
         }
         System.out.println("Type item number to remove:");
-        int itemIndex = in.nextInt();
+        int itemIndex = Input.nextInt(in);
 
         if (itemIndex < 0 || itemIndex >= i){
             System.out.println("Invalid index. Try again.");
@@ -101,7 +103,7 @@ public class CustomerOrderAction implements CustomerAction{
         for (PaymentMethod paymentMethod : paymentMethods){
             System.out.println(String.format("%d) %s", i++, paymentMethod.getName()));
         }
-        int choice = in.nextInt();
+        int choice = Input.nextInt(in);
 
         i = 1;
         PaymentMethod paymentMethodSelected = null;
@@ -134,12 +136,14 @@ public class CustomerOrderAction implements CustomerAction{
         while (myOption == null){
             System.out.println("-------------------------");
             System.out.println("Select Dine-in Option: \n1) Dine-in \n2) Takeaway");
-            int choice = in.nextInt();
+            int choice = Input.nextInt(in);
             if (choice == 1){
                 myOption = DiningOption.DINE_IN;
+                System.out.println("You have chosen to dine-in.");
             }
             else if (choice == 2){
                 myOption = DiningOption.DINE_OUT;
+                System.out.println("You have chosen to takeaway.");
             }
             else{
                 System.out.println("Invalid choice.");
