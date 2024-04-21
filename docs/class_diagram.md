@@ -27,6 +27,7 @@ classDiagram
         +getItems() List~Item~
         +getDiningOption() DiningOption
         +getStatus() OrderStatus
+        -getStatus(Date timestamp) OrderStatus
         +process()
         +collect()
     }

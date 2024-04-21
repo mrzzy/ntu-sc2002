@@ -6,6 +6,7 @@
 package sg.edu.ntu.sc2002;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -48,6 +49,11 @@ public class Order implements Serializable {
     }
 
     public OrderStatus getStatus() {
+        return this.getStatus(Date.from(Instant.now()));
+    }
+
+    private OrderStatus getStatus(Date timestamp) {
+        status = status.step(timestamp);
         return status;
     }
 
