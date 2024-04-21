@@ -6,7 +6,9 @@
 package sg.edu.ntu.sc2002;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.naming.LimitExceededException;
 
@@ -19,6 +21,24 @@ public class Branch implements Serializable {
     private Set<User> staffs;
     private Set<User> managers;
     private Set<Item> menu;
+    private Map<String, Order> orders;
+
+    public Branch(
+            String name,
+            String location,
+            int staffQuota,
+            Set<User> staffs,
+            Set<User> managers,
+            Set<Item> menu,
+            Map<String, Order> orders) {
+        this.name = name;
+        this.location = location;
+        this.staffQuota = staffQuota;
+        this.staffs = staffs;
+        this.managers = managers;
+        this.menu = menu;
+        this.orders = orders;
+    }
 
     public Branch(
             String name,
@@ -27,16 +47,18 @@ public class Branch implements Serializable {
             Set<User> staffs,
             Set<User> managers,
             Set<Item> menu) {
-        this.name = name;
-        this.location = location;
-        this.staffQuota = staffQuota;
-        this.staffs = staffs;
-        this.managers = managers;
-        this.menu = menu;
+        this(name, location, staffQuota, staffs, managers, menu, new HashMap<>());
     }
 
     public Branch(String name, String location, int staffQuota) {
-        this(name, location, staffQuota, new HashSet<>(), new HashSet<>(), new HashSet<>());
+        this(
+                name,
+                location,
+                staffQuota,
+                new HashSet<>(),
+                new HashSet<>(),
+                new HashSet<>(),
+                new HashMap<>());
     }
 
     /**
@@ -111,6 +133,10 @@ public class Branch implements Serializable {
 
     public Set<User> getManagers() {
         return managers;
+    }
+
+    public Map<String, Order> getOrders() {
+        return orders;
     }
 
     @Override
