@@ -52,7 +52,7 @@ public class Order implements Serializable {
         return this.getStatus(Date.from(Instant.now()));
     }
 
-    private OrderStatus getStatus(Date timestamp) {
+    protected OrderStatus getStatus(Date timestamp) {
         status = status.step(timestamp);
         return status;
     }
