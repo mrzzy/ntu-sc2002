@@ -14,7 +14,8 @@ public class PayNowMethod implements PaymentMethod{
     }
 
     public boolean pay(int amountCents, Scanner in){
-        System.out.println("Scan the QR code:");
+        System.out.println("Enter your phone number:");
+        in.next();
         return true;
     }
 }

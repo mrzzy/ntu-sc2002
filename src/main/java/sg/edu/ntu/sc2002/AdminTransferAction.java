@@ -126,7 +126,7 @@ public class AdminTransferAction implements AdminAction{
                 return;
             }
             selectedToBranch.getManagers().add(selectedUser);
-            selectedFromBranch.getStaffs().remove(selectedUser);
+            selectedFromBranch.getManagers().remove(selectedUser);
             selectedUser.setBranchBelongTo(selectedToBranch.getName());
         }
 

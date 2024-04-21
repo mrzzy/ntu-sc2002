@@ -14,8 +14,8 @@ public class BankCardMethod implements PaymentMethod{
     }
 
     public boolean pay(int amountCents, Scanner in){
-        System.out.println("Enter email");
-        in.nextLine();
+        System.out.println("Enter PIN");
+        in.next();
         return true;
     }
 }

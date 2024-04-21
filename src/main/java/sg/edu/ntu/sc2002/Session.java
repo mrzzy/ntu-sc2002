@@ -21,6 +21,7 @@ public record Session(Role role, Optional<User> user) {
      * @return Created application Session.
      */
     public static Session authenticate(Map<String, User> users, Scanner in) {
+        System.out.println("-------------------------");
         System.out.println("Are you a customer or a admin/staff?");
         System.out.println("1) Customer");
         System.out.println("2) Admin/Staff");

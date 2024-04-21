@@ -12,18 +12,23 @@ public class CustomerActionHandler {
         ArrayList<CustomerAction> customerCollectActions = new ArrayList<>(CustomerRole.getCollectAction());
 
         while (true) {
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
-            System.out.println("1) Order action");
-            System.out.println("2) Collect action");
+            System.out.println("1) View menu");
+            System.out.println("2) Order action");
+            System.out.println("3) Collect action");
 
             int actionChoice = in.nextInt();
             switch (actionChoice) {
                 case 0:
                     return branch;
                 case 1:
-                    branch = handleAction(customerOrderActions, in, branch, paymentMethods);
+                    ViewMenuAction.viewMenu(branch.getMenu());
                     break;
                 case 2:
+                    branch = handleAction(customerOrderActions, in, branch, paymentMethods);
+                    break;
+                case 3:
                     branch = handleAction(customerCollectActions, in, branch, paymentMethods);
                     break;
                 default:
@@ -36,6 +41,7 @@ public class CustomerActionHandler {
         while (true) {
             // Print available actions
             // quit action
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             for (int i = 0; i < customerActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, customerActions.get(i).title()));

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Arrays;
 
 public class CustomerRole implements Role {
+    
     @Override
     public char code() {
         // TODO Auto-generated method stub
@@ -16,7 +17,8 @@ public class CustomerRole implements Role {
     }
 
     public static List<CustomerAction> getOrderAction() {
-
+        CustomerOrderAction.myCart = new Cart();
+        CustomerOrderAction.totalPrice = 0;
         return new ArrayList<CustomerAction>(
             Arrays.asList(
                 new CustomerOrderAction(CustomerOrderMethod.ADD_TO_CART),

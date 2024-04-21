@@ -13,6 +13,7 @@ public class AdminActionHandler {
         ArrayList<AdminAction> adminBranchActions = new ArrayList<>(AdminRole.getBranchAction());
 
         while (true) {
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             System.out.println("1) Transfer action");
             System.out.println("2) Promotion action");
@@ -49,6 +50,7 @@ public class AdminActionHandler {
         while (true) {
             // Print available actions
             // quit action
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             for (int i = 0; i < adminActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, adminActions.get(i).title()));

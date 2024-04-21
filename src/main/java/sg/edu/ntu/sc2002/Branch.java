@@ -25,7 +25,7 @@ public class Branch implements Serializable {
     private List<Order> readyToPickupList;
     private List<Order> completedOrderList;
     private List<Order> cancelledOrderList;
-    private int orderId;
+    private int lastOrderId;
 
     public Branch(
             String name,
@@ -48,7 +48,7 @@ public class Branch implements Serializable {
         this.readyToPickupList = readyToPickupList;
         this.completedOrderList = completedOrderList;
         this.cancelledOrderList = cancelledOrderList;
-        this.orderId = newOrderList.size() + readyToPickupList.size() + completedOrderList.size() + cancelledOrderList.size();
+        this.lastOrderId = newOrderList.size() + readyToPickupList.size() + completedOrderList.size() + cancelledOrderList.size();
     }
 
     public Branch(String name, String location, int staffQuota) {
@@ -149,11 +149,11 @@ public class Branch implements Serializable {
     }
 
     public int getOrderId(){
-        return this.orderId;
+        return this.lastOrderId;
     }
 
     public void setOrderId(){
-        this.orderId++;
+        this.lastOrderId++;
     }
 
     @Override

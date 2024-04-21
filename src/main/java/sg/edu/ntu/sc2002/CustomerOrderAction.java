@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class CustomerOrderAction implements CustomerAction{
     private CustomerOrderMethod method;
-    private Cart myCart;
-    private double totalPrice;
+    static public Cart myCart;
+    static public double totalPrice;
 
     @Override
     public String title() {
@@ -26,51 +26,55 @@ public class CustomerOrderAction implements CustomerAction{
 
     public CustomerOrderAction(CustomerOrderMethod method){
         this.method = method;
-        this.myCart = new Cart();
-        this.totalPrice = 0;
     }
 
     public void viewCart(){
+        System.out.println("-------------------------");
         myCart.viewCart();
-        int totalPrice = 0;
+        double newTotalPrice = 0;
         for (Item item:myCart.getCart()){
-            totalPrice += item.getPrice();
+            newTotalPrice += item.getPrice();
         }
-        System.out.println(totalPrice);
-        this.totalPrice = totalPrice;
+        System.out.println(String.format("Total Price: %.2f", newTotalPrice));
+        totalPrice = newTotalPrice;
     }
 
     public boolean addToCart(Scanner in, Set<Item> menu){
+        System.out.println("-------------------------");
+        int i = 1;
         for (Item item:menu){
             if (item.getAvailable()){
-                System.out.println(String.format("Name: %s, Price: %f, Description: %s, Category: %s", item.getName(), item.getPrice(), item.getDescription(), item.getCategory()));
+                System.out.println(String.format("%d) Name: %s, Price: %.2f, Description: %s, Category: %s", i++, item.getName(), item.getPrice(), item.getDescription(), item.getCategory()));
             }
         }
-        System.out.println("Type item name to add:");
-        String itemName = in.nextLine();
+        System.out.println("Type item number to add:");
+        int itemNumber = in.nextInt();
 
         System.out.println("Any customisation?");
-        String itemDescription = in.nextLine();
+        String itemDescription = in.next();
 
+        i = 1;
         Item itemToAdd = null;
         for (Item item:menu){
-            if (itemName.equals(item.getName())){
+            if (itemNumber == i){
                 itemToAdd = item.copy();
                 itemToAdd.setDescription(itemDescription);
                 break;
             }
+            i++;
         }
         if (itemToAdd != null){
             myCart.addCart(itemToAdd);
             System.out.println("Item added successfully.");
             return true;
         } else {
-            System.out.println("Item not added.");
+            System.out.println("Invalid Item.");
             return false;
         }
     }
 
     public boolean removeFromCart(Scanner in){
+        System.out.println("-------------------------");
         int i = 1;
         for (Item item:myCart.getCart()){
             System.out.println(String.format("%d: Name: %s, Price: %f, Description: %s, Category: %s", i++, item.getName(), item.getPrice(), item.getDescription(), item.getCategory()));
@@ -88,47 +92,62 @@ public class CustomerOrderAction implements CustomerAction{
     }
 
     public boolean pay(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods){
-        for (PaymentMethod paymentMethod : paymentMethods){
-            System.out.println(paymentMethod.getName());
+        System.out.println("-------------------------");
+        if (myCart.getCart().size() == 0){
+            System.out.println("Cart is Empty!");
+            return false;
         }
-        String name = in.nextLine();
+        int i = 1;
+        for (PaymentMethod paymentMethod : paymentMethods){
+            System.out.println(String.format("%d) %s", i++, paymentMethod.getName()));
+        }
+        int choice = in.nextInt();
+
+        i = 1;
         PaymentMethod paymentMethodSelected = null;
         for (PaymentMethod paymentMethod : paymentMethods){
-            if (paymentMethod.getName() == name){
+            if (choice == i){
                 paymentMethodSelected = paymentMethod;
-            } else {
-                return false;
             }
+            i++;
         }
-        int amountCents = (int)this.totalPrice * 100;
+        if (paymentMethodSelected == null){
+            System.out.println("Invalid choice.");
+            return false;
+        }
+        int amountCents = (int) totalPrice * 100;
         boolean paymentSuccess = paymentMethodSelected.pay(amountCents, in);
 
         if (paymentSuccess){
+            System.out.println("Payment Successful.");
             Order myOrder = createOrder(in, branch);
             branch.getNewOrderList().add(myOrder);
             return true;
         } else {
+            System.out.println("Payment Unsuccessful.");
             return false;
         }
     }
 
     public Order createOrder(Scanner in, Branch branch){
-        System.out.println("Select Dine-in Option: 1. Dine-in 2. Takeaway");
-        int choice = in.nextInt();
         DiningOption myOption = null;
-        if (choice == 1){
-            myOption = DiningOption.DINE_IN;
+        while (myOption == null){
+            System.out.println("-------------------------");
+            System.out.println("Select Dine-in Option: \n1) Dine-in \n2) Takeaway");
+            int choice = in.nextInt();
+            if (choice == 1){
+                myOption = DiningOption.DINE_IN;
+            }
+            else if (choice == 2){
+                myOption = DiningOption.DINE_OUT;
+            }
+            else{
+                System.out.println("Invalid choice.");
+            }
         }
-        else if (choice == 2){
-            myOption = DiningOption.DINE_OUT;
-        }
-        else{
-            System.out.println("Invalid choice.");
-        }
-
         branch.setOrderId();
         Order myOrder = new Order(myCart.getCart(), myOption, branch.getOrderId());
-        
+        System.out.println(String.format("Your order ID is: %d", branch.getOrderId()));
         return myOrder;
     }
 

@@ -5,18 +5,10 @@
 
 package sg.edu.ntu.sc2002;
 
+import java.io.Serializable;
 import java.util.Date;
 
-
-/** Defines a status an {@link Order} can have. */
-enum OrderStatusType {
-    NEW,
-    READY_TO_PICKUP,
-    CANCELLED,
-    COMPLETED
-}
-
-public class OrderStatus {
+public class OrderStatus implements Serializable {
 
     private OrderStatusType status;
     private Date timestamp;

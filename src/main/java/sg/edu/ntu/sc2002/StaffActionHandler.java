@@ -10,6 +10,7 @@ public class StaffActionHandler {
         //ArrayList<StaffAction> staffMenuActions = new ArrayList<>(staffRole.getOrderAction());
 
         while (true) {
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             System.out.println("1) Staff action");
 
@@ -30,6 +31,7 @@ public class StaffActionHandler {
         while (true) {
             // Print available actions
             // quit action
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             for (int i = 0; i < staffActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, staffActions.get(i).title()));

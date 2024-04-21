@@ -5,32 +5,28 @@
 package sg.edu.ntu.sc2002;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Scanner;
 
-/** Fastfood Ordering &amp; Management System application. */
+/** Fast food Ordering &amp; Management System application. */
 public class Application {
     /**
-     * Entrypoint of Fastfood Ordering &amp; Management System
+     * Entrypoint of Fast food Ordering &amp; Management System
      *
      * @param args Optional. User may pass the path of serialization file to save / restore Fast
      *     Food {@link Chain} state. Otherwise, Chain stat will be saved to a temporary file.
      */
     public static void main(String[] args) {
-        System.out.println("Fastfood Ordering & Management System");
+
+        String filePath = String.format("%s%s%s%s%s", System.getProperty("user.dir"), File.separator, "chain-history", File.separator, "chain.txt").replace("\\", "/");
+        System.out.println("Fast food Ordering & Management System");
         // init or restore chain state
         Chain chain;
-        if (args.length >= 1 && Files.exists(Path.of(args[0]))) {
-            // restore chain state from serialised file
-            chain = Serialize.restore(args[0]);
-            System.out.println("Restored application state: " + args[0]);
-        } else {
-            // initialize chain state from resources
+        try{
+            chain = Serialize.restore(filePath);
+        }catch(Exception e){
             chain = Init.initChain();
         }
-
+        
         // authentication loop
         Scanner in = new Scanner(System.in);
         Session session;
@@ -42,37 +38,49 @@ public class Application {
                 System.out.println("Failed to authenticate: " + e.getMessage());
             }
         }
-
         // select the branch
         Branch selectedBranch = null;
 
-        if (session.role().code() =='C'){
-            System.out.println("Select a branch:");
-            for (Branch branch : chain.getBranches()){
-                System.out.println(String.format("%s", branch.getName()));
-            }
-            String choice = in.nextLine();
-            for (Branch branch : chain.getBranches()){
-                if (branch.getName().equals(choice)){
-                    selectedBranch = branch;
-                    break;
-                }
-            }
-        } else if (session.user().isPresent()){
-            if (session.role().code() =='M' || session.role().code() =='S'){
+        if (!session.user().isPresent()){
+            while (selectedBranch == null){
+                int i = 1;
+                System.out.println("-------------------------");
+                System.out.println("Select a branch:");
                 for (Branch branch : chain.getBranches()){
-                    if (branch.getName().equals(session.user().get().getBranchBelongTo())){
+                    System.out.println(String.format("%d) %s", i++, branch.getName()));
+                }
+                int choice = in.nextInt();
+                i = 1;
+                for (Branch branch : chain.getBranches()){
+                    if (i == choice){
                         selectedBranch = branch;
+                        System.out.println("-------------------------");
+                        System.out.println(String.format("Selected branch: %s", selectedBranch.getName()));
                         break;
                     }
+                    i++;
                 }
             }
-            // session action: reset password
-            System.out.printf("Reset password (Y)?");
-            String choice = in.nextLine();
-            if (choice.toLowerCase().equals("y")) {
-                session.changePassword(in);
-            } 
+            
+        } else {
+            String choice = null;
+            while(choice == null){
+                if (session.role().code() =='M' || session.role().code() =='S'){
+                    for (Branch branch : chain.getBranches()){
+                        if (branch.getName().equals(session.user().get().getBranchBelongTo())){
+                            selectedBranch = branch;
+                            break;
+                        }
+                    }
+                }
+                // session action: reset password
+                System.out.println("-------------------------");
+                System.out.printf("Reset password (Y/N (Press any Key))?");
+                choice = in.next();
+                if (choice.toLowerCase().equals("y")) {
+                    session.changePassword(in);
+                } 
+            }
         }
 
         // Check if order has expired for all branches, runs in background
@@ -98,18 +106,9 @@ public class Application {
         }
 
         // save chain state
-        String savePath;
-        if (args.length >= 1) {
-            savePath = args[0];
-        } else {
-            try {
-                savePath = File.createTempFile("chain", "").getPath();
-            } catch (IOException e) {
-                throw new RuntimeException("Could not create save file.", e);
-            }
-        }
-        Serialize.save(chain, savePath);
-        System.out.println("Saved application state: " + savePath);
+        Serialize.save(chain, filePath);
+        System.out.println("Saved application state: " + filePath);
         in.close();
+        System.exit(0);
     }
 }

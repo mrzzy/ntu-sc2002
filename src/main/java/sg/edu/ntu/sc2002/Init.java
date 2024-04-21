@@ -36,7 +36,6 @@ public class Init {
         Map<String, Branch> branches = parseBranches(Init.readInitWorkbook("branch_list.xlsx"));
         Map<String, Set<Item>> menus = parseMenus(Init.readInitWorkbook("menu_list.xlsx"));
         Map<String, Set<User>> staffs = parseStaffs(Init.readInitWorkbook("staff_list.xlsx"));
-
         // add available payment methods
         HashSet<PaymentMethod> paymentMethods = new HashSet<PaymentMethod>();
         paymentMethods.add(new PaypalMethod());
@@ -84,7 +83,7 @@ public class Init {
                                                 new User(
                                                         row.getCellAsString(1).get(),
                                                         row.getCellAsString(0).get(),
-                                                        row.getCellAsString(5).get(),
+                                                        row.getCellAsString(5).orElse(""),
                                                         row.getCellAsNumber(4).get().intValue(),
                                                         Gender.fromCode(
                                                                 row.getCellAsString(3)
@@ -153,6 +152,4 @@ public class Init {
             throw new RuntimeException("Unexpected exception reading init excel" + " files", e);
         }
     }
-    
-    
 }

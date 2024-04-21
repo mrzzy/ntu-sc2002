@@ -30,25 +30,32 @@ public class ManagerMenuAction implements ManagerAction {
 
     public void addItem(Scanner in, Branch branch) {
         while (true) {
-            System.out.println("Enter item name:");
-            String name = in.nextLine();
 
-            System.out.println("Enter item price:");
+            String name = null;
+            while (name == null){
+                in.nextLine();
+                System.out.println("Enter item name:");
+                name = in.nextLine();
+            }
+           
             double price = 0.0;
-            boolean validPrice = false;
-            while (!validPrice) {
-                if (in.hasNextDouble()) {
-                    price = in.nextDouble();
-                    validPrice = true;
-                } else {
-                    System.out.println("Invalid input! Please enter a valid price.");
-                    in.next(); // Consume the invalid input to avoid an infinite loop
+            while (price == 0.0){
+                System.out.println("Enter item price:");
+                while (true) {
+                    if (in.hasNextDouble()) {
+                        price = in.nextDouble();
+                        in.nextLine(); // Consume newline left by nextDouble()
+                        break;
+                    } else {
+                        System.out.println("Invalid input! Please enter a valid price.");
+                        in.nextLine(); // Consume the invalid input to avoid an infinite loop
+                    }
                 }
             }
-
+            
             System.out.println("Enter item availability (Y/N):");
             boolean available = false;
-            String availability = in.nextLine();
+            String availability = in.next();
             if (availability.equalsIgnoreCase("Y")) {
                 available = true;
             } else if (availability.equalsIgnoreCase("N")) {
@@ -59,7 +66,7 @@ public class ManagerMenuAction implements ManagerAction {
             }
 
             System.out.println("Enter item category:");
-            String category = in.nextLine();
+            String category = in.next();
 
             // Create and add the item to the menu
             Item item = new Item(name, price, available, category);
@@ -72,7 +79,7 @@ public class ManagerMenuAction implements ManagerAction {
 
     public void removeItem(Scanner in, Branch branch) {
         System.out.println("Enter item name:");
-        String name = in.nextLine();
+        String name = in.next();
         Item itemToRemove = null;
         for (Item item : branch.getMenu()) {
             if (item.getName().equals(name)) {
@@ -90,7 +97,7 @@ public class ManagerMenuAction implements ManagerAction {
 
     public void updateItem(Scanner in, Branch branch) {
         System.out.println("What item do you want to update?");
-        String name = in.nextLine();
+        String name = in.next();
         Item itemToUpdate = null;
         for (Item item : branch.getMenu()) {
             if (item.getName().equals(name)) {
@@ -128,7 +135,7 @@ public class ManagerMenuAction implements ManagerAction {
                     case 2:
                         System.out.println("Enter new availability (Y/N):");
                         boolean available = false;
-                        String availability = in.nextLine();
+                        String availability = in.next();
                         if (availability.equalsIgnoreCase("Y")) {
                             available = true;
                         } else if (availability.equalsIgnoreCase("N")) {

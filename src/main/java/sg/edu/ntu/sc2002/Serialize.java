@@ -43,6 +43,7 @@ public class Serialize {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));
             Chain chain = (Chain) in.readObject();
             in.close();
+            System.out.println("Restored successfully");
             return chain;
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Could not open file for writing: " + path, e);

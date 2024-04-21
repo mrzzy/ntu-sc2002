@@ -15,7 +15,7 @@ public class PaypalMethod implements PaymentMethod{
 
     public boolean pay(int amountCents, Scanner in){
         System.out.println("Enter email:");
-        in.nextLine();
+        in.next();
         return true;
     }
 }

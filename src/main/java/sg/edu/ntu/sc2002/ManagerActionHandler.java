@@ -19,22 +19,27 @@ public class ManagerActionHandler {
         ArrayList<StaffAction> managerOrderActions = new ArrayList<>(StaffRole.getOrderAction());
 
         while (true) {
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
-            System.out.println("1) Menu action");
-            System.out.println("2) Staff action");
-            System.out.println("3) Order action");
+            System.out.println("1) View menu");
+            System.out.println("2) Edit menu action");
+            System.out.println("3) Staff action");
+            System.out.println("4) Order action");
 
             int actionChoice = in.nextInt();
             switch (actionChoice) {
                 case 0:
                     return branch;
                 case 1:
-                    branch = handleAction(managerMenuActions, in, branch);
+                    ViewMenuAction.viewMenu(branch.getMenu());
                     break;
                 case 2:
-                    branch = handleAction(managerStaffActions, in, branch);
+                    branch = handleAction(managerMenuActions, in, branch);
                     break;
                 case 3:
+                    branch = handleAction(managerStaffActions, in, branch);
+                    break;
+                case 4:
                     branch = handleOrderAction(managerOrderActions, in, branch);
                     break;
                 default:
@@ -47,6 +52,7 @@ public class ManagerActionHandler {
         while (true) {
             // Print available actions
             // quit action
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             for (int i = 0; i < managerActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, managerActions.get(i).title()));
@@ -69,6 +75,7 @@ public class ManagerActionHandler {
         while (true) {
             // Print available actions
             // quit action
+            System.out.println("-------------------------");
             System.out.println("0) Quit");
             for (int i = 0; i < staffActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, staffActions.get(i).title()));

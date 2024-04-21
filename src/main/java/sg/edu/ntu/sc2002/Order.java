@@ -24,7 +24,7 @@ public class Order implements Serializable {
         this.orderId = orderId;
     }
 
-        /**
+    /**
      * Transition order status by processing order.
      *
      * @return Next order status post transition (if any).

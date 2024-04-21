@@ -14,15 +14,6 @@ public class Cart {
         return this.cartItems;
     }
 
-    //setter
-    public void addCart(Item item){
-        this.cartItems.add(item);
-    }
-
-    public void removeCart(int itemIndex){
-        this.cartItems.remove(itemIndex);
-    }
-
     public void viewCart(){
         if (this.cartItems.size() == 0){
             System.out.println("No items in cart.");
@@ -38,5 +29,14 @@ public class Cart {
             String category = item.getCategory();
             System.out.println(String.format("Name: %s, Price: %f, Description: %s, Available: %s, Category: %s", name, price, description, availability, category));
         }
+    }
+
+    //setter
+    public void addCart(Item item){
+        this.cartItems.add(item);
+    }
+
+    public void removeCart(int itemIndex){
+        this.cartItems.remove(itemIndex);
     }
 }
