@@ -64,7 +64,7 @@ Regardless of implementation, all payment methods should function the same way: 
 
 The Strategy design pattern implements this by encapsulating the specifics of each payment method in its own class, enforcing the Single-Responsibility design principle. Again an interface provides a consistent means of placing a deduction for the order for consumers, implementing the Dependency Inversion principle by having consumers depend on an abstract interface instead of a concrete class implementation.
 
-Assuming all payment methods behave the same, they can be transparent swapped for each other by the Liskov Subsitution design principle. New payment methods can be added without modifying the code for existing methods by extending the payment method interface, aligning with Open-Closed design principle.
+Assuming all payment methods behave the same, they can be transparent swapped for each other by the Liskov Substitution design principle. New payment methods can be added without modifying the code for existing methods by extending the payment method interface, aligning with Open-Closed design principle.
 
 ### Action: Command Pattern
 On a fundamental level, the FOMS application dispatches specific actions based on user command line input selections: placing orders, assigning staff, changing the menu etc. To the application, the specific details of how an action is performed, which inputs it requires is irrelevant.
