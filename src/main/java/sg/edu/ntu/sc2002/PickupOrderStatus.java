@@ -10,6 +10,8 @@ import java.util.Date;
 
 /** Marks an {@link Order} in the 'ready to pickup' status. */
 public class PickupOrderStatus extends OrderStatus {
+    private static final long serialVersionUID = 1L;
+
     /** Duration of time in seconds before order expires upon reaching Pickup status. */
     public static final long EXPIRES_SECONDS = 3600;
 

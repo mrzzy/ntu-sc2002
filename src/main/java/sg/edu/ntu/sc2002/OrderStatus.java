@@ -5,10 +5,11 @@
 
 package sg.edu.ntu.sc2002;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** Defines a status an {@link Order} can have. */
-public abstract class OrderStatus {
+public abstract class OrderStatus implements Serializable {
     /**
      * Transition order status based on current time.
      *
