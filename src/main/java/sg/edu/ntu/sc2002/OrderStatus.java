@@ -9,14 +9,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /** Defines a status an {@link Order} can have. */
-public abstract class OrderStatus implements Serializable {
+public interface OrderStatus extends Serializable {
     /**
      * Transition order status based on current time.
      *
      * @param timestamp Current time timestamp.
      * @return Next order status post transition (if any).
      */
-    OrderStatus step(Date timestamp) {
+    default OrderStatus step(Date timestamp) {
         // default implementation: do nothing.
         return this;
     }
@@ -27,7 +27,7 @@ public abstract class OrderStatus implements Serializable {
      * @throws UnsupportedOperationException If processing order in an unsupported status.
      * @return Next order status post transition (if any).
      */
-    OrderStatus process() {
+    default OrderStatus process() {
         throw new UnsupportedOperationException(
                 "Processing Order in status is unsupported: " + this);
     }
@@ -38,7 +38,7 @@ public abstract class OrderStatus implements Serializable {
      * @throws UnsupportedOperationException If collecting order in an unsupported status.
      * @return Next order status post transition (if any).
      */
-    OrderStatus collect() {
+    default OrderStatus collect() {
         throw new UnsupportedOperationException(
                 "Collecting Order in status is unsupported: " + this);
     }
