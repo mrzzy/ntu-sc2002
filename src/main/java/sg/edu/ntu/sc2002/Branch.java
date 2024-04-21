@@ -141,7 +141,7 @@ public class Branch implements Serializable {
 
     @Override
     public int hashCode() {
-        // branches are unique by username
+        // branches are unique by name
         return name.hashCode();
     }
 
@@ -167,6 +167,9 @@ public class Branch implements Serializable {
         if (menu == null) {
             if (other.menu != null) return false;
         } else if (!menu.equals(other.menu)) return false;
+        if (orders == null) {
+            if (other.orders != null) return false;
+        } else if (!orders.equals(other.orders)) return false;
         return true;
     }
 }

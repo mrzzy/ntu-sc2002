@@ -60,4 +60,29 @@ public class Order implements Serializable {
     public String getId() {
         return id;
     }
+
+    @Override
+    public int hashCode() {
+        // orders are unique by order id
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Order other = (Order) obj;
+        if (id == null) {
+            if (other.id != null) return false;
+        } else if (!id.equals(other.id)) return false;
+        if (items == null) {
+            if (other.items != null) return false;
+        } else if (!items.equals(other.items)) return false;
+        if (diningOption != other.diningOption) return false;
+        if (status == null) {
+            if (other.status != null) return false;
+        } else if (!status.equals(other.status)) return false;
+        return true;
+    }
 }
