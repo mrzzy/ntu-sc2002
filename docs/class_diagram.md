@@ -43,10 +43,10 @@ classDiagram
 
     %% Order Statuses
     class OrderStatus {
-        <<Abstract>>
-        +step(timestamp) OrderStatus*
-        +process() OrderStatus*
-        +collect() OrderStatus*
+        <<interface>>
+        +step(timestamp) OrderStatus
+        +process() OrderStatus
+        +collect() OrderStatus
     }
 
     class NewOrderStatus {
