@@ -19,9 +19,9 @@ stateDiagram-v2
     Completed --> [*]
 ```
 
-Although these state transitions in the above could have been implemented in chain of conditional if/else statements, this implementation is undesirable as it can lead to complex mess implementing state transitions between all states. This violates the the Single-Responsibility principle as we are handling state transitions for all states.
+Although these state transitions in the above could have been implemented in chain of conditional if/else statements, this implementation is undesirable as it can lead to complex mess implementing state transitions between all states. Additionally 'Ready to Pickup' order status has an automatic time based state transition to 'Canceled' status, different from the rest of state transitions which are manual.  Combining state transitions in one conditional block violates the Single-Responsibility principle as we are handling state transitions for different states in one place.
 
-Instead, these state transitions naturally lend itself to be modelled by the State design pattern.  Each state is represented by its own class and is responsible for its own transitions to other state objects. An interface provides a consistent way to interact with all state objects, implementing Dependency Inversion design principle by having Order depend on an Order Status interface instead of specific Order Status classes. By encapsulating state transition logic into individual state classes, we reduce isolate its complexity into manageable chunks, implementing the Single-Responsibility design principle.
+Instead, these state transitions naturally lend itself to be modelled by the State design pattern.  Each state is represented by its own class and is responsible for its own transitions to other state objects. An interface provides a consistent way to interact with all state objects, implementing Dependency Inversion design principle by having Order depend on an Order Status interface instead of specific Order Status classes. For example,'Ready to Pickup' status can specialise its time based state transition via `step(timestamp)` method. By encapsulating state transition logic into individual state classes, we reduce isolate its complexity into manageable chunks, implementing the Single-Responsibility design principle.
 
 ```mermaid
 classDiagram
