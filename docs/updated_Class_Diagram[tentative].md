@@ -1,4 +1,9 @@
+# Class Diagram
 
+```mermaid
+---
+title: Fastfood Ordering Management System
+---
 classDiagram
     class Item {
         -String name
@@ -484,3 +489,4 @@ classDiagram
     Application "1" ..> "1" StaffActionHandler: uses
     Application "1" ..> "1" checkExpired: uses
 
+```
