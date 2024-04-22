@@ -94,7 +94,7 @@ public class Application {
 
         // Check if order has expired for all branches, runs in background
         for (Branch branch : chain.getBranches()) {
-            branch.checkExpired();
+            Expired.cancelChecker(branch);
         }
 
         // Print available role actions

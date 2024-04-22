@@ -1,5 +1,6 @@
 package sg.edu.ntu.sc2002;
 
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ public class CustomerCollectAction implements CustomerAction {
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrderStatus(Scanner in, Branch branch) {
+        System.out.println("-------------------------");
         System.out.println("Enter your order ID:");
         int orderId = Input.nextInt(in);
 
@@ -81,13 +83,15 @@ public class CustomerCollectAction implements CustomerAction {
      * @param branch Fast Food Branch to perform the action on.
      */
     private void collect(Scanner in, Branch branch) {
+        System.out.println("-------------------------");
         System.out.println("Enter your order ID:");
         int orderId = Input.nextInt(in);
         for (Order order : branch.getReadyToPickupList()) {
             if (order.getId() == orderId) {
-                order.collect();
+                order.setTimestamp(new Date());
                 branch.getCompletedOrderList().add(order);
                 branch.getReadyToPickupList().remove(order);
+                System.out.println("Order collected successfully. Thank you and please come again!");
                 return;
             }
         }

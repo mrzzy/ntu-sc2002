@@ -1,17 +1,14 @@
 package sg.edu.ntu.sc2002;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class Expired {
 
-    public Date getTime() {
-        return new Date();
-    }
-
-    public void cancelChecker(Branch branch) {
+    public static void cancelChecker(Branch branch) {
         Timer timer = new Timer();
         timer.schedule(
                 new TimerTask() {
@@ -22,23 +19,25 @@ public class Expired {
                     }
                 },
                 0,
-                60000); // Schedule the task to run every 60 seconds (1 minute)
+                20000); // Schedule the task to run every 20 seconds
         return;
     }
 
-    public void checkExpired(Branch branch) {
+    private static void checkExpired(Branch branch) {
         long currentTimeMillis = System.currentTimeMillis();
-
-        for (Order order : branch.getReadyToPickupList()) {
-
-            long orderTimestampMillis = order.getOrderStatus().getTimestamp().getTime();
+        if (branch.getReadyToPickupList().size() == 0){
+            return;
+        }
+        Iterator<Order> iterator = branch.getReadyToPickupList().iterator();
+        while (iterator.hasNext()) {
+            Order order = iterator.next();
+            long orderTimestampMillis = order.getTimestamp().getTime();
 
             if (currentTimeMillis - orderTimestampMillis
-                    >= 300000) { // 300000 milliseconds = 5 minutes
-                order.cancel();
+                    >= 120000) { // 300000 milliseconds = 5 minutes
+                order.setTimestamp(new Date());
                 branch.getCancelledOrderList().add(order);
-                branch.getReadyToPickupList()
-                        .remove(order); // Remove the order from readyToPickupList
+                iterator.remove();
             }
         }
         return;

@@ -50,16 +50,20 @@ public class CustomerOrderAction implements CustomerAction {
         this.method = method;
     }
 
-    /** Display list of items and total price in Customer's Cart. */
-    private void viewCart() {
-        System.out.println("-------------------------");
-        myCart.viewCart();
+    
+    private void computeTotalCost() {
         double newTotalPrice = 0;
         for (Item item : myCart.getCart()) {
             newTotalPrice += item.getPrice();
         }
-        System.out.println(String.format("Total Price: %.2f", newTotalPrice));
         totalPrice = newTotalPrice;
+    }
+
+    /** Display list of items and total price in Customer's Cart. */
+    private void viewCart() {
+        System.out.println("-------------------------");
+        myCart.viewCart();
+        computeTotalCost();
     }
 
     /**
@@ -103,6 +107,7 @@ public class CustomerOrderAction implements CustomerAction {
 
         if (itemToAdd != null) {
             myCart.addCart(itemToAdd);
+            computeTotalCost();
             System.out.println("Item added successfully.");
             return true;
         } else {
@@ -137,8 +142,9 @@ public class CustomerOrderAction implements CustomerAction {
             System.out.println("Invalid index. Try again.");
             return false;
         }
-
+        
         myCart.removeCart(itemIndex - 1);
+        computeTotalCost();
         return true;
     }
 
@@ -182,6 +188,9 @@ public class CustomerOrderAction implements CustomerAction {
             System.out.println("Cart is Empty!");
             return false;
         }
+
+        System.out.println(String.format("Total Price: %.2f", totalPrice));
+        System.out.println("Select Payment Method:");
         int i = 1;
         for (PaymentMethod paymentMethod : paymentMethods) {
             System.out.println(String.format("%d) %s", i++, paymentMethod.getName()));
@@ -200,12 +209,17 @@ public class CustomerOrderAction implements CustomerAction {
             System.out.println("Invalid choice.");
             return false;
         }
+        
         int amountCents = (int) totalPrice * 100;
         boolean paymentSuccess = paymentMethodSelected.pay(amountCents, in);
 
         if (paymentSuccess) {
             System.out.println("Payment Successful.");
             Order myOrder = createOrder(in, branch);
+
+            myCart.getCart().clear();
+            computeTotalCost();
+
             branch.getNewOrderList().add(myOrder);
             return true;
         } else {
@@ -251,6 +265,7 @@ public class CustomerOrderAction implements CustomerAction {
     public void printReceipt(int orderID) {
         System.out.println(String.format("Your order ID is: %d", orderID));
         System.out.println("-------------------------");
+        System.out.println("RECEIPT");
         myCart.viewCart();
         double newTotalPrice = 0;
         for (Item item : myCart.getCart()) {

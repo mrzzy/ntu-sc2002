@@ -44,6 +44,13 @@ public class ManagerStaffAction implements ManagerAction {
      * @param branch Fast Food Branch to perform the action on.
      */
     private void listStaffAll(Scanner in, Branch branch) {
+        System.out.println("-------------------------");
+        System.out.println("List of Managers:");
+        for (User manager : branch.getManagers()) {
+            System.out.println(String.format("Name: %s, Age: %d", manager.getName(), manager.getAge()));
+        }
+        System.out.println("-------------------------");
+        System.out.println("List of Staff:");
         for (User staff : branch.getStaffs()) {
             System.out.println(String.format("Name: %s, Age: %d", staff.getName(), staff.getAge()));
         }

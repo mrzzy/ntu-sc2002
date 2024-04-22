@@ -57,6 +57,13 @@ public class ManagerMenuAction implements ManagerAction {
                 name = in.nextLine();
             }
 
+            for (Item item : branch.getMenu()){
+                if (name.trim().toLowerCase().equals(item.getName().toLowerCase())){
+                    System.out.println("Item already exists!");
+                    return;
+                }
+            }
+
             double price = 0.0;
             while (price <= 0.0) {
                 System.out.println("Enter item price:");
