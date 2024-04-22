@@ -70,16 +70,10 @@ public class AdminBranchAction implements AdminAction {
         System.out.print("Please enter branch name: ");
         String name = in.next();
 
-        boolean removed =
-                chain.getBranches()
-                        .removeIf(
-                                b -> b.getName().equals(name));
+        boolean removed = chain.getBranches().removeIf(b -> b.getName().equals(name));
 
-        if (removed)
-            System.out.printf("Successfully closed branch %s\n", name);
-        else
-            System.out.printf(
-                    "%s does not exist to be closed!\n");
+        if (removed) System.out.printf("Successfully closed branch %s\n", name);
+        else System.out.printf("%s does not exist to be closed!\n");
     }
 
     /**
