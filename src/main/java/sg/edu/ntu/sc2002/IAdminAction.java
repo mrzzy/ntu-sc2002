@@ -8,7 +8,7 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 
 /** Defines an executable Action on a Fast Food {@link Chain}. */
-public interface AdminAction {
+public interface IAdminAction {
     /**
      * Title of the Action displayed in the user interface.
      *

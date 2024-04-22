@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Implementation of the {@link Role} interface. */
-public class ManagerRole extends StaffRole implements Role {
+/** Implementation of the {@link IRole} interface. */
+public class ManagerRole extends StaffRole implements IRole {
     /**
      * Get the code that uniquely identifies the role
      *
@@ -25,9 +25,9 @@ public class ManagerRole extends StaffRole implements Role {
      *
      * @return Set of actions that the role is authorised to take.
      */
-    public static List<ManagerAction> getMenuAction() {
+    public static List<IManagerAction> getMenuAction() {
 
-        return new ArrayList<ManagerAction>(
+        return new ArrayList<IManagerAction>(
                 Arrays.asList(
                         new ManagerMenuAction(ManagerMenuMethod.ADD_ITEM),
                         new ManagerMenuAction(ManagerMenuMethod.REMOVE_ITEM),
@@ -39,8 +39,8 @@ public class ManagerRole extends StaffRole implements Role {
      *
      * @return Set of actions that the role is authorised to take.
      */
-    public static List<ManagerAction> getStaffAction() {
-        return new ArrayList<ManagerAction>(
+    public static List<IManagerAction> getStaffAction() {
+        return new ArrayList<IManagerAction>(
                 Arrays.asList(new ManagerStaffAction(ManagerStaffMethod.LIST_STAFF_ALL)));
     }
 }

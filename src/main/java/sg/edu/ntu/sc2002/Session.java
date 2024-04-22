@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /** Defines an application Session acquired by a User to interact with the application. */
-public record Session(Role role, Optional<User> user) {
+public record Session(IRole role, Optional<User> user) {
     /**
      * Create application Session by challenging over STDOUT.
      *

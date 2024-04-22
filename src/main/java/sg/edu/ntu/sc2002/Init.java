@@ -20,7 +20,7 @@ import org.dhatim.fastexcel.reader.Row;
 
 /** Implements reading of initial Fast Food Chain state from Excel workbooks in resources. */
 public class Init {
-    private static final Map<String, Role> ROLES =
+    private static final Map<String, IRole> ROLES =
             Map.of(
                     "S", new StaffRole(),
                     "M", new ManagerRole(),
@@ -37,7 +37,7 @@ public class Init {
         Map<String, Set<Item>> menus = parseMenus(Init.readInitWorkbook("menu_list.xlsx"));
         Map<String, Set<User>> staffs = parseStaffs(Init.readInitWorkbook("staff_list.xlsx"));
         // add available payment methods
-        HashSet<PaymentMethod> paymentMethods = new HashSet<PaymentMethod>();
+        HashSet<IPaymentMethod> paymentMethods = new HashSet<IPaymentMethod>();
         paymentMethods.add(new PaypalMethod());
         paymentMethods.add(new BankCardMethod());
 

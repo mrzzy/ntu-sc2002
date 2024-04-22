@@ -2,7 +2,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-public interface StaffAction {
+public interface IStaffAction {
     /**
      * Title of the Staff Action displayed in the user interface.
      *

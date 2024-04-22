@@ -2,8 +2,8 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-/** Implementation of the {@link AdminAction} interface. */
-public class AdminPaymentAction implements AdminAction {
+/** Implementation of the {@link IAdminAction} interface. */
+public class AdminPaymentAction implements IAdminAction {
     private AdminPaymentMethod method;
 
     public AdminPaymentAction(AdminPaymentMethod method) {
@@ -31,7 +31,7 @@ public class AdminPaymentAction implements AdminAction {
         System.out.println("Add payment");
 
         System.out.println("Here are the currently available payment methods:");
-        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+        for (IPaymentMethod paymentMethod : chain.getPaymentMethods()) {
             System.out.println(paymentMethod.getName());
         }
         System.out.println("Here is all the payment methods we support");
@@ -42,7 +42,7 @@ public class AdminPaymentAction implements AdminAction {
         System.out.println("Please enter payment method name");
         String paymentName = in.next();
 
-        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+        for (IPaymentMethod paymentMethod : chain.getPaymentMethods()) {
             if (paymentMethod.getName().equals(paymentName)) {
                 System.out.println("Payment method already exists!");
                 return;
@@ -81,13 +81,13 @@ public class AdminPaymentAction implements AdminAction {
 
         System.out.println("Please select which payment method you want to remove");
         System.out.println("Here are the available payment methods:");
-        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+        for (IPaymentMethod paymentMethod : chain.getPaymentMethods()) {
             System.out.println(paymentMethod.getName());
         }
 
         String paymentName = in.next();
-        PaymentMethod selectedPaymentMethod = null;
-        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+        IPaymentMethod selectedPaymentMethod = null;
+        for (IPaymentMethod paymentMethod : chain.getPaymentMethods()) {
             if (paymentMethod.getName().equals(paymentName)) {
                 selectedPaymentMethod = paymentMethod;
                 break;

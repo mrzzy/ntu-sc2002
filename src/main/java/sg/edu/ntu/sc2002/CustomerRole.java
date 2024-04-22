@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Implementation of the {@link Role} interface. */
-public class CustomerRole implements Role {
+/** Implementation of the {@link IRole} interface. */
+public class CustomerRole implements IRole {
     /**
      * Get the code that uniquely identifies the role
      *
@@ -25,10 +25,10 @@ public class CustomerRole implements Role {
      *
      * @return List of actions that the role is authorised to take.
      */
-    public static List<CustomerAction> getOrderAction() {
+    public static List<ICustomerAction> getOrderAction() {
         CustomerOrderAction.myCart = new Cart();
         CustomerOrderAction.totalPrice = 0;
-        return new ArrayList<CustomerAction>(
+        return new ArrayList<ICustomerAction>(
                 Arrays.asList(
                         new CustomerOrderAction(CustomerOrderMethod.ADD_TO_CART),
                         new CustomerOrderAction(CustomerOrderMethod.REMOVE_FROM_CART),
@@ -42,9 +42,9 @@ public class CustomerRole implements Role {
      *
      * @return List of actions that the role is authorised to take.
      */
-    public static List<CustomerAction> getCollectAction() {
+    public static List<ICustomerAction> getCollectAction() {
 
-        return new ArrayList<CustomerAction>(
+        return new ArrayList<ICustomerAction>(
                 Arrays.asList(
                         new CustomerCollectAction(CustomerCollectMethod.VIEW_ORDER_STATUS),
                         new CustomerCollectAction(CustomerCollectMethod.COLLECT)));

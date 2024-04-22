@@ -16,13 +16,13 @@ public class Chain implements Serializable {
     private User admin;
     private Map<String, User> staffs;
     private Set<Branch> branches;
-    private Set<PaymentMethod> paymentMethods;
+    private Set<IPaymentMethod> paymentMethods;
 
     public Chain(
             User admin,
             Map<String, User> staffs,
             Set<Branch> branches,
-            Set<PaymentMethod> paymentMethods) {
+            Set<IPaymentMethod> paymentMethods) {
         this.admin = admin;
         this.staffs = staffs;
         this.branches = branches;
@@ -37,7 +37,7 @@ public class Chain implements Serializable {
         return branches;
     }
 
-    public Set<PaymentMethod> getPaymentMethods() {
+    public Set<IPaymentMethod> getPaymentMethods() {
         return paymentMethods;
     }
 

@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.Set;
 
-/** Implementation of the {@link CustomerAction} interface. */
-public class CustomerCollectAction implements CustomerAction {
+/** Implementation of the {@link ICustomerAction} interface. */
+public class CustomerCollectAction implements ICustomerAction {
 
     /** Method of the Customer Collect Action. */
     private CustomerCollectMethod method;
@@ -113,7 +113,7 @@ public class CustomerCollectAction implements CustomerAction {
      * @return State of Fast Food Branch post performing action.
      */
     @Override
-    public Branch execute(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
+    public Branch execute(Scanner in, Branch branch, Set<IPaymentMethod> paymentMethods) {
         switch (this.method) {
             case VIEW_ORDER_STATUS -> viewOrderStatus(in, branch);
             case COLLECT -> collect(in, branch);

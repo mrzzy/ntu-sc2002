@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 /** Payment Method used by Customers to Pay for Orders */
-public interface PaymentMethod extends Serializable {
+public interface IPaymentMethod extends Serializable {
     /**
      * Get the name of the Payment Method.
      *

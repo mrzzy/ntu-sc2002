@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class AdminBranchAction implements AdminAction {
+public class AdminBranchAction implements IAdminAction {
     private AdminBranchMethod method;
 
     /** Constructor to set the Admin methods for the branch action types. */

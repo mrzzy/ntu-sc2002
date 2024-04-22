@@ -6,8 +6,8 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-/** Implementation of the {@link ManagerAction} interface. */
-public class ManagerStaffAction implements ManagerAction {
+/** Implementation of the {@link IManagerAction} interface. */
+public class ManagerStaffAction implements IManagerAction {
     /** Method to be executed by the action. */
     private ManagerStaffMethod method;
 

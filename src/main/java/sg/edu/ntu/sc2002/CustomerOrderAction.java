@@ -3,8 +3,8 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import java.util.Set;
 
-/** Implementation of the {@link CustomerAction} interface. */
-public class CustomerOrderAction implements CustomerAction {
+/** Implementation of the {@link ICustomerAction} interface. */
+public class CustomerOrderAction implements ICustomerAction {
     /** List of methods related to customer order actions */
     private CustomerOrderMethod method;
 
@@ -176,7 +176,7 @@ public class CustomerOrderAction implements CustomerAction {
      * @param paymentMethods Set of available payment methods supported by the Fast Food Chain.
      * @return Outcome of the transaction.
      */
-    private boolean pay(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
+    private boolean pay(Scanner in, Branch branch, Set<IPaymentMethod> paymentMethods) {
         System.out.println("-------------------------");
         if (myCart.getCart().size() == 0) {
             System.out.println("Cart is Empty!");
@@ -186,14 +186,14 @@ public class CustomerOrderAction implements CustomerAction {
         System.out.println(String.format("Total Price: %.2f", totalPrice));
         System.out.println("Select Payment Method:");
         int i = 1;
-        for (PaymentMethod paymentMethod : paymentMethods) {
+        for (IPaymentMethod paymentMethod : paymentMethods) {
             System.out.println(String.format("%d) %s", i++, paymentMethod.getName()));
         }
         int choice = Input.nextInt(in);
 
         i = 1;
-        PaymentMethod paymentMethodSelected = null;
-        for (PaymentMethod paymentMethod : paymentMethods) {
+        IPaymentMethod paymentMethodSelected = null;
+        for (IPaymentMethod paymentMethod : paymentMethods) {
             if (choice == i) {
                 paymentMethodSelected = paymentMethod;
             }
@@ -277,7 +277,7 @@ public class CustomerOrderAction implements CustomerAction {
      * @return State of Fast Food Branch post performing action.
      */
     @Override
-    public Branch execute(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
+    public Branch execute(Scanner in, Branch branch, Set<IPaymentMethod> paymentMethods) {
         switch (this.method) {
             case ADD_TO_CART -> addToCart(in, branch.getMenu());
             case REMOVE_FROM_CART -> removeFromCart(in);

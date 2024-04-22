@@ -3,7 +3,7 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import java.util.Set;
 
-public interface CustomerAction {
+public interface ICustomerAction {
     /**
      * Title of the Customer Action displayed in the user interface.
      *
@@ -19,5 +19,5 @@ public interface CustomerAction {
      * @param paymentMethods The payment methods the customer chooses.
      * @return State of the branch post performing action.
      */
-    public Branch execute(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods);
+    public Branch execute(Scanner in, Branch branch, Set<IPaymentMethod> paymentMethods);
 }

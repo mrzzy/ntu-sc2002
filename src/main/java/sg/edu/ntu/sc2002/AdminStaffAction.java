@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AdminStaffAction implements AdminAction {
+public class AdminStaffAction implements IAdminAction {
     private AdminStaffMethod method;
 
     public AdminStaffAction(AdminStaffMethod method) {

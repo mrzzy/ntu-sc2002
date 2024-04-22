@@ -4,8 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Date;
 
-/** Implementation of the {@link StaffAction} interface. */
-public class StaffOrderAction implements StaffAction {
+/** Implementation of the {@link IStaffAction} interface. */
+public class StaffOrderAction implements IStaffAction {
     private StaffOrderMethod method;
 
     public StaffOrderAction(StaffOrderMethod method) {

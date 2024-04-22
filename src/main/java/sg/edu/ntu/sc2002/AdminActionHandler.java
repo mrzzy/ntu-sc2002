@@ -14,13 +14,13 @@ public class AdminActionHandler {
      * @return State of Fast Food Chain post performing action.
      */
     public static Chain actionDispatcher(Scanner in, Chain chain) {
-        ArrayList<AdminAction> adminTransferActions =
+        ArrayList<IAdminAction> adminTransferActions =
                 new ArrayList<>(AdminRole.getTransferAction());
-        ArrayList<AdminAction> adminPromotionActions =
+        ArrayList<IAdminAction> adminPromotionActions =
                 new ArrayList<>(AdminRole.getPromotionAction());
-        ArrayList<AdminAction> adminStaffActions = new ArrayList<>(AdminRole.getStaffAction());
-        ArrayList<AdminAction> adminPaymentActions = new ArrayList<>(AdminRole.getPaymentAction());
-        ArrayList<AdminAction> adminBranchActions = new ArrayList<>(AdminRole.getBranchAction());
+        ArrayList<IAdminAction> adminStaffActions = new ArrayList<>(AdminRole.getStaffAction());
+        ArrayList<IAdminAction> adminPaymentActions = new ArrayList<>(AdminRole.getPaymentAction());
+        ArrayList<IAdminAction> adminBranchActions = new ArrayList<>(AdminRole.getBranchAction());
 
         while (true) {
             System.out.println("-------------------------");
@@ -65,7 +65,7 @@ public class AdminActionHandler {
      * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */
-    public static Chain handleAction(ArrayList<AdminAction> adminActions, Scanner in, Chain chain) {
+    public static Chain handleAction(ArrayList<IAdminAction> adminActions, Scanner in, Chain chain) {
         while (true) {
             // Print available actions
             // quit action

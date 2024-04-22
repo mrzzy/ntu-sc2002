@@ -19,12 +19,12 @@ public class ManagerActionHandler {
      */
     public static Branch actionDispatcher(Scanner in, Branch branch) {
         // manager actions
-        ArrayList<ManagerAction> managerMenuActions = new ArrayList<>(ManagerRole.getMenuAction());
-        ArrayList<ManagerAction> managerStaffActions =
+        ArrayList<IManagerAction> managerMenuActions = new ArrayList<>(ManagerRole.getMenuAction());
+        ArrayList<IManagerAction> managerStaffActions =
                 new ArrayList<>(ManagerRole.getStaffAction());
 
         // staff actions
-        ArrayList<StaffAction> managerOrderActions = new ArrayList<>(StaffRole.getOrderAction());
+        ArrayList<IStaffAction> managerOrderActions = new ArrayList<>(StaffRole.getOrderAction());
 
         while (true) {
             System.out.println("-------------------------");
@@ -66,7 +66,7 @@ public class ManagerActionHandler {
      * @return State of Fast Food Branch post performing action.
      */
     private static Branch handleAction(
-            ArrayList<ManagerAction> managerActions, Scanner in, Branch branch) {
+            ArrayList<IManagerAction> managerActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action
@@ -99,7 +99,7 @@ public class ManagerActionHandler {
      * @return State of Fast Food Branch post performing action.
      */
     private static Branch handleOrderAction(
-            ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
+            ArrayList<IStaffAction> staffActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action

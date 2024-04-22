@@ -16,12 +16,12 @@ public class CustomerActionHandler {
      * @return State of Fast Food Branch post performing action.
      */
     public static Branch actionDispatcher(
-            Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
+            Scanner in, Branch branch, Set<IPaymentMethod> paymentMethods) {
 
         // customer methods
-        ArrayList<CustomerAction> customerOrderActions =
+        ArrayList<ICustomerAction> customerOrderActions =
                 new ArrayList<>(CustomerRole.getOrderAction());
-        ArrayList<CustomerAction> customerCollectActions =
+        ArrayList<ICustomerAction> customerCollectActions =
                 new ArrayList<>(CustomerRole.getCollectAction());
 
         while (true) {
@@ -61,10 +61,10 @@ public class CustomerActionHandler {
      * @return State of Fast Food Branch post performing action.
      */
     public static Branch handleAction(
-            ArrayList<CustomerAction> customerActions,
+            ArrayList<ICustomerAction> customerActions,
             Scanner in,
             Branch branch,
-            Set<PaymentMethod> paymentMethods) {
+            Set<IPaymentMethod> paymentMethods) {
         while (true) {
             // Print available actions
             // quit action

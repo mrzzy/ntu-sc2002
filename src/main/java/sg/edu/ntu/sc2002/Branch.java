@@ -71,7 +71,7 @@ public class Branch implements Serializable {
 
     /**
      * Assign the given user to work in this branch. User will be assigned based on their {@link
-     * Role}: staff or manager.
+     * IRole}: staff or manager.
      *
      * @throws IllegalArgumentException If given user with an unsupported role.
      * @throws LimitExceededException If assignment of staff exceeds quota.

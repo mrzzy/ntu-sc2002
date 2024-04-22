@@ -2,8 +2,8 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-/** Implementation of the {@link PaymentMethod} interface. */
-public record PaypalMethod() implements PaymentMethod {
+/** Implementation of the {@link IPaymentMethod} interface. */
+public record PaypalMethod() implements IPaymentMethod {
     /**
      * Name of the payment method.
      *

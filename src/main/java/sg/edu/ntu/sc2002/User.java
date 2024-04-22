@@ -34,7 +34,7 @@ public class User implements Serializable {
     private String password;
 
     /** role of the user */
-    private Role role;
+    private IRole role;
 
     /**
      * Constructor to create a User with username and role. Name, branchBelongTo, gender, and
@@ -43,7 +43,7 @@ public class User implements Serializable {
      * @param username Username of User.
      * @param role Role of User.
      */
-    public User(String username, Role role) {
+    public User(String username, IRole role) {
         this(username, username, "", -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
     }
 
@@ -65,7 +65,7 @@ public class User implements Serializable {
             int age,
             Gender gender,
             String password,
-            Role role) {
+            IRole role) {
         this.username = username;
         this.name = name;
         this.branchBelongTo = branchBelongTo;
@@ -112,7 +112,7 @@ public class User implements Serializable {
     /**
      * @return Role of the User.
      */
-    public Role getRole() {
+    public IRole getRole() {
         return role;
     }
 
@@ -153,7 +153,7 @@ public class User implements Serializable {
      *
      * @param role New role.
      */
-    public void setRole(Role role) {
+    public void setRole(IRole role) {
         this.role = role;
     }
 

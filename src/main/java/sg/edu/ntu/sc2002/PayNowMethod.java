@@ -2,8 +2,8 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-/** Implementation of the {@link PaymentMethod} interface. */
-public record PayNowMethod(String name) implements PaymentMethod {
+/** Implementation of the {@link IPaymentMethod} interface. */
+public record PayNowMethod(String name) implements IPaymentMethod {
 
     /** Constructor to set name of payment method. */
     public PayNowMethod() {

@@ -14,7 +14,7 @@ public class StaffActionHandler {
      * @return State of Fast Food Branch post performing action.
      */
     public static Branch actionDispatcher(Scanner in, Branch branch) {
-        ArrayList<StaffAction> staffOrderActions = new ArrayList<>(StaffRole.getOrderAction());
+        ArrayList<IStaffAction> staffOrderActions = new ArrayList<>(StaffRole.getOrderAction());
 
         while (true) {
             System.out.println("-------------------------");
@@ -44,7 +44,7 @@ public class StaffActionHandler {
      * @return State of Fast Food Branch post performing action.
      */
     private static Branch handleAction(
-            ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
+            ArrayList<IStaffAction> staffActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action

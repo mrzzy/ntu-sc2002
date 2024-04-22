@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StaffRole implements Role {
+public class StaffRole implements IRole {
     /**
      * Get the code that uniquely identifies the role
      *
@@ -24,8 +24,8 @@ public class StaffRole implements Role {
      *
      * @return Set of actions that the role is authorised to take.
      */
-    public static List<StaffAction> getOrderAction() {
-        return new ArrayList<StaffAction>(
+    public static List<IStaffAction> getOrderAction() {
+        return new ArrayList<IStaffAction>(
                 Arrays.asList(
                         new StaffOrderAction(StaffOrderMethod.VIEW_ORDERS),
                         new StaffOrderAction(StaffOrderMethod.VIEW_ORDER_DETAILS),
