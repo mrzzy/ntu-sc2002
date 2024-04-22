@@ -6,13 +6,27 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
+/** Implementation of the {@link ManagerAction} interface. */
 public class ManagerStaffAction implements ManagerAction {
+    /**
+     * Method to be executed by the action.
+     */
     private ManagerStaffMethod method;
 
+    /**
+     * Constructor to create a Manager Staff Action.
+     * 
+     * @param method Method of the Manager Staff Action.
+     */
     public ManagerStaffAction(ManagerStaffMethod method) {
         this.method = method;
     }
 
+    /**
+     * Title of the Action displayed in the user interface.
+     *
+     * @return Title of the action.
+     */
     @Override
     public String title() {
         switch (method) {
@@ -23,12 +37,25 @@ public class ManagerStaffAction implements ManagerAction {
         }
     }
 
-    public void listStaffAll(Scanner in, Branch branch) {
+    /**
+     * List all staff details on the given Fast Food Branch.
+     * 
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     */
+    private void listStaffAll(Scanner in, Branch branch) {
         for (User staff : branch.getStaffs()) {
             System.out.println(String.format("Name: %s, Age: %d", staff.getName(), staff.getAge()));
         }
     }
 
+    /**
+     * Execute Action on the given Fast Food Branch.
+     *
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @return State of Fast Food Branch post performing action.
+     */
     @Override
     public Branch execute(Scanner in, Branch branch) {
         switch (this.method) {

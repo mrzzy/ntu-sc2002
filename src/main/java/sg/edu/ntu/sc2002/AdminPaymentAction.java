@@ -2,6 +2,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
+/** Implementation of the {@link AdminAction} interface. */
 public class AdminPaymentAction implements AdminAction {
     private AdminPaymentMethod method;
 
@@ -12,7 +13,7 @@ public class AdminPaymentAction implements AdminAction {
     /**
      * Title of the Action displayed in the user interface.
      *
-     * @return Tile of the action.
+     * @return Title of the action.
      */
     @Override
     public String title() {

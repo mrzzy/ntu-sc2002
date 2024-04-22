@@ -9,11 +9,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StaffRole implements Role {
+    /**
+     * Get the code that uniquely identifies the role
+     *
+     * @return Single character code for role.
+     */
     @Override
     public char code() {
         return 'S';
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     *
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<StaffAction> getOrderAction() {
         return new ArrayList<StaffAction>(
                 Arrays.asList(

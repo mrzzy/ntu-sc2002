@@ -3,8 +3,14 @@ package sg.edu.ntu.sc2002;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Handles all executable Admin Actions on a Fast Food {@link Chain}. */
 public class AdminActionHandler {
-
+    /**
+     * Prompts user for the type of action to be performed and passes the specific type of action objects to handleAction method for execution.
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     * @return State of Fast Food Chain post performing action.
+     */
     public static Chain actionDispatcher(Scanner in, Chain chain) {
         ArrayList<AdminAction> adminTransferActions =
                 new ArrayList<>(AdminRole.getTransferAction());
@@ -48,6 +54,13 @@ public class AdminActionHandler {
         }
     }
 
+    /**
+     * Lists all methods available under a specific type of role-based action and executes based on user's choice at runtime.
+     * @param adminActions The list of AdminAction objects of a specific type of action.
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     * @return State of Fast Food Chain post performing action.
+     */
     public static Chain handleAction(ArrayList<AdminAction> adminActions, Scanner in, Chain chain) {
         while (true) {
             // Print available actions

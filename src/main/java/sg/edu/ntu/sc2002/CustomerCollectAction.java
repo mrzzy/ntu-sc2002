@@ -3,10 +3,19 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import java.util.Set;
 
+/** Implementation of the {@link CustomerAction} interface. */
 public class CustomerCollectAction implements CustomerAction {
 
+    /**
+     * Method of the Customer Collect Action.
+     */
     private CustomerCollectMethod method;
 
+    /**
+     * Title of the Action displayed in the user interface.
+     *
+     * @return Title of the action.
+     */
     @Override
     public String title() {
         switch (method) {
@@ -19,11 +28,22 @@ public class CustomerCollectAction implements CustomerAction {
         }
     }
 
+    /**
+     * Constructor to create a Customer Collect Action.
+     *
+     * @param method Method of the Customer Collect Action.
+     */
     public CustomerCollectAction(CustomerCollectMethod method) {
         this.method = method;
     }
 
-    public void viewOrderStatus(Scanner in, Branch branch) {
+    /**
+     * Displays order status based on the order ID provided by the Customer.
+     * 
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     */
+    private void viewOrderStatus(Scanner in, Branch branch) {
         System.out.println("Enter your order ID:");
         int orderId = Input.nextInt(in);
 
@@ -54,7 +74,13 @@ public class CustomerCollectAction implements CustomerAction {
         System.out.println("Invalid order ID.");
     }
 
-    public void collect(Scanner in, Branch branch) {
+    /**
+     * Update the order status from ready to pick up to completed by the Customer.
+     * 
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     */
+    private void collect(Scanner in, Branch branch) {
         System.out.println("Enter your order ID:");
         int orderId = Input.nextInt(in);
         for (Order order : branch.getReadyToPickupList()) {
@@ -76,6 +102,14 @@ public class CustomerCollectAction implements CustomerAction {
                         + " order.");
     }
 
+    /**
+     * Execute Action on the given Fast Food Branch.
+     *
+     * @param in             Stdin scanner used by action to read user input.
+     * @param branch         Fast Food Branch to perform the action on.
+     * @param paymentMethods Payment methods offered by the Fast Food Chain.
+     * @return State of Fast Food Branch post performing action.
+     */
     @Override
     public Branch execute(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
         switch (this.method) {

@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class AdminBranchAction implements AdminAction {
     private AdminBranchMethod method;
 
+    /**
+     * Constructor to set the Admin methods for the branch action types.
+     */
     public AdminBranchAction(AdminBranchMethod method) {
         this.method = method;
     }
@@ -14,7 +17,7 @@ public class AdminBranchAction implements AdminAction {
     /**
      * Title of the Action displayed in the user interface.
      *
-     * @return Tile of the action.
+     * @return Title of the action.
      */
     @Override
     public String title() {

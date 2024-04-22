@@ -6,13 +6,27 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
+/** Implementation of the {@link ManagerAction} interface. */
 public class ManagerMenuAction implements ManagerAction {
+    /**
+     * Method to be executed by the action.
+     */
     private ManagerMenuMethod method;
 
+    /**
+     * Constructor to create a Manager Menu Action.
+     * 
+     * @param method Method of the Manager Menu Action.
+     */
     public ManagerMenuAction(ManagerMenuMethod method) {
         this.method = method;
     }
 
+    /**
+     * Title of the Action displayed in the user interface.
+     *
+     * @return Title of the action.
+     */
     @Override
     public String title() {
         switch (method) {
@@ -27,7 +41,13 @@ public class ManagerMenuAction implements ManagerAction {
         }
     }
 
-    public void addItem(Scanner in, Branch branch) {
+    /**
+     * Add item to a menu.
+     * 
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch The branch which the menu belongs to.
+     */
+    private void addItem(Scanner in, Branch branch) {
         System.out.println("-------------------------");
         while (true) {
 
@@ -79,7 +99,13 @@ public class ManagerMenuAction implements ManagerAction {
         }
     }
 
-    public void removeItem(Scanner in, Branch branch) {
+    /**
+     * Remove item from a menu.
+     * 
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch The branch which the menu belongs to.
+     */
+    private void removeItem(Scanner in, Branch branch) {
         System.out.println("-------------------------");
         System.out.println("Enter item number:");
         int choice = Input.nextInt(in);
@@ -101,7 +127,13 @@ public class ManagerMenuAction implements ManagerAction {
         }
     }
 
-    public void updateItem(Scanner in, Branch branch) {
+    /**
+     * Update item price or description in a menu.
+     * 
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch The branch which the menu belongs to.
+     */
+    private void updateItem(Scanner in, Branch branch) {
         System.out.println("-------------------------");
         System.out.println("What item number do you want to update?");
         int itemChoice = Input.nextInt(in);
@@ -154,6 +186,13 @@ public class ManagerMenuAction implements ManagerAction {
         }
     }
 
+    /**
+     * Execute Action on the given Fast Food Branch.
+     *
+     * @param in     Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @return State of Fast Food Branch post performing action.
+     */
     @Override
     public Branch execute(Scanner in, Branch branch) {
         switch (this.method) {
