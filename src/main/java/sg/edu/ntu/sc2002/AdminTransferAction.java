@@ -52,10 +52,10 @@ public class AdminTransferAction implements AdminAction {
         System.out.println("Please select the staff/manager username you want to transfer : ");
         System.out.println("Available staff : ");
         for (User user : selectedFromBranch.getStaffs()) {
-            System.out.println(user.getUsername());
+            System.out.printf("Staff : %s\n", user.getUsername());
         }
         for (User user : selectedFromBranch.getManagers()) {
-            System.out.println(user.getUsername());
+            System.out.printf("Manager : %s\n", user.getUsername());
         }
 
         String username = in.next();

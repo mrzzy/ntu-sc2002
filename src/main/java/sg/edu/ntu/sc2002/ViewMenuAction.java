@@ -2,12 +2,11 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Set;
 
-
 /** View menu of a particular branch. */
 public class ViewMenuAction {
     /**
      * View menu of a Fast Food Branch.
-     * 
+     *
      * @param menu Menu of the chosen Fast Food Branch.
      */
     public static void viewMenu(Set<Item> menu) {

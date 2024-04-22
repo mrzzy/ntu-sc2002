@@ -11,29 +11,37 @@ import java.io.Serializable;
 public class User implements Serializable {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
+
     /** default password for each user */
     public static final String DEFAULT_PASSWORD = "password";
+
     /** username of the user */
     private String username;
+
     /** name of the user */
     private String name;
+
     /** branch the user belongs to */
     private String branchBelongTo;
+
     /** age of the user */
     private int age;
+
     /** gender of the user */
     private Gender gender;
+
     /** password set by the user */
     private String password;
+
     /** role of the user */
     private Role role;
 
     /**
-     * Constructor to create a User with username and role.
-     * Name, branchBelongTo, gender, and password are set to default values.
-     * 
+     * Constructor to create a User with username and role. Name, branchBelongTo, gender, and
+     * password are set to default values.
+     *
      * @param username Username of User.
-     * @param role     Role of User.
+     * @param role Role of User.
      */
     public User(String username, Role role) {
         this(username, username, "", -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
@@ -41,14 +49,14 @@ public class User implements Serializable {
 
     /**
      * Constructor to create a User.
-     * 
-     * @param username       Username of User.
-     * @param name           Name of User.
+     *
+     * @param username Username of User.
+     * @param name Name of User.
      * @param branchBelongTo Branch of User.
-     * @param age            Age of User.
-     * @param gender         Gender of User.
-     * @param password       Password of User.
-     * @param role           Role of User.
+     * @param age Age of User.
+     * @param gender Gender of User.
+     * @param password Password of User.
+     * @param role Role of User.
      */
     public User(
             String username,
@@ -133,7 +141,7 @@ public class User implements Serializable {
 
     /**
      * Updates the User password.
-     * 
+     *
      * @param password New password.
      */
     public void setPassword(String password) {
@@ -142,7 +150,7 @@ public class User implements Serializable {
 
     /**
      * Updates the User role.
-     * 
+     *
      * @param role New role.
      */
     public void setRole(Role role) {
@@ -151,7 +159,7 @@ public class User implements Serializable {
 
     /**
      * Updates the User's name.
-     * 
+     *
      * @param name New name.
      */
     public void setName(String name) {
@@ -160,7 +168,7 @@ public class User implements Serializable {
 
     /**
      * Updates the User age.
-     * 
+     *
      * @param age New age.
      */
     public void setAge(int age) {
@@ -169,7 +177,7 @@ public class User implements Serializable {
 
     /**
      * Updates the User gender.
-     * 
+     *
      * @param gender New gender.
      */
     public void setGender(Gender gender) {
@@ -178,7 +186,7 @@ public class User implements Serializable {
 
     /**
      * Updates the User's branch.
-     * 
+     *
      * @param branchBelongTo New branch.
      */
     public void setBranchBelongTo(String branchBelongTo) {
@@ -193,12 +201,9 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
 
         User other = (User) obj;
         return getUsername().equals(other.getUsername())

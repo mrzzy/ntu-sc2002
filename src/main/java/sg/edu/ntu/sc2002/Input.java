@@ -7,7 +7,7 @@ public class Input {
 
     /**
      * Handles the error when reading an integer input from Scanner class.
-     * 
+     *
      * @param in Stdin scanner used by action to read user input.
      * @return Scanner input.
      */
@@ -28,7 +28,7 @@ public class Input {
 
     /**
      * Handles the error when reading a float input from Scanner class.
-     * 
+     *
      * @param in Stdin scanner used by action to read user input.
      * @return Scanner input.
      */

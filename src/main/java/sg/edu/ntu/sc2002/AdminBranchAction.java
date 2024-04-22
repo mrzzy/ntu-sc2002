@@ -7,9 +7,7 @@ import java.util.Scanner;
 public class AdminBranchAction implements AdminAction {
     private AdminBranchMethod method;
 
-    /**
-     * Constructor to set the Admin methods for the branch action types.
-     */
+    /** Constructor to set the Admin methods for the branch action types. */
     public AdminBranchAction(AdminBranchMethod method) {
         this.method = method;
     }
@@ -31,7 +29,6 @@ public class AdminBranchAction implements AdminAction {
         }
     }
 
-    // TODO : Exception here is not intended long term
     private void openBranch(Scanner in, Chain chain) {
         System.out.println("Open branch");
         System.out.print("Please enter branch name: ");
@@ -72,19 +69,11 @@ public class AdminBranchAction implements AdminAction {
         System.out.println("Close branch");
         System.out.print("Please enter branch name: ");
         String name = in.next();
-        System.out.print("Please enter branch location: ");
-        String location = in.next();
 
-        boolean removed =
-                chain.getBranches()
-                        .removeIf(
-                                b -> b.getName().equals(name) && b.getLocation().equals(location));
+        boolean removed = chain.getBranches().removeIf(b -> b.getName().equals(name));
 
-        if (removed)
-            System.out.printf("Successfully closed branch %s at location %s\n", name, location);
-        else
-            System.out.println(
-                    "Branch name and location does not exist in the records to be closed");
+        if (removed) System.out.printf("Successfully closed branch %s\n", name);
+        else System.out.printf("%s does not exist to be closed!\n");
     }
 
     /**

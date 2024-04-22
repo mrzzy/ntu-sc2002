@@ -55,7 +55,7 @@ public class AdminStaffAction implements AdminAction {
 
         System.out.print("Please enter staff age: ");
         int age = Input.nextInt(in);
-        System.out.println("Please enter gender (M|F): ");
+        System.out.print("Please enter gender (M|F): ");
         char genderCode = in.next().charAt(0);
         // Sanity check
         if (genderCode != 'M' && genderCode != 'F') {
@@ -64,19 +64,19 @@ public class AdminStaffAction implements AdminAction {
         }
         Gender gender = Gender.fromCode(genderCode);
 
-        System.out.println("Please enter password: ");
+        System.out.print("Please enter password: ");
         String password = in.next();
 
         // Create staff
         User user = new User(username, name, branch, age, gender, password, new StaffRole());
 
-        if (chain.getStaffs().containsKey(username)) {
+        if (chain.getStaffs().containsKey(username) || username == "boss") {
             System.out.println("The current staff already exists");
             return;
         }
 
         selectedBranch.getStaffs().add(user);
-        chain.getStaffs().put(username, user);
+        // chain.getStaffs().put(username, user);
     }
 
     private void editStaff(Scanner in, Chain chain) {
@@ -259,7 +259,7 @@ public class AdminStaffAction implements AdminAction {
                             s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
         Set<User> staffs = staffStream.collect(Collectors.toSet());
 
-        Stream<User> managerStream = branches.stream().flatMap(b -> b.getStaffs().stream());
+        Stream<User> managerStream = branches.stream().flatMap(b -> b.getManagers().stream());
         if (filterRolePredicate == 'Y')
             managerStream = managerStream.filter(s -> s.getRole().code() == filterRole);
         if (filterGenderPredicate == 'Y')

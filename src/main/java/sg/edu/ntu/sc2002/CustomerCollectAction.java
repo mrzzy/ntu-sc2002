@@ -7,9 +7,7 @@ import java.util.Set;
 /** Implementation of the {@link CustomerAction} interface. */
 public class CustomerCollectAction implements CustomerAction {
 
-    /**
-     * Method of the Customer Collect Action.
-     */
+    /** Method of the Customer Collect Action. */
     private CustomerCollectMethod method;
 
     /**
@@ -40,8 +38,8 @@ public class CustomerCollectAction implements CustomerAction {
 
     /**
      * Displays order status based on the order ID provided by the Customer.
-     * 
-     * @param in     Stdin scanner used by action to read user input.
+     *
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrderStatus(Scanner in, Branch branch) {
@@ -78,8 +76,8 @@ public class CustomerCollectAction implements CustomerAction {
 
     /**
      * Update the order status from ready to pick up to completed by the Customer.
-     * 
-     * @param in     Stdin scanner used by action to read user input.
+     *
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void collect(Scanner in, Branch branch) {
@@ -109,8 +107,8 @@ public class CustomerCollectAction implements CustomerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in             Stdin scanner used by action to read user input.
-     * @param branch         Fast Food Branch to perform the action on.
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
      * @param paymentMethods Payment methods offered by the Fast Food Chain.
      * @return State of Fast Food Branch post performing action.
      */

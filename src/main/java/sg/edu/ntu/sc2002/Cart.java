@@ -4,14 +4,10 @@ import java.util.ArrayList;
 
 /** Defines a class to store the items ordered by the customer. */
 public class Cart {
-    /**
-     * List of items in the cart.
-     */
+    /** List of items in the cart. */
     private ArrayList<Item> cartItems;
 
-    /**
-     * Constructor to create a Cart object.
-     */
+    /** Constructor to create a Cart object. */
     public Cart() {
         this.cartItems = new ArrayList<Item>();
     }
@@ -19,16 +15,14 @@ public class Cart {
     // getter
     /**
      * Get the list of items in the cart.
-     * 
+     *
      * @return list of items in the cart.
      */
     public ArrayList<Item> getCart() {
         return this.cartItems;
     }
 
-    /**
-     * View the items in the cart.
-     */
+    /** View the items in the cart. */
     public void viewCart() {
         if (this.cartItems.size() == 0) {
             System.out.println("No items in cart.");
@@ -53,7 +47,7 @@ public class Cart {
     // setter
     /**
      * Add an item to the cart.
-     * 
+     *
      * @param item Item to be added to the cart.
      */
     public void addCart(Item item) {
@@ -62,7 +56,7 @@ public class Cart {
 
     /**
      * Remove an item from the cart.
-     * 
+     *
      * @param itemIndex Index of the item to be removed from the cart.
      */
     public void removeCart(int itemIndex) {

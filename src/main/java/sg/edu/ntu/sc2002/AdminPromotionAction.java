@@ -58,6 +58,7 @@ public class AdminPromotionAction implements AdminAction {
 
                 // Add the new manager in
                 b.getManagers().add(user);
+                System.out.printf("%s has been assigned to %s\n", user.getName(), b.getName());
             }
         }
     }
