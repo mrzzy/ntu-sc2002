@@ -17,7 +17,7 @@ public record PaypalMethod() implements IPaymentMethod {
      * Make payment for the order using the specified method
      *
      * @param amountCents The total cost of the order in cents.
-     * @param in Stdin scanner used by action to read user input.
+     * @param in          Stdin scanner used by action to read user input.
      * @return The outcome of the transaction.
      */
     public boolean pay(int amountCents, Scanner in) {

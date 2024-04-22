@@ -10,18 +10,18 @@ import java.util.Scanner;
 /** Handles all executable Manager Actions on a Fast Food {@link Branch}. */
 public class ManagerActionHandler {
     /**
-     * Prompts user for the type of action to be performed and passes the specific type of action
+     * Prompts user for the type of action to be performed and passes the specific
+     * type of action
      * objects to handleAction method for execution.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */
     public static Branch actionDispatcher(Scanner in, Branch branch) {
         // manager actions
         ArrayList<IManagerAction> managerMenuActions = new ArrayList<>(ManagerRole.getMenuAction());
-        ArrayList<IManagerAction> managerStaffActions =
-                new ArrayList<>(ManagerRole.getStaffAction());
+        ArrayList<IManagerAction> managerStaffActions = new ArrayList<>(ManagerRole.getStaffAction());
 
         // staff actions
         ArrayList<IStaffAction> managerOrderActions = new ArrayList<>(StaffRole.getOrderAction());
@@ -57,12 +57,14 @@ public class ManagerActionHandler {
     }
 
     /**
-     * Lists all methods available under a specific type of role-based action and executes based on
+     * Lists all methods available under a specific type of role-based action and
+     * executes based on
      * user's choice at runtime.
      *
-     * @param managerActions The list of ManagerAction objects of a specific type of action.
-     * @param in Stdin scanner used by action to read user input.
-     * @param branch Fast Food Branch to perform the action on.
+     * @param managerActions The list of ManagerAction objects of a specific type of
+     *                       action.
+     * @param in             Stdin scanner used by action to read user input.
+     * @param branch         Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */
     private static Branch handleAction(
@@ -90,12 +92,14 @@ public class ManagerActionHandler {
     }
 
     /**
-     * Lists all methods available under a specific type of role-based action and executes based on
+     * Lists all methods available under a specific type of role-based action and
+     * executes based on
      * user's choice at runtime.
      *
-     * @param staffActions The list of StaffAction objects of a specific type of action.
-     * @param in Stdin scanner used by action to read user input.
-     * @param branch Fast Food Branch to perform the action on.
+     * @param staffActions The list of StaffAction objects of a specific type of
+     *                     action.
+     * @param in           Stdin scanner used by action to read user input.
+     * @param branch       Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */
     private static Branch handleOrderAction(

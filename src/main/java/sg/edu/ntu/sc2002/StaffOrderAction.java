@@ -34,7 +34,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * View all orders of each type under a given Fast Food Branch.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrders(Scanner in, Branch branch) {
@@ -78,7 +78,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * View order details for new orders under a given Fast Food Branch.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrderDetails(Scanner in, Branch branch) {
@@ -142,7 +142,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * Update the status of a new order to ready to pick up.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private Branch processOrder(Scanner in, Branch branch) {
@@ -178,7 +178,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */

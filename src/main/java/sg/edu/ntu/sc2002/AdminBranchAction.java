@@ -48,18 +48,17 @@ public class AdminBranchAction implements IAdminAction {
             }
         }
 
-        Branch branch =
-                new Branch(
-                        name,
-                        location,
-                        quota,
-                        new HashSet<User>(),
-                        new HashSet<User>(),
-                        new HashSet<Item>(),
-                        new ArrayList<Order>(),
-                        new ArrayList<Order>(),
-                        new ArrayList<Order>(),
-                        new ArrayList<Order>());
+        Branch branch = new Branch(
+                name,
+                location,
+                quota,
+                new HashSet<User>(),
+                new HashSet<User>(),
+                new HashSet<Item>(),
+                new ArrayList<Order>(),
+                new ArrayList<Order>(),
+                new ArrayList<Order>(),
+                new ArrayList<Order>());
         chain.getBranches().add(branch);
 
         System.out.printf("Successfully opened branch %s at location %s\n", name, location);
@@ -72,14 +71,16 @@ public class AdminBranchAction implements IAdminAction {
 
         boolean removed = chain.getBranches().removeIf(b -> b.getName().equals(name));
 
-        if (removed) System.out.printf("Successfully closed branch %s\n", name);
-        else System.out.printf("%s does not exist to be closed!\n");
+        if (removed)
+            System.out.printf("Successfully closed branch %s\n", name);
+        else
+            System.out.printf("%s does not exist to be closed!\n");
     }
 
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */

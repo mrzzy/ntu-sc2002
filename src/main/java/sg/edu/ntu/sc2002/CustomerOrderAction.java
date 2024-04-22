@@ -46,7 +46,6 @@ public class CustomerOrderAction implements ICustomerAction {
         this.method = method;
     }
 
-    
     private void computeTotalCost() {
         double newTotalPrice = 0;
         for (Item item : myCart.getCart()) {
@@ -65,7 +64,7 @@ public class CustomerOrderAction implements ICustomerAction {
     /**
      * Adds the Customer's chosen item to their Cart.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in   Stdin scanner used by action to read user input.
      * @param menu Item menu from the chosen Fast Food Branch.
      * @return Outcome of adding the Item to Cart.
      */
@@ -138,7 +137,7 @@ public class CustomerOrderAction implements ICustomerAction {
             System.out.println("Invalid index. Try again.");
             return false;
         }
-        
+
         myCart.removeCart(itemIndex - 1);
         computeTotalCost();
         return true;
@@ -169,11 +168,13 @@ public class CustomerOrderAction implements ICustomerAction {
     }
 
     /**
-     * Prompts user to choose payment type and calls the payment method in that type.
+     * Prompts user to choose payment type and calls the payment method in that
+     * type.
      *
-     * @param in Stdin scanner used by action to read user input.
-     * @param branch Fast Food Branch to perform the action on.
-     * @param paymentMethods Set of available payment methods supported by the Fast Food Chain.
+     * @param in             Stdin scanner used by action to read user input.
+     * @param branch         Fast Food Branch to perform the action on.
+     * @param paymentMethods Set of available payment methods supported by the Fast
+     *                       Food Chain.
      * @return Outcome of the transaction.
      */
     private boolean pay(Scanner in, Branch branch, Set<IPaymentMethod> paymentMethods) {
@@ -203,7 +204,7 @@ public class CustomerOrderAction implements ICustomerAction {
             System.out.println("Invalid choice.");
             return false;
         }
-        
+
         int amountCents = (int) totalPrice * 100;
         boolean paymentSuccess = paymentMethodSelected.pay(amountCents, in);
 
@@ -225,7 +226,7 @@ public class CustomerOrderAction implements ICustomerAction {
     /**
      * Creates the order.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return Order
      */
@@ -271,8 +272,8 @@ public class CustomerOrderAction implements ICustomerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in Stdin scanner used by action to read user input.
-     * @param branch Fast Food Branch to perform the action on.
+     * @param in             Stdin scanner used by action to read user input.
+     * @param branch         Fast Food Branch to perform the action on.
      * @param paymentMethods Payment methods offered by the Fast Food Chain.
      * @return State of Fast Food Branch post performing action.
      */

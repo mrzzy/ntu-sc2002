@@ -21,7 +21,7 @@ public interface IPaymentMethod extends Serializable {
      * Pay for the Order with the given amount.
      *
      * @param amountCents Amount to be paid in cents.
-     * @param in Stdin scanner used by action to read user input.
+     * @param in          Stdin scanner used by action to read user input.
      * @return True if payment is successful, false otherwise.
      */
     public boolean pay(int amountCents, Scanner in);

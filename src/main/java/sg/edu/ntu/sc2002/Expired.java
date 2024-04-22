@@ -5,8 +5,14 @@ import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/** Handles all expired orders in a {@link Branch}. */
 public class Expired {
 
+    /**
+     * Schedules a task to check for expired orders in a {@link Branch}.
+     *
+     * @param branch Branch to check for expired orders.
+     */
     public static void cancelChecker(Branch branch) {
         Timer timer = new Timer();
         timer.schedule(
@@ -22,9 +28,15 @@ public class Expired {
         return;
     }
 
+    /**
+     * Checks for expired orders in a {@link Branch} and moves them to the cancelled
+     * order list.
+     *
+     * @param branch Branch to check for expired orders.
+     */
     private static void checkExpired(Branch branch) {
         long currentTimeMillis = System.currentTimeMillis();
-        if (branch.getReadyToPickupList().size() == 0){
+        if (branch.getReadyToPickupList().size() == 0) {
             return;
         }
         Iterator<Order> iterator = branch.getReadyToPickupList().iterator();
@@ -32,8 +44,7 @@ public class Expired {
             Order order = iterator.next();
             long orderTimestampMillis = order.getTimestamp().getTime();
 
-            if (currentTimeMillis - orderTimestampMillis
-                    >= 120000) { // 300000 milliseconds = 5 minutes
+            if (currentTimeMillis - orderTimestampMillis >= 120000) { // 300000 milliseconds = 5 minutes
                 order.setTimestamp(new Date());
                 branch.getCancelledOrderList().add(order);
                 iterator.remove();
