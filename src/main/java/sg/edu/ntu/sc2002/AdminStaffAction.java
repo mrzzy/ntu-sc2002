@@ -40,6 +40,22 @@ public class AdminStaffAction implements AdminAction {
 
         System.out.print("Please enter staff branch: ");
         String branchBelongTo = in.next();
+        Branch selectedBranch = null;
+        for (Branch branch : chain.getBranches()){
+            if (branch.getName().equals(branchBelongTo)){
+                if (branch.getStaffs().size() >= branch.getStaffQuota()){
+                    System.out.println("Quota exceeded.");
+                    return;
+                } else {
+                    selectedBranch = branch;
+                    break;
+                }
+            }
+        }
+        if (selectedBranch == null){
+            System.out.println("Branch does not exist.");
+            return;
+        }
 
         System.out.print("Please enter staff age: ");
         int age = Input.nextInt(in);
@@ -59,6 +75,7 @@ public class AdminStaffAction implements AdminAction {
             return;
         }
 
+        selectedBranch.getStaffs().add(user);
         chain.getStaffs().put(username, user);
     }
 
@@ -73,6 +90,20 @@ public class AdminStaffAction implements AdminAction {
             return;
         }
         User user = chain.getStaffs().get(username);
+        User branchUser = null;
+
+        for (Branch branch : chain.getBranches()){
+            for (User userInBranch:branch.getStaffs()){
+                if (userInBranch.getUsername().equals(username)){
+                    branchUser = userInBranch;
+                }
+            }
+        }
+
+        if (branchUser == null) {
+            System.out.println("This user does not exist");
+            return;
+        }
 
         while (true) {
             System.out.println("0) Quit");
@@ -87,22 +118,26 @@ public class AdminStaffAction implements AdminAction {
                 System.out.println("Please enter new name: ");
                 String newName = in.next();
                 user.setName(newName);
+                branchUser.setName(newName);
             }
             if (choice == 2) {
                 System.out.println("Please enter new age: ");
                 int newAge = Input.nextInt(in);
                 user.setAge(newAge);
+                branchUser.setAge(newAge);
             }
             if (choice == 3) {
                 System.out.println("Please enter new gender: ");
                 // TODO : foolproof this
                 char genderCode = in.next().charAt(0);
                 user.setGender(Gender.fromCode(genderCode));
+                branchUser.setGender(Gender.fromCode(genderCode));
             }
             if (choice == 4) {
                 System.out.println("Please enter new password: ");
                 String newPassword = in.next();
                 user.setPassword(newPassword);
+                branchUser.setPassword(newPassword);
             }
         }
     }
@@ -117,7 +152,16 @@ public class AdminStaffAction implements AdminAction {
             System.out.println("This user does not exist");
             return;
         }
+
         chain.getStaffs().remove(username);
+        for (Branch branch : chain.getBranches()){
+            for (User user:branch.getStaffs()){
+                if (user.getUsername().equals(username)){
+                    branch.getStaffs().remove(user);
+                    return;
+                }
+            }
+        }
     }
 
     private void listStaffAll(Scanner in, Chain chain) {
