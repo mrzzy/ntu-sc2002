@@ -5,17 +5,13 @@ import java.util.Set;
 
 /** Implementation of the {@link CustomerAction} interface. */
 public class CustomerOrderAction implements CustomerAction {
-    /**
-     * List of methods related to customer order actions
-     */
+    /** List of methods related to customer order actions */
     private CustomerOrderMethod method;
-    /**
-     * Cart of the Customer
-     */
+
+    /** Cart of the Customer */
     public static Cart myCart;
-    /**
-     * Total price of the items in the Customer's Cart
-     */
+
+    /** Total price of the items in the Customer's Cart */
     public static double totalPrice;
 
     /**
@@ -43,7 +39,7 @@ public class CustomerOrderAction implements CustomerAction {
 
     /**
      * Constructor to create a Customer Order Action.
-     * 
+     *
      * @param method Method of the Customer Order Action.
      */
     public CustomerOrderAction(CustomerOrderMethod method) {
@@ -64,8 +60,8 @@ public class CustomerOrderAction implements CustomerAction {
 
     /**
      * Adds the Customer's chosen item to their Cart.
-     * 
-     * @param in   Stdin scanner used by action to read user input.
+     *
+     * @param in Stdin scanner used by action to read user input.
      * @param menu Item menu from the chosen Fast Food Branch.
      * @return Outcome of adding the Item to Cart.
      */
@@ -113,7 +109,7 @@ public class CustomerOrderAction implements CustomerAction {
 
     /**
      * Removes the Customer's chosen item from their Cart.
-     * 
+     *
      * @param in Stdin scanner used by action to read user input.
      * @return Outcome of removing the Item from the Cart.
      */
@@ -144,7 +140,7 @@ public class CustomerOrderAction implements CustomerAction {
 
     /**
      * Customises the Customer's chosen item in their Cart.
-     * 
+     *
      * @param in Stdin scanner used by action to read user input.
      * @return Outcome of customising the Item in the Cart.
      */
@@ -167,13 +163,11 @@ public class CustomerOrderAction implements CustomerAction {
     }
 
     /**
-     * Prompts user to choose payment type and calls the payment method in that
-     * type.
-     * 
-     * @param in             Stdin scanner used by action to read user input.
-     * @param branch         Fast Food Branch to perform the action on.
-     * @param paymentMethods Set of available payment methods supported by the Fast
-     *                       Food Chain.
+     * Prompts user to choose payment type and calls the payment method in that type.
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @param paymentMethods Set of available payment methods supported by the Fast Food Chain.
      * @return Outcome of the transaction.
      */
     private boolean pay(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
@@ -216,8 +210,8 @@ public class CustomerOrderAction implements CustomerAction {
 
     /**
      * Creates the order.
-     * 
-     * @param in     Stdin scanner used by action to read user input.
+     *
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return Order
      */
@@ -245,7 +239,7 @@ public class CustomerOrderAction implements CustomerAction {
 
     /**
      * Displays the order information
-     * 
+     *
      * @param orderID ID number of the order created.
      */
     public void printReceipt(int orderID) {
@@ -262,8 +256,8 @@ public class CustomerOrderAction implements CustomerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in             Stdin scanner used by action to read user input.
-     * @param branch         Fast Food Branch to perform the action on.
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
      * @param paymentMethods Payment methods offered by the Fast Food Chain.
      * @return State of Fast Food Branch post performing action.
      */

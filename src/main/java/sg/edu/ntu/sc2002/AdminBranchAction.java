@@ -7,9 +7,7 @@ import java.util.Scanner;
 public class AdminBranchAction implements AdminAction {
     private AdminBranchMethod method;
 
-    /**
-     * Constructor to set the Admin methods for the branch action types.
-     */
+    /** Constructor to set the Admin methods for the branch action types. */
     public AdminBranchAction(AdminBranchMethod method) {
         this.method = method;
     }

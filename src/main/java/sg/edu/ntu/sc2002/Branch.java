@@ -128,7 +128,7 @@ public class Branch implements Serializable {
 
     /**
      * Name of the branch.
-     * 
+     *
      * @return Name of the branch.
      */
     public String getName() {
@@ -137,7 +137,7 @@ public class Branch implements Serializable {
 
     /**
      * Location of the branch.
-     * 
+     *
      * @return Location of the branch.
      */
     public String getLocation() {
@@ -146,7 +146,7 @@ public class Branch implements Serializable {
 
     /**
      * Staff in the branch.
-     * 
+     *
      * @return List of Staff in the branch.
      */
     public Set<User> getStaffs() {
@@ -155,7 +155,7 @@ public class Branch implements Serializable {
 
     /**
      * Menu of the branch.
-     * 
+     *
      * @return Menu of the branch.
      */
     public Set<Item> getMenu() {
@@ -164,7 +164,7 @@ public class Branch implements Serializable {
 
     /**
      * Managers in the branch.
-     * 
+     *
      * @return List of managers in the branch.
      */
     public Set<User> getManagers() {

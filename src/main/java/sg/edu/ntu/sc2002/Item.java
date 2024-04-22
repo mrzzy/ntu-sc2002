@@ -11,23 +11,29 @@ import java.io.Serializable;
 public class Item implements Serializable {
     /** item name */
     private String name;
+
     /** item price */
     private double price;
+
     /** item description */
     private String description;
+
     /** item customisation */
     private String customisation;
+
     /** item availability */
     private boolean available;
+
     /** item category */
     private String category;
+
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor when an Item object is created under {@link ManagerMenuAction}.
-     * Customisation is set to empty string as default.
-     * 
+     * Constructor when an Item object is created under {@link ManagerMenuAction}. Customisation is
+     * set to empty string as default.
+     *
      * @param name
      * @param price
      * @param description
@@ -45,7 +51,7 @@ public class Item implements Serializable {
 
     /**
      * Constructor when an Item object is created under {@link CustomerOrderAction}
-     * 
+     *
      * @param name
      * @param price
      * @param description
@@ -70,32 +76,44 @@ public class Item implements Serializable {
 
     // getters
 
-    /** @return Name of item */
+    /**
+     * @return Name of item
+     */
     public String getName() {
         return this.name;
     }
 
-    /** @return Price of item */
+    /**
+     * @return Price of item
+     */
     public Double getPrice() {
         return this.price;
     }
 
-    /** @return Description of item */
+    /**
+     * @return Description of item
+     */
     public String getDescription() {
         return this.description;
     }
 
-    /** @return Customisation of item */
+    /**
+     * @return Customisation of item
+     */
     public String getCustomisation() {
         return this.customisation;
     }
 
-    /** @return Availability of item */
+    /**
+     * @return Availability of item
+     */
     public boolean getAvailable() {
         return this.available;
     }
 
-    /** @return Category of item */
+    /**
+     * @return Category of item
+     */
     public String getCategory() {
         return this.category;
     }
@@ -104,7 +122,7 @@ public class Item implements Serializable {
 
     /**
      * Update the price of the item.
-     * 
+     *
      * @param newPrice New item price.
      */
     public void setPrice(double newPrice) {
@@ -113,7 +131,7 @@ public class Item implements Serializable {
 
     /**
      * Update the description of the item.
-     * 
+     *
      * @param newDescription New item description.
      */
     public void setDescription(String newDescription) {
@@ -122,7 +140,7 @@ public class Item implements Serializable {
 
     /**
      * Update the available of the item.
-     * 
+     *
      * @param newAvailable New item available.
      */
     public void setAvailable(boolean newAvailable) {
@@ -131,7 +149,7 @@ public class Item implements Serializable {
 
     /**
      * Update the customisation of the item.
-     * 
+     *
      * @param newCustomisation New item customisation.
      */
     public void setCustomisation(String newCustomisation) {
@@ -140,7 +158,7 @@ public class Item implements Serializable {
 
     /**
      * Create a copy of the item to be added to the item array list {@link Cart}.
-     * 
+     *
      * @return Item copy.
      */
     public Item copy() {
@@ -164,37 +182,24 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         Item other = (Item) obj;
         if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-            return false;
+            if (other.name != null) return false;
+        } else if (!name.equals(other.name)) return false;
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) return false;
         if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
+            if (other.description != null) return false;
+        } else if (!description.equals(other.description)) return false;
         if (customisation == null) {
-            if (other.customisation != null)
-                return false;
-        } else if (!customisation.equals(other.customisation))
-            return false;
-        if (available != other.available)
-            return false;
+            if (other.customisation != null) return false;
+        } else if (!customisation.equals(other.customisation)) return false;
+        if (available != other.available) return false;
         if (category == null) {
-            if (other.category != null)
-                return false;
-        } else if (!category.equals(other.category))
-            return false;
+            if (other.category != null) return false;
+        } else if (!category.equals(other.category)) return false;
         return true;
     }
 }

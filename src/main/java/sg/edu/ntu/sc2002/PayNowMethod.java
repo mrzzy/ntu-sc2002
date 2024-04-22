@@ -4,17 +4,15 @@ import java.util.Scanner;
 
 /** Implementation of the {@link PaymentMethod} interface. */
 public record PayNowMethod(String name) implements PaymentMethod {
-    
-    /**
-     * Constructor to set name of payment method.
-     */
+
+    /** Constructor to set name of payment method. */
     public PayNowMethod() {
         this("PayNow");
     }
 
     /**
      * Name of the payment method.
-     * 
+     *
      * @return Name of the method.
      */
     public String getName() {
@@ -23,7 +21,7 @@ public record PayNowMethod(String name) implements PaymentMethod {
 
     /**
      * Make payment for the order using the specified method
-     * 
+     *
      * @param amountCents The total cost of the order in cents.
      * @param in Stdin scanner used by action to read user input.
      * @return The outcome of the transaction.

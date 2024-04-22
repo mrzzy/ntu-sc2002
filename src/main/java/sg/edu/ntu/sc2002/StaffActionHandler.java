@@ -6,7 +6,9 @@ import java.util.Scanner;
 /** Handles all executable Staff Actions on a Fast Food {@link Branch}. */
 public class StaffActionHandler {
     /**
-     * Prompts user for the type of action to be performed and passes the specific type of action objects to handleAction method for execution.
+     * Prompts user for the type of action to be performed and passes the specific type of action
+     * objects to handleAction method for execution.
+     *
      * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
@@ -33,7 +35,9 @@ public class StaffActionHandler {
     }
 
     /**
-     * Lists all methods available under a specific type of role-based action and executes based on user's choice at runtime.
+     * Lists all methods available under a specific type of role-based action and executes based on
+     * user's choice at runtime.
+     *
      * @param staffActions The list of StaffAction objects of a specific type of action.
      * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.

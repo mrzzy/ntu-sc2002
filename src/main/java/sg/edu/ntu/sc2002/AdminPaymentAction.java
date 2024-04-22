@@ -50,23 +50,28 @@ public class AdminPaymentAction implements AdminAction {
         }
 
         switch (paymentName) {
-            case "PayNow": {
-                chain.getPaymentMethods().add(new PayNowMethod());
-                System.out.printf("Added %s as a new payment method\n", paymentName);
-                break;
-            }
-            case "Paypal": {
-                chain.getPaymentMethods().add(new PaypalMethod());
-                System.out.printf("Added %s as a new payment method\n", paymentName);
-                break;
-            }
-            case "BankCard": {
-                chain.getPaymentMethods().add(new BankCardMethod());
-                System.out.printf("Added %s as a new payment method\n", paymentName);
-                break;
-            }
+            case "PayNow":
+                {
+                    chain.getPaymentMethods().add(new PayNowMethod());
+                    System.out.printf("Added %s as a new payment method\n", paymentName);
+                    break;
+                }
+            case "Paypal":
+                {
+                    chain.getPaymentMethods().add(new PaypalMethod());
+                    System.out.printf("Added %s as a new payment method\n", paymentName);
+                    break;
+                }
+            case "BankCard":
+                {
+                    chain.getPaymentMethods().add(new BankCardMethod());
+                    System.out.printf("Added %s as a new payment method\n", paymentName);
+                    break;
+                }
             default:
-                System.out.printf("We do not support adding %s as a new payment method right now!\n", paymentName);
+                System.out.printf(
+                        "We do not support adding %s as a new payment method right now!\n",
+                        paymentName);
                 break;
         }
     }
