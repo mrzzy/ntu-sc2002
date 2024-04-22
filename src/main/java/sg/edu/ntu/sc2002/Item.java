@@ -9,17 +9,25 @@ import java.io.Serializable;
 
 /** Defines a Food Item offered by the Fast Food Chain */
 public class Item implements Serializable {
+    /** item name */
     private String name;
+    /** item price */
     private double price;
+    /** item description */
     private String description;
+    /** item customisation */
     private String customisation;
+    /** item availability */
     private boolean available;
+    /** item category */
     private String category;
+    /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
     /**
      * Constructor when an Item object is created under {@link ManagerMenuAction}.
      * Customisation is set to empty string as default.
+     * 
      * @param name
      * @param price
      * @param description
@@ -37,6 +45,7 @@ public class Item implements Serializable {
 
     /**
      * Constructor when an Item object is created under {@link CustomerOrderAction}
+     * 
      * @param name
      * @param price
      * @param description
@@ -93,47 +102,51 @@ public class Item implements Serializable {
 
     // setters
 
-    /** 
+    /**
      * Update the price of the item.
-     * @param newPrice New item price. 
+     * 
+     * @param newPrice New item price.
      */
     public void setPrice(double newPrice) {
         this.price = newPrice;
     }
 
-    /** 
+    /**
      * Update the description of the item.
-     * @param newDescription New item description. 
+     * 
+     * @param newDescription New item description.
      */
     public void setDescription(String newDescription) {
         this.description = newDescription;
     }
 
-    /** 
+    /**
      * Update the available of the item.
-     * @param newAvailable New item available. 
+     * 
+     * @param newAvailable New item available.
      */
     public void setAvailable(boolean newAvailable) {
         this.available = newAvailable;
     }
 
-    /** 
+    /**
      * Update the customisation of the item.
-     * @param newCustomisation New item customisation. 
+     * 
+     * @param newCustomisation New item customisation.
      */
     public void setCustomisation(String newCustomisation) {
         this.customisation = newCustomisation;
     }
 
-    /** 
+    /**
      * Create a copy of the item to be added to the item array list {@link Cart}.
-     * @return Item copy.  
+     * 
+     * @return Item copy.
      */
     public Item copy() {
         return new Item(this.name, this.price, this.description, this.available, this.category);
     }
 
-    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -151,24 +164,37 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         Item other = (Item) obj;
         if (name == null) {
-            if (other.name != null) return false;
-        } else if (!name.equals(other.name)) return false;
-        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) return false;
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+            return false;
         if (description == null) {
-            if (other.description != null) return false;
-        } else if (!description.equals(other.description)) return false;
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
         if (customisation == null) {
-            if (other.customisation != null) return false;
-        } else if (!customisation.equals(other.customisation)) return false;
-        if (available != other.available) return false;
+            if (other.customisation != null)
+                return false;
+        } else if (!customisation.equals(other.customisation))
+            return false;
+        if (available != other.available)
+            return false;
         if (category == null) {
-            if (other.category != null) return false;
-        } else if (!category.equals(other.category)) return false;
+            if (other.category != null)
+                return false;
+        } else if (!category.equals(other.category))
+            return false;
         return true;
     }
 }

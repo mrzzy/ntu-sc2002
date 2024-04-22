@@ -7,11 +7,20 @@ package sg.edu.ntu.sc2002;
 
 /** Enumeration for different genders. */
 public enum Gender {
+    /**
+     * male gender
+     */
     MALE,
+    /**
+     * female gender
+     */
     FEMALE,
+    /**
+     * unknown gender
+     */
     UNKNOWN;
 
-    /** 
+    /**
      * Instantiates the relevant Gender based on the user char input.
      * 
      * @param code Type of gender.

@@ -8,8 +8,16 @@ import java.util.Scanner;
 
 /** Implementation of the {@link ManagerAction} interface. */
 public class ManagerStaffAction implements ManagerAction {
+    /**
+     * Method to be executed by the action.
+     */
     private ManagerStaffMethod method;
 
+    /**
+     * Constructor to create a Manager Staff Action.
+     * 
+     * @param method Method of the Manager Staff Action.
+     */
     public ManagerStaffAction(ManagerStaffMethod method) {
         this.method = method;
     }
@@ -32,10 +40,10 @@ public class ManagerStaffAction implements ManagerAction {
     /**
      * List all staff details on the given Fast Food Branch.
      * 
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
-    public void listStaffAll(Scanner in, Branch branch) {
+    private void listStaffAll(Scanner in, Branch branch) {
         for (User staff : branch.getStaffs()) {
             System.out.println(String.format("Name: %s, Age: %d", staff.getName(), staff.getAge()));
         }
@@ -44,7 +52,7 @@ public class ManagerStaffAction implements ManagerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */

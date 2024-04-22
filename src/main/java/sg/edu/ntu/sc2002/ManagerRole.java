@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/** Implementation of the {@link Role} interface. */
 public class ManagerRole extends StaffRole implements Role {
     /**
      * Get the code that uniquely identifies the role

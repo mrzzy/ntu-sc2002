@@ -4,22 +4,31 @@ import java.util.ArrayList;
 
 /** Defines a class to store the items ordered by the customer. */
 public class Cart {
+    /**
+     * List of items in the cart.
+     */
     private ArrayList<Item> cartItems;
 
     /**
-     * Initialises an empty list of items when a CustomerRole is created.
-     *
-     * @return Tile of the action.
+     * Constructor to create a Cart object.
      */
     public Cart() {
         this.cartItems = new ArrayList<Item>();
     }
 
     // getter
+    /**
+     * Get the list of items in the cart.
+     * 
+     * @return list of items in the cart.
+     */
     public ArrayList<Item> getCart() {
         return this.cartItems;
     }
 
+    /**
+     * View the items in the cart.
+     */
     public void viewCart() {
         if (this.cartItems.size() == 0) {
             System.out.println("No items in cart.");
@@ -42,10 +51,20 @@ public class Cart {
     }
 
     // setter
+    /**
+     * Add an item to the cart.
+     * 
+     * @param item Item to be added to the cart.
+     */
     public void addCart(Item item) {
         this.cartItems.add(item);
     }
 
+    /**
+     * Remove an item from the cart.
+     * 
+     * @param itemIndex Index of the item to be removed from the cart.
+     */
     public void removeCart(int itemIndex) {
         this.cartItems.remove(itemIndex);
     }
