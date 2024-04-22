@@ -3,6 +3,7 @@ package sg.edu.ntu.sc2002;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/** Implementation of the {@link StaffAction} interface. */
 public class StaffOrderAction implements StaffAction {
     private StaffOrderMethod method;
 
@@ -10,6 +11,11 @@ public class StaffOrderAction implements StaffAction {
         this.method = method;
     }
 
+    /**
+     * Title of the Action displayed in the user interface.
+     *
+     * @return Title of the action.
+     */
     @Override
     public String title() {
         switch (method) {
@@ -24,6 +30,12 @@ public class StaffOrderAction implements StaffAction {
         }
     }
 
+    /**
+     * View all orders of each type under a given Fast Food Branch.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     */
     public void viewOrders(Scanner in, Branch branch) {
 
         System.out.println("New Order");
@@ -65,6 +77,12 @@ public class StaffOrderAction implements StaffAction {
         System.out.println("Invalid order ID.");
     }
 
+    /**
+     * View order details for new orders under a given Fast Food Branch.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     */
     public void viewOrderDetails(Scanner in, Branch branch) {
         System.out.println("Enter order ID:");
         int orderId = Input.nextInt(in);
@@ -82,6 +100,12 @@ public class StaffOrderAction implements StaffAction {
         System.out.println("Order not found.");
     }
 
+    /**
+     * Update the status of a new order to ready to pick up.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     */
     public Branch processOrder(Scanner in, Branch branch) {
         try {
             System.out.println("Enter order ID:");
@@ -110,6 +134,13 @@ public class StaffOrderAction implements StaffAction {
         }
     }
 
+    /**
+     * Execute Action on the given Fast Food Branch.
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @return State of Fast Food Branch post performing action.
+     */
     @Override
     public Branch execute(Scanner in, Branch branch) {
         switch (this.method) {

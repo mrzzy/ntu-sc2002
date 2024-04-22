@@ -9,13 +9,22 @@ import java.util.List;
 import java.util.Arrays;
 
 public class CustomerRole implements Role {
-    
+    /**
+     * Get the code that uniquely identifies the role
+     *
+     * @return Single character code for role.
+     */
     @Override
     public char code() {
         // TODO Auto-generated method stub
         return 'C';
     }
 
+    /**
+     * Get type of actions that the role is authorised to take.
+     *
+     * @return List of actions that the role is authorised to take.
+     */
     public static List<CustomerAction> getOrderAction() {
         CustomerOrderAction.myCart = new Cart();
         CustomerOrderAction.totalPrice = 0;
@@ -30,6 +39,11 @@ public class CustomerRole implements Role {
         );
     }
 
+    /**
+     * Get type of actions that the role is authorised to take.
+     *
+     * @return List of actions that the role is authorised to take.
+     */
     public static List<CustomerAction> getCollectAction() {
 
         return new ArrayList<CustomerAction>(

@@ -3,11 +3,17 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import java.util.Set;
 
+/** Implementation of the {@link CustomerAction} interface. */
 public class CustomerOrderAction implements CustomerAction{
     private CustomerOrderMethod method;
     static public Cart myCart;
     static public double totalPrice;
 
+    /**
+     * Title of the Action displayed in the user interface.
+     *
+     * @return Title of the action.
+     */
     @Override
     public String title() {
         switch (method) {
@@ -30,6 +36,7 @@ public class CustomerOrderAction implements CustomerAction{
         this.method = method;
     }
 
+    /** Display list of items and total price in Customer's Cart. */
     public void viewCart(){
         System.out.println("-------------------------");
         myCart.viewCart();
@@ -41,6 +48,13 @@ public class CustomerOrderAction implements CustomerAction{
         totalPrice = newTotalPrice;
     }
 
+    /**
+     * Adds the Customer's chosen item to their Cart.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @param menu Item menu from the chosen Fast Food Branch.
+     * @return Outcome of adding the Item to Cart.
+     */
     public boolean addToCart(Scanner in, Set<Item> menu){
         System.out.println("-------------------------");
         int i = 1;
@@ -77,6 +91,12 @@ public class CustomerOrderAction implements CustomerAction{
         }
     }
 
+    /**
+     * Removes the Customer's chosen item from their Cart.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @return Outcome of removing the Item from the Cart.
+     */
     public boolean removeFromCart(Scanner in){
         System.out.println("-------------------------");
         int i = 1;
@@ -95,6 +115,12 @@ public class CustomerOrderAction implements CustomerAction{
         return true;
     }
 
+    /**
+     * Customises the Customer's chosen item in their Cart.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @return Outcome of customising the Item in the Cart.
+     */
     public boolean customiseItemInCart(Scanner in){
         System.out.println("-------------------------");
         if (myCart.getCart().size() == 0){
@@ -113,6 +139,14 @@ public class CustomerOrderAction implements CustomerAction{
         return true;
     }
 
+    /**
+     * Prompts user to choose payment type and calls the payment method in that type.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @param paymentMethods Set of available payment methods supported by the Fast Food Chain.
+     * @return Outcome of the transaction.
+     */
     public boolean pay(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods){
         System.out.println("-------------------------");
         if (myCart.getCart().size() == 0){
@@ -151,6 +185,13 @@ public class CustomerOrderAction implements CustomerAction{
         }
     }
 
+    /**
+     * Creates the order.
+     * 
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @return Order
+     */
     public Order createOrder(Scanner in, Branch branch){
         DiningOption myOption = null;
         while (myOption == null){
@@ -171,10 +212,35 @@ public class CustomerOrderAction implements CustomerAction{
         }
         branch.setOrderId();
         Order myOrder = new Order(myCart.getCart(), myOption, branch.getOrderId());
-        System.out.println(String.format("Your order ID is: %d", branch.getOrderId()));
+        printReceipt(branch.getOrderId());
         return myOrder;
     }
 
+
+    /**
+     * Displays the order information
+     * 
+     * @param orderID ID number of the order created.
+     */
+    public void printReceipt(int orderID){
+        System.out.println(String.format("Your order ID is: %d", orderID));
+        System.out.println("-------------------------");
+        myCart.viewCart();
+        double newTotalPrice = 0;
+        for (Item item:myCart.getCart()){
+            newTotalPrice += item.getPrice();
+        }
+        System.out.println(String.format("Total Price: %.2f", newTotalPrice));
+    }
+
+    /**
+     * Execute Action on the given Fast Food Branch.
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
+     * @param paymentMethods Payment methods offered by the Fast Food Chain.
+     * @return State of Fast Food Branch post performing action.
+     */
     @Override
     public Branch execute(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
         switch (this.method) {

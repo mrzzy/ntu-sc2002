@@ -2,9 +2,15 @@ package sg.edu.ntu.sc2002;
 
 import java.util.ArrayList;
 
+/** Defines a class to store the items ordered by the customer. */
 public class Cart {
     private ArrayList<Item> cartItems;
 
+    /**
+     * Initialises an empty list of items when a CustomerRole is created.
+     *
+     * @return Tile of the action.
+     */
     public Cart() {
         this.cartItems = new ArrayList<Item>();
     }

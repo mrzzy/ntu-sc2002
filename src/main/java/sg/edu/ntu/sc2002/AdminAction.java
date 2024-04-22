@@ -12,7 +12,7 @@ public interface AdminAction {
     /**
      * Title of the Action displayed in the user interface.
      *
-     * @return Tile of the action.
+     * @return Title of the action.
      */
     public String title();
 

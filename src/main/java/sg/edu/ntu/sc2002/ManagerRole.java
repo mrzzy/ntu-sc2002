@@ -9,11 +9,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ManagerRole extends StaffRole implements Role {
+    /**
+     * Get the code that uniquely identifies the role
+     *
+     * @return Single character code for role.
+     */
     @Override
     public char code() {
         return 'M';
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     *
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<ManagerAction> getMenuAction() {
 
         return new ArrayList<ManagerAction>(
@@ -23,6 +33,11 @@ public class ManagerRole extends StaffRole implements Role {
                         new ManagerMenuAction(ManagerMenuMethod.UPDATE_ITEM)));
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     *
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<ManagerAction> getStaffAction() {
         return new ArrayList<ManagerAction>(
                 Arrays.asList(new ManagerStaffAction(ManagerStaffMethod.LIST_STAFF_ALL)));

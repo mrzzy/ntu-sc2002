@@ -126,22 +126,47 @@ public class Branch implements Serializable {
 
     // getter
 
+    /**
+     * Name of the branch.
+     * 
+     * @return Name of the branch.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Location of the branch.
+     * 
+     * @return Location of the branch.
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Staff in the branch.
+     * 
+     * @return List of Staff in the branch.
+     */
     public Set<User> getStaffs() {
         return staffs;
     }
 
+    /**
+     * Menu of the branch.
+     * 
+     * @return Menu of the branch.
+     */
     public Set<Item> getMenu() {
         return menu;
     }
 
+    /**
+     * Managers in the branch.
+     * 
+     * @return List of managers in the branch.
+     */
     public Set<User> getManagers() {
         return managers;
     }
