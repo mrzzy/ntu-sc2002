@@ -170,7 +170,7 @@ public class User implements Serializable {
     /**
      * Updates the User's branch.
      * 
-     * @param branch New branch.
+     * @param branchBelongsTo New branch.
      */
     public void setBranchBelongTo(String branchBelongTo) {
         this.branchBelongTo = branchBelongTo;
