@@ -37,21 +37,14 @@ public class AdminStaffAction implements AdminAction {
         String name = in.next();
         System.out.print("Please enter staff username: ");
         String username = in.next();
-
         System.out.print("Please enter staff branch: ");
-        String branchBelongTo = in.next();
-        Branch selectedBranch = null;
-        for (Branch branch : chain.getBranches()) {
-            if (branch.getName().equals(branchBelongTo)) {
-                if (branch.getStaffs().size() >= branch.getStaffQuota()) {
-                    System.out.println("Quota exceeded.");
-                    return;
-                } else {
-                    selectedBranch = branch;
-                    break;
-                }
-            }
-        }
+        String branch = in.next();
+
+        Branch selectedBranch =
+                chain.getBranches().stream()
+                        .filter(b -> branch.equals(b.getName()))
+                        .findAny()
+                        .orElse(null);
         if (selectedBranch == null) {
             System.out.println("Branch does not exist.");
             return;
@@ -60,15 +53,20 @@ public class AdminStaffAction implements AdminAction {
         System.out.print("Please enter staff age: ");
         int age = Input.nextInt(in);
         System.out.println("Please enter gender (M|F): ");
-        // TODO : Parse / Strip
         char genderCode = in.next().charAt(0);
+        // Sanity check
+        if (genderCode != 'M' && genderCode != 'F') {
+            System.out.println("Please enter M or F for gender");
+            return;
+        }
         Gender gender = Gender.fromCode(genderCode);
+
         System.out.println("Please enter password: ");
         String password = in.next();
 
         // Create staff
         User user =
-                new User(username, name, branchBelongTo, age, gender, password, new StaffRole());
+                new User(username, name, branch, age, gender, password, new StaffRole());
 
         if (chain.getStaffs().containsKey(username)) {
             System.out.println("The current staff already exists");
