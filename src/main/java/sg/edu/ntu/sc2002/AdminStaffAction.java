@@ -55,7 +55,7 @@ public class AdminStaffAction implements AdminAction {
 
         System.out.print("Please enter staff age: ");
         int age = Input.nextInt(in);
-        System.out.println("Please enter gender (M|F): ");
+        System.out.print("Please enter gender (M|F): ");
         char genderCode = in.next().charAt(0);
         // Sanity check
         if (genderCode != 'M' && genderCode != 'F') {
@@ -64,13 +64,13 @@ public class AdminStaffAction implements AdminAction {
         }
         Gender gender = Gender.fromCode(genderCode);
 
-        System.out.println("Please enter password: ");
+        System.out.print("Please enter password: ");
         String password = in.next();
 
         // Create staff
         User user = new User(username, name, branch, age, gender, password, new StaffRole());
 
-        if (chain.getStaffs().containsKey(username)) {
+        if (chain.getStaffs().containsKey(username) || username == "boss") {
             System.out.println("The current staff already exists");
             return;
         }
