@@ -1,6 +1,9 @@
 package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AdminStaffAction implements AdminAction {
     private AdminStaffMethod method;
@@ -65,8 +68,7 @@ public class AdminStaffAction implements AdminAction {
         String password = in.next();
 
         // Create staff
-        User user =
-                new User(username, name, branch, age, gender, password, new StaffRole());
+        User user = new User(username, name, branch, age, gender, password, new StaffRole());
 
         if (chain.getStaffs().containsKey(username)) {
             System.out.println("The current staff already exists");
@@ -89,11 +91,12 @@ public class AdminStaffAction implements AdminAction {
         }
         User user = chain.getStaffs().get(username);
 
-        User branchUser = chain.getBranches().stream()
-                                    .flatMap(b -> b.getStaffs().stream())
-                                    .filter(s -> username.equals(s.getUsername()))
-                                    .findAny()
-                                    .orElse(null);
+        User branchUser =
+                chain.getBranches().stream()
+                        .flatMap(b -> b.getStaffs().stream())
+                        .filter(s -> username.equals(s.getUsername()))
+                        .findAny()
+                        .orElse(null);
         if (branchUser == null) {
             System.out.println("This user does not exist");
             return;
@@ -165,31 +168,130 @@ public class AdminStaffAction implements AdminAction {
     private void listStaffAll(Scanner in, Chain chain) {
         System.out.println("List all staff");
 
-        // TODO : filter branch / role / gender / age
-        for (Branch branch : chain.getBranches()) {
-            for (User staff : branch.getStaffs()) {
-                System.out.printf(
-                        "%s, %s, %s, %d, %s, %s\n",
-                        branch.getName(),
-                        branch.getLocation(),
-                        staff.getName(),
-                        staff.getAge(),
-                        staff.getGender(),
-                        staff.getRole().code());
+        System.out.println("Do you want to filter by branch? (Y|N)");
+        char filterBranchPredicate = in.next().charAt(0);
+        String branch = null;
+        if (filterBranchPredicate == 'Y') {
+            while (true) {
+                System.out.println("Please input which branch you want to filter by");
+                branch = in.next();
+
+                String finalBranch = branch;
+                Branch branchExists =
+                        chain.getBranches().stream()
+                                .filter(b -> finalBranch.equals(b.getName()))
+                                .findAny()
+                                .orElse(null);
+                if (branchExists != null) break;
+                System.out.println("BRanch does not exist! Please try again");
             }
         }
 
-        for (Branch branch : chain.getBranches()) {
-            for (User manager : branch.getManagers()) {
-                System.out.printf(
-                        "%s, %s, %s, %d, %s, %s\n",
-                        branch.getName(),
-                        branch.getLocation(),
-                        manager.getName(),
-                        manager.getAge(),
-                        manager.getGender(),
-                        manager.getRole().code());
+        System.out.println("Do you want to filter by role? (Y|N)");
+        char filterRolePredicate = in.next().charAt(0);
+        char role = 0;
+        if (filterRolePredicate == 'Y') {
+            while (true) {
+                System.out.println("Please input which role you want to filter by (S|M)");
+                role = in.next().charAt(0);
+                // If valid role, then break
+                if (role == 'S' || role == 'M') break;
+                System.out.println("Role to filter by is neither S or M. Cannot filter by this");
             }
+        }
+
+        System.out.println("Do you want to filter by gender? (Y|N)");
+        char filterGenderPredicate = in.next().charAt(0);
+        char gender = 0;
+        if (filterGenderPredicate == 'Y') {
+            while (true) {
+                System.out.println("Please input which gender you want to filter by (M|F)");
+                gender = in.next().charAt(0);
+                // If valid role, then break
+                if (gender == 'M' || gender == 'F') break;
+                System.out.println("Gender to filter by is neither M or F. Cannot filter by this");
+            }
+        }
+
+        System.out.println("Do you want to filter by age? (Y|N)");
+        char filterAgePredicate = in.next().charAt(0);
+        int minAge = 0;
+        int maxAge = 0;
+        if (filterAgePredicate == 'Y') {
+            while (true) {
+                System.out.println("Please input the minimum age you want to filter by");
+                minAge = in.nextInt();
+                System.out.println("Please input the maximum age you want to filter by");
+                maxAge = in.nextInt();
+
+                // If there exists a valid range, even if it's an age range of 1
+                // this can be searched
+                if (minAge <= maxAge) {
+                    break;
+                }
+
+                System.out.println("Minimum age must be less than or equals to the maximum age.");
+            }
+        }
+
+        String filterBranch = branch;
+        char filterRole = role;
+        char filterGender = gender;
+        int filterMinAge = minAge;
+        int filterMaxAge = maxAge;
+
+        // Filter by branch first
+        Stream<Branch> allBranches = chain.getBranches().stream();
+        if (filterBranchPredicate == 'Y')
+            allBranches = allBranches.filter(b -> b.getName().equals(filterBranch));
+
+        Set<Branch> branches = allBranches.collect(Collectors.toSet());
+
+        // Filter users by role | gender | age
+        Stream<User> staffStream = branches.stream().flatMap(b -> b.getStaffs().stream());
+        if (filterRolePredicate == 'Y')
+            staffStream = staffStream.filter(s -> s.getRole().code() == filterRole);
+        if (filterGenderPredicate == 'Y')
+            staffStream = staffStream.filter(s -> Gender.toCode(s.getGender()) == filterGender);
+        if (filterAgePredicate == 'Y')
+            staffStream =
+                    staffStream.filter(
+                            s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
+        Set<User> staffs = staffStream.collect(Collectors.toSet());
+
+        Stream<User> managerStream = branches.stream().flatMap(b -> b.getStaffs().stream());
+        if (filterRolePredicate == 'Y')
+            managerStream = managerStream.filter(s -> s.getRole().code() == filterRole);
+        if (filterGenderPredicate == 'Y')
+            managerStream = managerStream.filter(s -> Gender.toCode(s.getGender()) == filterGender);
+        if (filterAgePredicate == 'Y')
+            managerStream =
+                    managerStream.filter(
+                            s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
+        Set<User> managers = managerStream.collect(Collectors.toSet());
+
+        if (staffs.size() == 0 && managers.size() == 0) {
+            System.out.println("No one to list!");
+            return;
+        }
+
+        for (User staff : staffs) {
+            System.out.printf(
+                    "%s, %s, %d, %s, %s\n",
+                    staff.getBranchBelongTo(),
+                    staff.getName(),
+                    staff.getAge(),
+                    staff.getGender(),
+                    staff.getRole().code());
+        }
+        for (User manager : managers) {
+            System.out.printf(
+                    "%s, %s, %d, %s, %s\n",
+                    manager.getBranchBelongTo(),
+                    manager.getName(),
+                    manager.getAge(),
+                    manager.getGender(),
+                    manager.getRole().code());
         }
     }
 

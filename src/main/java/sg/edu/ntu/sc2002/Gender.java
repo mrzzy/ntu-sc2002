@@ -10,6 +10,17 @@ public enum Gender {
     FEMALE,
     UNKNOWN;
 
+    public static char toCode(Gender gender) {
+        switch (gender) {
+            case MALE:
+                return 'M';
+            case FEMALE:
+                return 'F';
+            default:
+                return 'U';
+        }
+    }
+
     public static Gender fromCode(char code) {
         switch (code) {
             case 'M':
