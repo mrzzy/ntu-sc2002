@@ -41,9 +41,9 @@ public class AdminStaffAction implements AdminAction {
         System.out.print("Please enter staff branch: ");
         String branchBelongTo = in.next();
         Branch selectedBranch = null;
-        for (Branch branch : chain.getBranches()){
-            if (branch.getName().equals(branchBelongTo)){
-                if (branch.getStaffs().size() >= branch.getStaffQuota()){
+        for (Branch branch : chain.getBranches()) {
+            if (branch.getName().equals(branchBelongTo)) {
+                if (branch.getStaffs().size() >= branch.getStaffQuota()) {
                     System.out.println("Quota exceeded.");
                     return;
                 } else {
@@ -52,7 +52,7 @@ public class AdminStaffAction implements AdminAction {
                 }
             }
         }
-        if (selectedBranch == null){
+        if (selectedBranch == null) {
             System.out.println("Branch does not exist.");
             return;
         }
@@ -92,9 +92,9 @@ public class AdminStaffAction implements AdminAction {
         User user = chain.getStaffs().get(username);
         User branchUser = null;
 
-        for (Branch branch : chain.getBranches()){
-            for (User userInBranch:branch.getStaffs()){
-                if (userInBranch.getUsername().equals(username)){
+        for (Branch branch : chain.getBranches()) {
+            for (User userInBranch : branch.getStaffs()) {
+                if (userInBranch.getUsername().equals(username)) {
                     branchUser = userInBranch;
                 }
             }
@@ -154,9 +154,9 @@ public class AdminStaffAction implements AdminAction {
         }
 
         chain.getStaffs().remove(username);
-        for (Branch branch : chain.getBranches()){
-            for (User user:branch.getStaffs()){
-                if (user.getUsername().equals(username)){
+        for (Branch branch : chain.getBranches()) {
+            for (User user : branch.getStaffs()) {
+                if (user.getUsername().equals(username)) {
                     branch.getStaffs().remove(user);
                     return;
                 }
