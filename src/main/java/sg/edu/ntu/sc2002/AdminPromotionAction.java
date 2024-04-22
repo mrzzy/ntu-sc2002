@@ -2,7 +2,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-public class AdminPromotionAction implements AdminAction{
+public class AdminPromotionAction implements AdminAction {
     private AdminPromotionMethod method;
 
     public AdminPromotionAction(AdminPromotionMethod method) {

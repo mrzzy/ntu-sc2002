@@ -13,7 +13,8 @@ public class ManagerActionHandler {
 
         // manager methods
         ArrayList<ManagerAction> managerMenuActions = new ArrayList<>(ManagerRole.getMenuAction());
-        ArrayList<ManagerAction> managerStaffActions = new ArrayList<>(ManagerRole.getStaffAction());
+        ArrayList<ManagerAction> managerStaffActions =
+                new ArrayList<>(ManagerRole.getStaffAction());
 
         // staff methods
         ArrayList<StaffAction> managerOrderActions = new ArrayList<>(StaffRole.getOrderAction());
@@ -48,7 +49,8 @@ public class ManagerActionHandler {
         }
     }
 
-    private static Branch handleAction(ArrayList<ManagerAction> managerActions, Scanner in, Branch branch) {
+    private static Branch handleAction(
+            ArrayList<ManagerAction> managerActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action
@@ -71,7 +73,8 @@ public class ManagerActionHandler {
         }
     }
 
-    private static Branch handleOrderAction(ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
+    private static Branch handleOrderAction(
+            ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action

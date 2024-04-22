@@ -6,8 +6,8 @@
 package sg.edu.ntu.sc2002;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 /** Defines a Fast Food Order of {@link Item}. */
 public class Order implements Serializable {
@@ -17,7 +17,7 @@ public class Order implements Serializable {
     private OrderStatus orderStatus;
     private int orderId;
 
-    public Order(List<Item> items, DiningOption diningOption, int orderId){
+    public Order(List<Item> items, DiningOption diningOption, int orderId) {
         this.items = items;
         this.diningOption = diningOption;
         this.orderStatus = new OrderStatus();
@@ -30,34 +30,33 @@ public class Order implements Serializable {
      * @return Next order status post transition (if any).
      */
 
-     /** Process the items in this Order. Performed by Staff. */
-    public void process(){
-        if (this.orderStatus.getStatus() == OrderStatusType.NEW){
+    /** Process the items in this Order. Performed by Staff. */
+    public void process() {
+        if (this.orderStatus.getStatus() == OrderStatusType.NEW) {
             this.orderStatus.setStatus(OrderStatusType.READY_TO_PICKUP);
-        }    
+        }
         this.orderStatus.setTimestamp(new Date()); // Update timestamp
     }
 
     /** Collect this Order. Performed by Branch. */
-    public void cancel(){
-        if (this.orderStatus.getStatus() == OrderStatusType.READY_TO_PICKUP){
+    public void cancel() {
+        if (this.orderStatus.getStatus() == OrderStatusType.READY_TO_PICKUP) {
             this.orderStatus.setStatus(OrderStatusType.CANCELLED);
-        }    
+        }
         this.orderStatus.setTimestamp(new Date()); // Update timestamp
     }
 
     /** Collect this Order. Performed by Customer. */
-    public void collect(){
-        if (this.orderStatus.getStatus() == OrderStatusType.READY_TO_PICKUP){
+    public void collect() {
+        if (this.orderStatus.getStatus() == OrderStatusType.READY_TO_PICKUP) {
             this.orderStatus.setStatus(OrderStatusType.COMPLETED);
-        }    
+        }
         this.orderStatus.setTimestamp(new Date()); // Update timestamp
     }
 
-    public int getId(){
+    public int getId() {
         return this.orderId;
     }
-
 
     public List<Item> getItems() {
         return items;
@@ -69,5 +68,30 @@ public class Order implements Serializable {
 
     public OrderStatus getOrderStatus() {
         return orderStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + orderId;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Order other = (Order) obj;
+        if (items == null) {
+            if (other.items != null) return false;
+        } else if (!items.equals(other.items)) return false;
+        if (diningOption != other.diningOption) return false;
+        if (orderStatus == null) {
+            if (other.orderStatus != null) return false;
+        } else if (!orderStatus.equals(other.orderStatus)) return false;
+        if (orderId != other.orderId) return false;
+        return true;
     }
 }

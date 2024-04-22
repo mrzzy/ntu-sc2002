@@ -6,10 +6,10 @@
 package sg.edu.ntu.sc2002;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.naming.LimitExceededException;
 
 /** Defines a Branch of Fast Food Restaurant {@link Chain}. */
@@ -48,11 +48,25 @@ public class Branch implements Serializable {
         this.readyToPickupList = readyToPickupList;
         this.completedOrderList = completedOrderList;
         this.cancelledOrderList = cancelledOrderList;
-        this.lastOrderId = newOrderList.size() + readyToPickupList.size() + completedOrderList.size() + cancelledOrderList.size();
+        this.lastOrderId =
+                newOrderList.size()
+                        + readyToPickupList.size()
+                        + completedOrderList.size()
+                        + cancelledOrderList.size();
     }
 
     public Branch(String name, String location, int staffQuota) {
-        this(name, location, staffQuota, new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        this(
+                name,
+                location,
+                staffQuota,
+                new HashSet<>(),
+                new HashSet<>(),
+                new HashSet<>(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                new ArrayList<>());
     }
 
     /**
@@ -76,7 +90,7 @@ public class Branch implements Serializable {
                 }
                 getStaffs().add(user);
             }
-            
+
             default ->
                     throw new IllegalArgumentException(
                             "Refusing to assign unsupported role: " + user.getRole());
@@ -132,33 +146,33 @@ public class Branch implements Serializable {
         return managers;
     }
 
-    public List<Order> getReadyToPickupList(){
+    public List<Order> getReadyToPickupList() {
         return this.readyToPickupList;
     }
 
-    public List<Order> getNewOrderList(){
+    public List<Order> getNewOrderList() {
         return this.newOrderList;
     }
 
-    public List<Order> getCompletedOrderList(){
+    public List<Order> getCompletedOrderList() {
         return this.completedOrderList;
     }
 
-    public List<Order> getCancelledOrderList(){
+    public List<Order> getCancelledOrderList() {
         return this.cancelledOrderList;
     }
 
-    public int getOrderId(){
+    public int getOrderId() {
         return this.lastOrderId;
     }
 
-    public void setOrderId(){
+    public void setOrderId() {
         this.lastOrderId++;
     }
 
     @Override
     public int hashCode() {
-        // branches are unique by username
+        // branches are unique by name
         return name.hashCode();
     }
 
@@ -184,6 +198,19 @@ public class Branch implements Serializable {
         if (menu == null) {
             if (other.menu != null) return false;
         } else if (!menu.equals(other.menu)) return false;
+        if (newOrderList == null) {
+            if (other.newOrderList != null) return false;
+        } else if (!newOrderList.equals(other.newOrderList)) return false;
+        if (readyToPickupList == null) {
+            if (other.readyToPickupList != null) return false;
+        } else if (!readyToPickupList.equals(other.readyToPickupList)) return false;
+        if (completedOrderList == null) {
+            if (other.completedOrderList != null) return false;
+        } else if (!completedOrderList.equals(other.completedOrderList)) return false;
+        if (cancelledOrderList == null) {
+            if (other.cancelledOrderList != null) return false;
+        } else if (!cancelledOrderList.equals(other.cancelledOrderList)) return false;
+        if (lastOrderId != other.lastOrderId) return false;
         return true;
     }
 

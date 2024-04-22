@@ -14,7 +14,7 @@ public interface CustomerAction {
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch The particular branch the customer perform the action on.
      * @param paymentMethods The payment methods the customer chooses.
      * @return State of the branch post performing action.

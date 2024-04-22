@@ -2,12 +2,13 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-public class AdminTransferAction implements AdminAction{
+public class AdminTransferAction implements AdminAction {
     private AdminTransferMethod method;
 
     public AdminTransferAction(AdminTransferMethod method) {
         this.method = method;
     }
+
     /**
      * Title of the Action displayed in the user interface.
      *

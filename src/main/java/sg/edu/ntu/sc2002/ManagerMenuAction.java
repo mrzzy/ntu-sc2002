@@ -27,32 +27,31 @@ public class ManagerMenuAction implements ManagerAction {
         }
     }
 
-
     public void addItem(Scanner in, Branch branch) {
         System.out.println("-------------------------");
         while (true) {
 
             String name = null;
-            while (name == null){
+            while (name == null) {
                 System.out.println("Enter item name:");
                 name = in.nextLine();
             }
-           
+
             double price = 0.0;
-            while (price <= 0.0){
+            while (price <= 0.0) {
                 System.out.println("Enter item price:");
                 price = Input.nextDouble(in);
             }
 
             String description = null;
-            while (description == null){
+            while (description == null) {
                 in.nextLine();
                 System.out.println("Enter item description:");
                 description = in.nextLine();
             }
 
             boolean available = false;
-            while (true){
+            while (true) {
                 System.out.println("Enter item availability (Y/N):");
                 String availability = in.next();
                 if (availability.equalsIgnoreCase("Y")) {
@@ -66,7 +65,7 @@ public class ManagerMenuAction implements ManagerAction {
                     continue; // Restart the loop to allow the user to input again
                 }
             }
-            
+
             System.out.println("Enter item category:");
             String category = in.next();
 
@@ -141,7 +140,7 @@ public class ManagerMenuAction implements ManagerAction {
                     case 2:
                         System.out.println("Enter new description:");
                         String description = null;
-                        while (description == null){
+                        while (description == null) {
                             in.nextLine();
                             description = in.nextLine();
                             itemToUpdate.setDescription(description);

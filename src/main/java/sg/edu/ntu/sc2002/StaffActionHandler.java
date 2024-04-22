@@ -1,13 +1,13 @@
 package sg.edu.ntu.sc2002;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StaffActionHandler {
 
-    public static Branch actionDispatcher(Scanner in, Branch branch){
+    public static Branch actionDispatcher(Scanner in, Branch branch) {
         ArrayList<StaffAction> staffOrderActions = new ArrayList<>(StaffRole.getOrderAction());
-        //ArrayList<StaffAction> staffMenuActions = new ArrayList<>(staffRole.getOrderAction());
+        // ArrayList<StaffAction> staffMenuActions = new ArrayList<>(staffRole.getOrderAction());
 
         while (true) {
             System.out.println("-------------------------");
@@ -27,7 +27,8 @@ public class StaffActionHandler {
         }
     }
 
-    private static Branch handleAction(ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
+    private static Branch handleAction(
+            ArrayList<StaffAction> staffActions, Scanner in, Branch branch) {
         while (true) {
             // Print available actions
             // quit action

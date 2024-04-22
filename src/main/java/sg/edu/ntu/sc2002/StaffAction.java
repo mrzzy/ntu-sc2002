@@ -13,7 +13,7 @@ public interface StaffAction {
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch The particular branch the staff performs the action on.
      * @return State of the branch post performing action.
      */

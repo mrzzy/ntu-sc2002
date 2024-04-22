@@ -23,7 +23,14 @@ public class User implements Serializable {
         this(username, username, "", -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
     }
 
-    public User(String username, String name, String branchBelongTo, int age, Gender gender, String password, Role role) {
+    public User(
+            String username,
+            String name,
+            String branchBelongTo,
+            int age,
+            Gender gender,
+            String password,
+            Role role) {
         this.username = username;
         this.name = name;
         this.branchBelongTo = branchBelongTo;
@@ -44,7 +51,7 @@ public class User implements Serializable {
         return this.username.equals(username) && this.password.equals(password);
     }
 
-    //setter
+    // setter
 
     public void setPassword(String password) {
         this.password = password;
@@ -70,7 +77,7 @@ public class User implements Serializable {
         this.branchBelongTo = branchBelongTo;
     }
 
-    //getter
+    // getter
     public String getUsername() {
         return username;
     }

@@ -2,7 +2,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-public class AdminStaffAction implements AdminAction{
+public class AdminStaffAction implements AdminAction {
     private AdminStaffMethod method;
 
     public AdminStaffAction(AdminStaffMethod method) {
@@ -51,7 +51,8 @@ public class AdminStaffAction implements AdminAction{
         String password = in.next();
 
         // Create staff
-        User user = new User(username, name, branchBelongTo, age, gender, password, new StaffRole());
+        User user =
+                new User(username, name, branchBelongTo, age, gender, password, new StaffRole());
 
         if (chain.getStaffs().containsKey(username)) {
             System.out.println("The current staff already exists");
@@ -72,7 +73,7 @@ public class AdminStaffAction implements AdminAction{
             return;
         }
         User user = chain.getStaffs().get(username);
-        
+
         while (true) {
             System.out.println("0) Quit");
             System.out.println("1) Edit name");

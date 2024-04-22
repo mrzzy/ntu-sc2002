@@ -13,13 +13,24 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SerializeTest {
+    private Chain chain = Init.initChain();
+
+    @BeforeEach
+    public void setup() {
+        Branch branch = chain.getBranches().iterator().next();
+        branch.getNewOrderList()
+                .add(new Order(new ArrayList<>(branch.getMenu()), DiningOption.DINE_OUT, 1));
+    }
+
     @Test
     public void save() throws IOException {
         File saveFile = File.createTempFile("chain", "");
-        Serialize.save(Init.initChain(), saveFile.getPath());
+        Serialize.save(chain, saveFile.getPath());
         assertTrue(Files.size(Path.of(saveFile.getPath())) > 0);
         saveFile.delete();
     }
@@ -27,11 +38,10 @@ class SerializeTest {
     @Test
     public void restore() throws IOException {
         File saveFile = File.createTempFile("chain", "");
-        Chain saveChain = Init.initChain();
-        Serialize.save(saveChain, saveFile.getPath());
+        Serialize.save(chain, saveFile.getPath());
 
         Chain restoreChain = Serialize.restore(saveFile.getPath());
-        assertEquals(saveChain, restoreChain);
+        assertEquals(chain, restoreChain);
         saveFile.delete();
     }
 }

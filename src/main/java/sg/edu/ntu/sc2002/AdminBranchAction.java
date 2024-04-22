@@ -1,16 +1,16 @@
 package sg.edu.ntu.sc2002;
 
-import java.util.Scanner;
-import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
 
-public class AdminBranchAction implements AdminAction{
+public class AdminBranchAction implements AdminAction {
     private AdminBranchMethod method;
 
     public AdminBranchAction(AdminBranchMethod method) {
         this.method = method;
     }
-    
+
     /**
      * Title of the Action displayed in the user interface.
      *
@@ -56,9 +56,9 @@ public class AdminBranchAction implements AdminAction{
                         new HashSet<User>(),
                         new HashSet<User>(),
                         new HashSet<Item>(),
-                        new ArrayList<Order>(), 
-                        new ArrayList<Order>(), 
-                        new ArrayList<Order>(), 
+                        new ArrayList<Order>(),
+                        new ArrayList<Order>(),
+                        new ArrayList<Order>(),
                         new ArrayList<Order>());
         chain.getBranches().add(branch);
 

@@ -1,7 +1,7 @@
 package sg.edu.ntu.sc2002;
 
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class StaffOrderAction implements StaffAction {
     private StaffOrderMethod method;
@@ -24,47 +24,57 @@ public class StaffOrderAction implements StaffAction {
         }
     }
 
-    public void viewOrders(Scanner in, Branch branch){
+    public void viewOrders(Scanner in, Branch branch) {
 
         System.out.println("New Order");
         System.out.println("-------------------------");
-        for (Order order : branch.getNewOrderList()){
-            System.out.println(String.format("ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
+        for (Order order : branch.getNewOrderList()) {
+            System.out.println(
+                    String.format(
+                            "ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
         }
         System.out.println("-------------------------");
 
         System.out.println("Ready to Pickup");
         System.out.println("-------------------------");
-        for (Order order : branch.getReadyToPickupList()){
-            System.out.println(String.format("ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
+        for (Order order : branch.getReadyToPickupList()) {
+            System.out.println(
+                    String.format(
+                            "ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
         }
         System.out.println("-------------------------");
 
-        
         System.out.println("Completed Orders");
         System.out.println("-------------------------");
-        for (Order order : branch.getCompletedOrderList()){
-            System.out.println(String.format("ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
+        for (Order order : branch.getCompletedOrderList()) {
+            System.out.println(
+                    String.format(
+                            "ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
         }
         System.out.println("-------------------------");
 
         System.out.println("Cancelled Orders");
         System.out.println("-------------------------");
-        for (Order order : branch.getCancelledOrderList()){
-            System.out.println(String.format("ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
+        for (Order order : branch.getCancelledOrderList()) {
+            System.out.println(
+                    String.format(
+                            "ID: %d, %s", order.getId(), order.getOrderStatus().getTimestamp()));
         }
         System.out.println("-------------------------");
 
         System.out.println("Invalid order ID.");
     }
 
-    public void viewOrderDetails(Scanner in, Branch branch){
+    public void viewOrderDetails(Scanner in, Branch branch) {
         System.out.println("Enter order ID:");
         int orderId = Input.nextInt(in);
-        for (Order order: branch.getNewOrderList()){
-            if (order.getId() == orderId){
-                for (Item item: order.getItems()){
-                    System.out.println(String.format("Name: %s, Customisation: %s", item.getName(), item.getCustomisation()));
+        for (Order order : branch.getNewOrderList()) {
+            if (order.getId() == orderId) {
+                for (Item item : order.getItems()) {
+                    System.out.println(
+                            String.format(
+                                    "Name: %s, Customisation: %s",
+                                    item.getName(), item.getCustomisation()));
                 }
                 return;
             }
@@ -76,13 +86,13 @@ public class StaffOrderAction implements StaffAction {
         try {
             System.out.println("Enter order ID:");
             int orderId = Input.nextInt(in);
-            
+
             // Check if the entered order ID is negative or zero
             if (orderId <= 0) {
                 System.out.println("Invalid order ID.");
                 return branch;
             }
-    
+
             for (Order order : branch.getNewOrderList()) {
                 if (order.getId() == orderId) {
                     order.process();
@@ -99,7 +109,7 @@ public class StaffOrderAction implements StaffAction {
             return branch;
         }
     }
-    
+
     @Override
     public Branch execute(Scanner in, Branch branch) {
         switch (this.method) {

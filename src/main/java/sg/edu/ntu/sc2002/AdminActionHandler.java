@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 public class AdminActionHandler {
 
-    public static Chain actionDispatcher(Scanner in, Chain chain){
-        ArrayList<AdminAction> adminTransferActions = new ArrayList<>(AdminRole.getTransferAction());
-        ArrayList<AdminAction> adminPromotionActions = new ArrayList<>(AdminRole.getPromotionAction());
+    public static Chain actionDispatcher(Scanner in, Chain chain) {
+        ArrayList<AdminAction> adminTransferActions =
+                new ArrayList<>(AdminRole.getTransferAction());
+        ArrayList<AdminAction> adminPromotionActions =
+                new ArrayList<>(AdminRole.getPromotionAction());
         ArrayList<AdminAction> adminStaffActions = new ArrayList<>(AdminRole.getStaffAction());
         ArrayList<AdminAction> adminPaymentActions = new ArrayList<>(AdminRole.getPaymentAction());
         ArrayList<AdminAction> adminBranchActions = new ArrayList<>(AdminRole.getBranchAction());
@@ -46,7 +48,7 @@ public class AdminActionHandler {
         }
     }
 
-    public static Chain handleAction(ArrayList<AdminAction> adminActions, Scanner in, Chain chain){
+    public static Chain handleAction(ArrayList<AdminAction> adminActions, Scanner in, Chain chain) {
         while (true) {
             // Print available actions
             // quit action

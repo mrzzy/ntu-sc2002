@@ -2,7 +2,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-public class AdminPaymentAction implements AdminAction{
+public class AdminPaymentAction implements AdminAction {
     private AdminPaymentMethod method;
 
     public AdminPaymentAction(AdminPaymentMethod method) {
@@ -39,7 +39,7 @@ public class AdminPaymentAction implements AdminAction{
             }
         }
 
-        if (paymentName.equals("PayNow")){
+        if (paymentName.equals("PayNow")) {
             chain.getPaymentMethods().add(new PayNowMethod());
         }
 

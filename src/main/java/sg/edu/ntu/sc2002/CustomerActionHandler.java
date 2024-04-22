@@ -5,11 +5,14 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class CustomerActionHandler {
-    public static Branch actionDispatcher(Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
+    public static Branch actionDispatcher(
+            Scanner in, Branch branch, Set<PaymentMethod> paymentMethods) {
 
         // customer methods
-        ArrayList<CustomerAction> customerOrderActions = new ArrayList<>(CustomerRole.getOrderAction());
-        ArrayList<CustomerAction> customerCollectActions = new ArrayList<>(CustomerRole.getCollectAction());
+        ArrayList<CustomerAction> customerOrderActions =
+                new ArrayList<>(CustomerRole.getOrderAction());
+        ArrayList<CustomerAction> customerCollectActions =
+                new ArrayList<>(CustomerRole.getCollectAction());
 
         while (true) {
             System.out.println("-------------------------");
@@ -36,8 +39,12 @@ public class CustomerActionHandler {
             }
         }
     }
-    
-    public static Branch handleAction(ArrayList<CustomerAction> customerActions, Scanner in, Branch branch, Set<PaymentMethod> paymentMethods){
+
+    public static Branch handleAction(
+            ArrayList<CustomerAction> customerActions,
+            Scanner in,
+            Branch branch,
+            Set<PaymentMethod> paymentMethods) {
         while (true) {
             // Print available actions
             // quit action
@@ -46,7 +53,7 @@ public class CustomerActionHandler {
             for (int i = 0; i < customerActions.size(); i++) {
                 System.out.println(String.format("%d) %s", i + 1, customerActions.get(i).title()));
             }
-            
+
             int choice = Input.nextInt(in);
             if (choice <= 0) {
                 // quit

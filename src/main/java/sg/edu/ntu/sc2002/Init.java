@@ -7,11 +7,11 @@ package sg.edu.ntu.sc2002;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.naming.LimitExceededException;
@@ -91,7 +91,6 @@ public class Init {
                                                                         .charAt(0)),
                                                         User.DEFAULT_PASSWORD,
                                                         ROLES.get(row.getCellAsString(2).get())),
-                                                        
                                         Collectors.toSet())));
     }
 

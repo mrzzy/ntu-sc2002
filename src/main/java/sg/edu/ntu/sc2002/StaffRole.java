@@ -5,8 +5,8 @@
 package sg.edu.ntu.sc2002;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 public class StaffRole implements Role {
     @Override

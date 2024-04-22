@@ -9,10 +9,10 @@ package sg.edu.ntu.sc2002;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 public class InitTest {
@@ -63,8 +63,7 @@ public class InitTest {
                         new ArrayList<>(),
                         new ArrayList<>(),
                         new ArrayList<>(),
-                        new ArrayList<>()
-                ));
+                        new ArrayList<>()));
     }
 
     @Test
@@ -73,7 +72,13 @@ public class InitTest {
         assertEquals(
                 chain.getAdmin(),
                 new User(
-                        "boss", "Boss", "", 62, Gender.FEMALE, User.DEFAULT_PASSWORD, new AdminRole()));
+                        "boss",
+                        "Boss",
+                        "",
+                        62,
+                        Gender.FEMALE,
+                        User.DEFAULT_PASSWORD,
+                        new AdminRole()));
 
         assertEquals(chain.getBranches().size(), 3);
         assertEquals(chain.getStaffs().size(), 7);

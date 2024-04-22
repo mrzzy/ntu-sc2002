@@ -19,59 +19,61 @@ public class CustomerCollectAction implements CustomerAction {
         }
     }
 
-    public CustomerCollectAction(CustomerCollectMethod method){
+    public CustomerCollectAction(CustomerCollectMethod method) {
         this.method = method;
     }
 
-    public void viewOrderStatus(Scanner in, Branch branch){
+    public void viewOrderStatus(Scanner in, Branch branch) {
         System.out.println("Enter your order ID:");
         int orderId = Input.nextInt(in);
-        
-        for (Order order : branch.getReadyToPickupList()){
-            if (order.getId() == orderId){
+
+        for (Order order : branch.getReadyToPickupList()) {
+            if (order.getId() == orderId) {
                 System.out.println("Your order is ready to pickup!");
-                return;  
-            } 
+                return;
+            }
         }
-        for (Order order : branch.getNewOrderList()){
-            if (order.getId() == orderId){
+        for (Order order : branch.getNewOrderList()) {
+            if (order.getId() == orderId) {
                 System.out.println("Your order is still preparing...");
-                return;  
-            } 
+                return;
+            }
         }
-        for (Order order : branch.getCompletedOrderList()){
-            if (order.getId() == orderId){
+        for (Order order : branch.getCompletedOrderList()) {
+            if (order.getId() == orderId) {
                 System.out.println("Your order has been completed.");
-                return;  
-            } 
+                return;
+            }
         }
-        for (Order order : branch.getCancelledOrderList()){
-            if (order.getId() == orderId){
+        for (Order order : branch.getCancelledOrderList()) {
+            if (order.getId() == orderId) {
                 System.out.println("Your order was cancelled.");
-                return;  
-            } 
+                return;
+            }
         }
         System.out.println("Invalid order ID.");
     }
 
-    public void collect(Scanner in, Branch branch){
+    public void collect(Scanner in, Branch branch) {
         System.out.println("Enter your order ID:");
         int orderId = Input.nextInt(in);
-        for (Order order : branch.getReadyToPickupList()){
-            if (order.getId() == orderId){
+        for (Order order : branch.getReadyToPickupList()) {
+            if (order.getId() == orderId) {
                 order.collect();
                 branch.getCompletedOrderList().add(order);
                 branch.getReadyToPickupList().remove(order);
                 return;
             }
         }
-        for (Order order : branch.getNewOrderList()){
-            if (order.getId() == orderId){
+        for (Order order : branch.getNewOrderList()) {
+            if (order.getId() == orderId) {
                 System.out.println("Your order is still preparing...");
-                return;  
-            } 
+                return;
+            }
         }
-        System.out.println("Your order does not exist. Check with our staff if you have not collected your order.");
+        System.out.println(
+                "Your order does not exist. Check with our staff if you have not collected your"
+                        + " order.");
     }
 
     @Override
