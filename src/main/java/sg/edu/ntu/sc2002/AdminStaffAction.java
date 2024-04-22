@@ -180,6 +180,19 @@ public class AdminStaffAction implements AdminAction {
                         staff.getRole().toString());
             }
         }
+
+        for (Branch branch : chain.getBranches()) {
+            for (User manager : branch.getManagers()) {
+                System.out.printf(
+                        "%s, %s, %s, %d, %s, %s\n",
+                        branch.getName(),
+                        branch.getLocation(),
+                        manager.getName(),
+                        manager.getAge(),
+                        manager.getGender(),
+                        manager.getRole().toString());
+            }
+        }
     }
 
     /**
