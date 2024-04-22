@@ -30,6 +30,15 @@ public class AdminPaymentAction implements AdminAction {
     private void addPayment(Scanner in, Chain chain) {
         System.out.println("Add payment");
 
+        System.out.println("Here are the currently available payment methods:");
+        for (PaymentMethod paymentMethod : chain.getPaymentMethods()) {
+            System.out.println(paymentMethod.getName());
+        }
+        System.out.println("Here is all the payment methods we support");
+        System.out.println("PayNow");
+        System.out.println("Paypal");
+        System.out.println("BankCard");
+
         System.out.println("Please enter payment method name");
         String paymentName = in.next();
 
@@ -40,11 +49,26 @@ public class AdminPaymentAction implements AdminAction {
             }
         }
 
-        if (paymentName.equals("PayNow")) {
-            chain.getPaymentMethods().add(new PayNowMethod());
+        switch (paymentName) {
+            case "PayNow": {
+                chain.getPaymentMethods().add(new PayNowMethod());
+                System.out.printf("Added %s as a new payment method\n", paymentName);
+                break;
+            }
+            case "Paypal": {
+                chain.getPaymentMethods().add(new PaypalMethod());
+                System.out.printf("Added %s as a new payment method\n", paymentName);
+                break;
+            }
+            case "BankCard": {
+                chain.getPaymentMethods().add(new BankCardMethod());
+                System.out.printf("Added %s as a new payment method\n", paymentName);
+                break;
+            }
+            default:
+                System.out.printf("We do not support adding %s as a new payment method right now!\n", paymentName);
+                break;
         }
-
-        System.out.printf("Added %s to payment methods\n", paymentName);
     }
 
     private void removePayment(Scanner in, Chain chain) {

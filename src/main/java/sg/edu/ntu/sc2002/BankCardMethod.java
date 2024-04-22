@@ -10,7 +10,7 @@ public record BankCardMethod() implements PaymentMethod {
      * @return Name of the method.
      */
     public String getName() {
-        return "Bank Card";
+        return "BankCard";
     }
 
     /**
