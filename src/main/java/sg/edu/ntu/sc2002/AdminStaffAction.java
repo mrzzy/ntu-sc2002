@@ -177,7 +177,7 @@ public class AdminStaffAction implements AdminAction {
                         staff.getName(),
                         staff.getAge(),
                         staff.getGender(),
-                        staff.getRole().toString());
+                        staff.getRole().code());
             }
         }
 
@@ -190,7 +190,7 @@ public class AdminStaffAction implements AdminAction {
                         manager.getName(),
                         manager.getAge(),
                         manager.getGender(),
-                        manager.getRole().toString());
+                        manager.getRole().code());
             }
         }
     }
