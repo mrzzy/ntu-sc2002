@@ -88,16 +88,12 @@ public class AdminStaffAction implements AdminAction {
             return;
         }
         User user = chain.getStaffs().get(username);
-        User branchUser = null;
 
-        for (Branch branch : chain.getBranches()) {
-            for (User userInBranch : branch.getStaffs()) {
-                if (userInBranch.getUsername().equals(username)) {
-                    branchUser = userInBranch;
-                }
-            }
-        }
-
+        User branchUser = chain.getBranches().stream()
+                                    .flatMap(b -> b.getStaffs().stream())
+                                    .filter(s -> username.equals(s.getUsername()))
+                                    .findAny()
+                                    .orElse(null);
         if (branchUser == null) {
             System.out.println("This user does not exist");
             return;
@@ -128,6 +124,10 @@ public class AdminStaffAction implements AdminAction {
                 System.out.println("Please enter new gender: ");
                 // TODO : foolproof this
                 char genderCode = in.next().charAt(0);
+                if (genderCode != 'M' && genderCode != 'F') {
+                    System.out.println("Gender can only be M or F!");
+                    return;
+                }
                 user.setGender(Gender.fromCode(genderCode));
                 branchUser.setGender(Gender.fromCode(genderCode));
             }
