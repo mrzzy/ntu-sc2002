@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Implementation of the IRole interface for staff role
+ */
 public class StaffRole implements IRole {
     /**
      * Get the code that uniquely identifies the role

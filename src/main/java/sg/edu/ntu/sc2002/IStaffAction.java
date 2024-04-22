@@ -2,6 +2,9 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
+/**
+ * Defines an executable Action on a Fast Food Chain.
+ */
 public interface IStaffAction {
     /**
      * Title of the Staff Action displayed in the user interface.

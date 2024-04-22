@@ -3,6 +3,9 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Defines an executable Action on a Fast Food Chain.
+ */
 public interface ICustomerAction {
     /**
      * Title of the Customer Action displayed in the user interface.
