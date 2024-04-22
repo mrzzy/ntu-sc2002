@@ -76,7 +76,7 @@ public class AdminStaffAction implements AdminAction {
         }
 
         selectedBranch.getStaffs().add(user);
-        chain.getStaffs().put(username, user);
+        // chain.getStaffs().put(username, user);
     }
 
     private void editStaff(Scanner in, Chain chain) {
@@ -259,7 +259,7 @@ public class AdminStaffAction implements AdminAction {
                             s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
         Set<User> staffs = staffStream.collect(Collectors.toSet());
 
-        Stream<User> managerStream = branches.stream().flatMap(b -> b.getStaffs().stream());
+        Stream<User> managerStream = branches.stream().flatMap(b -> b.getManagers().stream());
         if (filterRolePredicate == 'Y')
             managerStream = managerStream.filter(s -> s.getRole().code() == filterRole);
         if (filterGenderPredicate == 'Y')
