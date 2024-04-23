@@ -301,18 +301,20 @@ public class AdminStaffAction implements IAdminAction {
 
         for (User staff : staffs) {
             System.out.printf(
-                    "%s, %s, %d, %s, %s\n",
+                    "Branch : %s, Name : %s, Username : %s, Age : %d, Gender : %s, Role : %s\n",
                     staff.getBranchBelongTo(),
                     staff.getName(),
+                    staff.getUsername(),
                     staff.getAge(),
                     staff.getGender(),
                     staff.getRole().code());
         }
         for (User manager : managers) {
             System.out.printf(
-                    "%s, %s, %d, %s, %s\n",
+                    "Branch : %s, Name : %s, Username : %s, Age : %d, Gender : %s, Role : %s\n",
                     manager.getBranchBelongTo(),
                     manager.getName(),
+                    manager.getUsername(),
                     manager.getAge(),
                     manager.getGender(),
                     manager.getRole().code());

@@ -49,10 +49,18 @@ public class AdminPromotionAction implements IAdminAction {
             return;
         }
 
-        System.out.println("Please enter branch name: ");
+        System.out.println("Please enter branch name to transfer to: ");
         String branch = in.next();
 
         for (Branch b : chain.getBranches()) {
+            // Remove the user from the old branch
+            if (b.getName().equals(user.getBranchBelongTo())) {
+                b.getManagers().remove(user);
+            }
+        }
+
+        for (Branch b : chain.getBranches()) {
+            // Add the user to the new branch
             if (b.getName().equals(branch)) {
                 // Check how many branch managers exist in this branch
                 if (b.getManagers().size() >= b.getManagerQuota()) {
@@ -62,8 +70,11 @@ public class AdminPromotionAction implements IAdminAction {
                     return;
                 }
 
+                // Update the branch name
+                user.setBranchBelongTo(b.getName());
                 // Add the new manager in
                 b.getManagers().add(user);
+                System.out.println("Added to new branch");
                 System.out.printf("%s has been assigned to %s\n", user.getName(), b.getName());
             }
         }
@@ -99,6 +110,11 @@ public class AdminPromotionAction implements IAdminAction {
         if (selectedBranch.getManagers().size() >= selectedBranch.getManagerQuota()) {
             System.out.println(
                     "Selected branch does not have enough quota to contain more managers");
+            return;
+        }
+
+        if (selectedBranch.getStaffs().size() == 1) {
+            System.out.println("Cannot promote to branch manager if a branch only has one staff! 0 staffs at a branch is not allowed");
             return;
         }
 
