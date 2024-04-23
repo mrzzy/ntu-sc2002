@@ -13,7 +13,7 @@ public class Args {
             names = {"-r", "--restore"},
             description =
                     "Optional. Path of serialization file to save / restore application state."
-                            + " Unspecified defaults to 'chain-history/chain.txt'.")
+                            + " Unspecified defaults to 'chain.txt'.")
     private String statePath = "";
 
     @Parameter(
