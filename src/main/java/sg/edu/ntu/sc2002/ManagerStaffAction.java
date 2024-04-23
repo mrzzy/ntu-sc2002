@@ -38,14 +38,15 @@ public class ManagerStaffAction implements IManagerAction {
     /**
      * List all staff details on the given Fast Food Branch.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void listStaffAll(Scanner in, Branch branch) {
         System.out.println("-------------------------");
         System.out.println("List of Managers:");
         for (User manager : branch.getManagers()) {
-            System.out.println(String.format("Name: %s, Age: %d", manager.getName(), manager.getAge()));
+            System.out.println(
+                    String.format("Name: %s, Age: %d", manager.getName(), manager.getAge()));
         }
         System.out.println("-------------------------");
         System.out.println("List of Staff:");
@@ -57,7 +58,7 @@ public class ManagerStaffAction implements IManagerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */

@@ -2,9 +2,7 @@ package sg.edu.ntu.sc2002;
 
 import java.util.Scanner;
 
-/**
- * Defines an executable Action on a Fast Food Chain.
- */
+/** Defines an executable Action on a Fast Food Chain. */
 public interface IStaffAction {
     /**
      * Title of the Staff Action displayed in the user interface.
@@ -16,7 +14,7 @@ public interface IStaffAction {
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch The particular branch the staff performs the action on.
      * @return State of the branch post performing action.
      */

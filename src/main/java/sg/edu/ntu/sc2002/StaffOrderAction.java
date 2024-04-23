@@ -1,8 +1,8 @@
 package sg.edu.ntu.sc2002;
 
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Date;
 
 /** Implementation of the {@link IStaffAction} interface. */
 public class StaffOrderAction implements IStaffAction {
@@ -34,7 +34,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * View all orders of each type under a given Fast Food Branch.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrders(Scanner in, Branch branch) {
@@ -42,43 +42,35 @@ public class StaffOrderAction implements IStaffAction {
         System.out.println("New Order");
         System.out.println("-------------------------");
         for (Order order : branch.getNewOrderList()) {
-            System.out.println(
-                    String.format(
-                            "ID: %d, %s", order.getId(), order.getTimestamp()));
+            System.out.println(String.format("ID: %d, %s", order.getId(), order.getTimestamp()));
         }
         System.out.println("-------------------------");
 
         System.out.println("Ready to Pickup");
         System.out.println("-------------------------");
         for (Order order : branch.getReadyToPickupList()) {
-            System.out.println(
-                    String.format(
-                            "ID: %d, %s", order.getId(), order.getTimestamp()));
+            System.out.println(String.format("ID: %d, %s", order.getId(), order.getTimestamp()));
         }
         System.out.println("-------------------------");
 
         System.out.println("Completed Orders");
         System.out.println("-------------------------");
         for (Order order : branch.getCompletedOrderList()) {
-            System.out.println(
-                    String.format(
-                            "ID: %d, %s", order.getId(), order.getTimestamp()));
+            System.out.println(String.format("ID: %d, %s", order.getId(), order.getTimestamp()));
         }
         System.out.println("-------------------------");
 
         System.out.println("Cancelled Orders");
         System.out.println("-------------------------");
         for (Order order : branch.getCancelledOrderList()) {
-            System.out.println(
-                    String.format(
-                            "ID: %d, %s", order.getId(), order.getTimestamp()));
+            System.out.println(String.format("ID: %d, %s", order.getId(), order.getTimestamp()));
         }
     }
 
     /**
      * View order details for new orders under a given Fast Food Branch.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrderDetails(Scanner in, Branch branch) {
@@ -142,7 +134,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * Update the status of a new order to ready to pick up.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private Branch processOrder(Scanner in, Branch branch) {
@@ -162,7 +154,8 @@ public class StaffOrderAction implements IStaffAction {
                     order.setTimestamp(new Date());
                     branch.getReadyToPickupList().add(order);
                     branch.getNewOrderList().remove(order);
-                    System.out.println("Order processed successfully. Ready to be picked up by customer.");
+                    System.out.println(
+                            "Order processed successfully. Ready to be picked up by customer.");
                     return branch;
                 }
             }
@@ -178,7 +171,7 @@ public class StaffOrderAction implements IStaffAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */
