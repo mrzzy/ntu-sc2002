@@ -18,7 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SerializeTest {
-    private Chain chain = Init.initChain();
+    private Chain chain = Init.initChain(new Args());
 
     @BeforeEach
     public void setup() {

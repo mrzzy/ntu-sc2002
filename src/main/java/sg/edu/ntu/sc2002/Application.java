@@ -4,7 +4,7 @@
  */
 package sg.edu.ntu.sc2002;
 
-import java.io.File;
+import com.beust.jcommander.JCommander;
 import java.util.Scanner;
 
 /** Fast food Ordering &amp; Management System application. */
@@ -12,28 +12,22 @@ public class Application {
     /**
      * Entrypoint of Fast food Ordering &amp; Management System
      *
-     * @param args Optional. User may pass the path of serialization file to save / restore Fast
-     *     Food {@link Chain} state. Otherwise, Chain stat will be saved to a temporary file.
+     * @param args See usage information by parsing the {@code --help} flag.
      */
     public static void main(String[] args) {
+        // parse command line args
+        Args arguments = new Args();
+        JCommander parser = JCommander.newBuilder().addObject(arguments).build();
+        parser.parse(args);
+        // help: show usage and exit
+        if (arguments.isHelp()) {
+            parser.usage();
+            return;
+        }
 
-        String filePath =
-                String.format(
-                                "%s%s%s%s%s",
-                                System.getProperty("user.dir"),
-                                File.separator,
-                                "chain-history",
-                                File.separator,
-                                "chain.txt")
-                        .replace("\\", "/");
         System.out.println("Fast food Ordering & Management System");
         // init or restore chain state
-        Chain chain;
-        try {
-            chain = Serialize.restore(filePath);
-        } catch (Exception e) {
-            chain = Init.initChain();
-        }
+        Chain chain = Init.initChain(arguments);
 
         // authentication loop
         Scanner in = new Scanner(System.in);
@@ -116,8 +110,8 @@ public class Application {
         }
 
         // save chain state
-        Serialize.save(chain, filePath);
-        System.out.println("Saved application state: " + filePath);
+        Serialize.save(chain, arguments.getStatePath());
+        System.out.println("Saved application state: " + arguments.getStatePath());
         in.close();
         System.exit(0);
     }
