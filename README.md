@@ -18,7 +18,7 @@ Run FOMS:
 mvn exec:exec
 ```
 
-- **Program Arguments** Open pom.xml and add `<argument>` tags to `exec-maven-plugin`'s `<arguments>` tag.
+- **Program Arguments** Open pom.xml and add `<argument>` tags to `exec-maven-plugin`'s `<arguments>` tag. Pass `-h` as an argument to show usage information.
 
 ## Contributing
 - **Project Structure** See [Maven Docs](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html) on project layout.
