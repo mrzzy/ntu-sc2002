@@ -42,6 +42,7 @@ public class Application {
         }
         // select the branch
         Branch selectedBranch = null;
+        boolean selectedValidBranch = false;
 
         if (!session.user().isPresent()) {
             while (selectedBranch == null) {
@@ -55,7 +56,13 @@ public class Application {
                 i = 1;
                 for (Branch branch : chain.getBranches()) {
                     if (i == choice) {
+                        if (branch.getStaffs().size() == 0 && branch.getManagers().size() == 0) {
+                            System.out.println(
+                                    "Branch has no available staff or managers to serve you!");
+                            break;
+                        }
                         selectedBranch = branch;
+                        selectedValidBranch = true;
                         System.out.println("-------------------------");
                         System.out.println(
                                 String.format("Selected branch: %s", selectedBranch.getName()));
