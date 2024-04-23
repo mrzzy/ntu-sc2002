@@ -6,17 +6,18 @@ import java.util.Scanner;
 /** Handles all executable Admin Actions on a Fast Food {@link Chain}. */
 public class AdminActionHandler {
     /**
-     * Prompts user for the type of action to be performed and passes the specific
-     * type of action
+     * Prompts user for the type of action to be performed and passes the specific type of action
      * objects to handleAction method for execution.
      *
-     * @param in    Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */
     public static Chain actionDispatcher(Scanner in, Chain chain) {
-        ArrayList<IAdminAction> adminTransferActions = new ArrayList<>(AdminRole.getTransferAction());
-        ArrayList<IAdminAction> adminPromotionActions = new ArrayList<>(AdminRole.getPromotionAction());
+        ArrayList<IAdminAction> adminTransferActions =
+                new ArrayList<>(AdminRole.getTransferAction());
+        ArrayList<IAdminAction> adminPromotionActions =
+                new ArrayList<>(AdminRole.getPromotionAction());
         ArrayList<IAdminAction> adminStaffActions = new ArrayList<>(AdminRole.getStaffAction());
         ArrayList<IAdminAction> adminPaymentActions = new ArrayList<>(AdminRole.getPaymentAction());
         ArrayList<IAdminAction> adminBranchActions = new ArrayList<>(AdminRole.getBranchAction());
@@ -56,17 +57,16 @@ public class AdminActionHandler {
     }
 
     /**
-     * Lists all methods available under a specific type of role-based action and
-     * executes based on
+     * Lists all methods available under a specific type of role-based action and executes based on
      * user's choice at runtime.
      *
-     * @param adminActions The list of AdminAction objects of a specific type of
-     *                     action.
-     * @param in           Stdin scanner used by action to read user input.
-     * @param chain        Fast Food Chain to perform the action on.
+     * @param adminActions The list of AdminAction objects of a specific type of action.
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */
-    public static Chain handleAction(ArrayList<IAdminAction> adminActions, Scanner in, Chain chain) {
+    public static Chain handleAction(
+            ArrayList<IAdminAction> adminActions, Scanner in, Chain chain) {
         while (true) {
             // Print available actions
             // quit action

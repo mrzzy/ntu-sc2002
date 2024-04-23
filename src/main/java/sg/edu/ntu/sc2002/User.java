@@ -37,12 +37,11 @@ public class User implements Serializable {
     private IRole role;
 
     /**
-     * Constructor to create a User with username and role. Name, branchBelongTo,
-     * gender, and
+     * Constructor to create a User with username and role. Name, branchBelongTo, gender, and
      * password are set to default values.
      *
      * @param username Username of User.
-     * @param role     Role of User.
+     * @param role Role of User.
      */
     public User(String username, IRole role) {
         this(username, username, "", -1, Gender.UNKNOWN, DEFAULT_PASSWORD, role);
@@ -51,13 +50,13 @@ public class User implements Serializable {
     /**
      * Constructor to create a User.
      *
-     * @param username       Username of User.
-     * @param name           Name of User.
+     * @param username Username of User.
+     * @param name Name of User.
      * @param branchBelongTo Branch of User.
-     * @param age            Age of User.
-     * @param gender         Gender of User.
-     * @param password       Password of User.
-     * @param role           Role of User.
+     * @param age Age of User.
+     * @param gender Gender of User.
+     * @param password Password of User.
+     * @param role Role of User.
      */
     public User(
             String username,
@@ -202,12 +201,9 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
 
         User other = (User) obj;
         return getUsername().equals(other.getUsername())

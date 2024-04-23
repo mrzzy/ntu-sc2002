@@ -13,21 +13,25 @@ import java.util.List;
 public class Order implements Serializable {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
+
     /** List of items in the order */
     private List<Item> items;
+
     /** Dining option for the order */
     private DiningOption diningOption;
+
     /** Timestamp of the latest order status update */
     private Date timestamp;
+
     /** Order ID */
     private int orderId;
 
     /**
      * Creates a new order with the given items, dining option and order ID.
      *
-     * @param items        List of items in the order.
+     * @param items List of items in the order.
      * @param diningOption Dining option for the order.
-     * @param orderId      Order ID.
+     * @param orderId Order ID.
      */
     public Order(List<Item> items, DiningOption diningOption, int orderId) {
         this.items = items;
@@ -91,27 +95,18 @@ public class Order implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         Order other = (Order) obj;
         if (items == null) {
-            if (other.items != null)
-                return false;
-        } else if (!items.equals(other.items))
-            return false;
-        if (diningOption != other.diningOption)
-            return false;
+            if (other.items != null) return false;
+        } else if (!items.equals(other.items)) return false;
+        if (diningOption != other.diningOption) return false;
         if (timestamp == null) {
-            if (other.timestamp != null)
-                return false;
-        } else if (!timestamp.equals(other.timestamp))
-            return false;
-        if (orderId != other.orderId)
-            return false;
+            if (other.timestamp != null) return false;
+        } else if (!timestamp.equals(other.timestamp)) return false;
+        if (orderId != other.orderId) return false;
         return true;
     }
 }

@@ -39,7 +39,7 @@ public class CustomerCollectAction implements ICustomerAction {
     /**
      * Displays order status based on the order ID provided by the Customer.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void viewOrderStatus(Scanner in, Branch branch) {
@@ -77,7 +77,7 @@ public class CustomerCollectAction implements ICustomerAction {
     /**
      * Update the order status from ready to pick up to completed by the Customer.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      */
     private void collect(Scanner in, Branch branch) {
@@ -89,7 +89,8 @@ public class CustomerCollectAction implements ICustomerAction {
                 order.setTimestamp(new Date());
                 branch.getCompletedOrderList().add(order);
                 branch.getReadyToPickupList().remove(order);
-                System.out.println("Order collected successfully. Thank you and please come again!");
+                System.out.println(
+                        "Order collected successfully. Thank you and please come again!");
                 return;
             }
         }
@@ -107,8 +108,8 @@ public class CustomerCollectAction implements ICustomerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in             Stdin scanner used by action to read user input.
-     * @param branch         Fast Food Branch to perform the action on.
+     * @param in Stdin scanner used by action to read user input.
+     * @param branch Fast Food Branch to perform the action on.
      * @param paymentMethods Payment methods offered by the Fast Food Chain.
      * @return State of Fast Food Branch post performing action.
      */
