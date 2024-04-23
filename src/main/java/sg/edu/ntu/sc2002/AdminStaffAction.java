@@ -33,6 +33,12 @@ public class AdminStaffAction implements IAdminAction {
         }
     }
 
+    /**
+     * Adds a new staff to a branch
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void addStaff(Scanner in, Chain chain) {
         System.out.println("Add Staff");
 
@@ -79,6 +85,12 @@ public class AdminStaffAction implements IAdminAction {
         // chain.getStaffs().put(username, user);
     }
 
+    /**
+     * Edits the details of an existing staff
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void editStaff(Scanner in, Chain chain) {
         System.out.println("Edit Staff");
 
@@ -143,6 +155,12 @@ public class AdminStaffAction implements IAdminAction {
         }
     }
 
+    /**
+     * Remove a staff, given their username
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void removeStaff(Scanner in, Chain chain) {
         System.out.println("Remove Staff");
 
@@ -165,6 +183,12 @@ public class AdminStaffAction implements IAdminAction {
         }
     }
 
+    /**
+     * List all staffs out, with options to filter the list by branch, role, gender, age
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void listStaffAll(Scanner in, Chain chain) {
         System.out.println("List all staff");
 

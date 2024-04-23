@@ -27,6 +27,12 @@ public class AdminPaymentAction implements IAdminAction {
         }
     }
 
+    /**
+     * Adds a new payment method from the existing list of supported payment methods
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void addPayment(Scanner in, Chain chain) {
         System.out.println("Add payment");
 
@@ -76,8 +82,19 @@ public class AdminPaymentAction implements IAdminAction {
         }
     }
 
+    /**
+     * Removes a new payment method from the existing list of supported payment methods
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void removePayment(Scanner in, Chain chain) {
         System.out.println("Remove payment");
+
+        if (chain.getPaymentMethods().size() == 0) {
+            System.out.println("There are no payment methods to remove!");
+            return;
+        }
 
         System.out.println("Please select which payment method you want to remove");
         System.out.println("Here are the available payment methods:");

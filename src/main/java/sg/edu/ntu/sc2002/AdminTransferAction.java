@@ -24,6 +24,13 @@ public class AdminTransferAction implements IAdminAction {
         }
     }
 
+    /**
+     * Transfer a staff from one branch to another branch, can only transfer within the
+     * staff/manager quota limits
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void transferStaff(Scanner in, Chain chain) {
         System.out.println("Transfer staff");
 

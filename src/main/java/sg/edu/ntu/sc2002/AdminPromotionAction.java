@@ -26,6 +26,12 @@ public class AdminPromotionAction implements IAdminAction {
         }
     }
 
+    /**
+     * Assigns a manager to a branch given that there is enough quota
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void assignManager(Scanner in, Chain chain) {
         System.out.println("Assign manager");
 
@@ -63,6 +69,12 @@ public class AdminPromotionAction implements IAdminAction {
         }
     }
 
+    /**
+     * Promotes a staff to a manager
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void promoteStaff(Scanner in, Chain chain) {
         System.out.println("Promote staff");
 

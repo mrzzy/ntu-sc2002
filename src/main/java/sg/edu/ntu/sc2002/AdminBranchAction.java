@@ -29,6 +29,12 @@ public class AdminBranchAction implements IAdminAction {
         }
     }
 
+    /**
+     * Opens a new branch given the name / location / staff quota
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void openBranch(Scanner in, Chain chain) {
         System.out.println("Open branch");
         System.out.print("Please enter branch name: ");
@@ -65,6 +71,12 @@ public class AdminBranchAction implements IAdminAction {
         System.out.printf("Successfully opened branch %s at location %s\n", name, location);
     }
 
+    /**
+     * Closes a branch
+     *
+     * @param in Stdin scanner used by action to read user input.
+     * @param chain Fast Food Chain to perform the action on.
+     */
     private void closeBranch(Scanner in, Chain chain) {
         System.out.println("Close branch");
         System.out.print("Please enter branch name: ");
