@@ -114,7 +114,9 @@ public class AdminPromotionAction implements IAdminAction {
         }
 
         if (selectedBranch.getStaffs().size() == 1) {
-            System.out.println("Cannot promote to branch manager if a branch only has one staff! 0 staffs at a branch is not allowed");
+            System.out.println(
+                    "Cannot promote to branch manager if a branch only has one staff! 0 staffs at a"
+                            + " branch is not allowed");
             return;
         }
 

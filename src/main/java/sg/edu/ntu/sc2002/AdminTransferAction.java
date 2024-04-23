@@ -85,8 +85,12 @@ public class AdminTransferAction implements IAdminAction {
             return;
         }
 
-        if (selectedUser.getRole().code() == 'S' && selectedFromBranch.getStaffs().size() == 1 && selectedFromBranch.getManagers().size() >= 1) {
-            System.out.println("Cannot transfer the only remaining staff out of this branch when there exists managers! Manager cannot manage 0 staffs");
+        if (selectedUser.getRole().code() == 'S'
+                && selectedFromBranch.getStaffs().size() == 1
+                && selectedFromBranch.getManagers().size() >= 1) {
+            System.out.println(
+                    "Cannot transfer the only remaining staff out of this branch when there exists"
+                            + " managers! Manager cannot manage 0 staffs");
             return;
         }
 
