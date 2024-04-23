@@ -24,6 +24,11 @@
       <version>0.18.0</version>
     </dependency>
     <dependency>
+      <groupId>com.beust</groupId>
+      <artifactId>jcommander</artifactId>
+      <version>1.82</version>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.9.1</version>
@@ -81,11 +86,19 @@
           <configuration>
             <executable>java</executable>
             <arguments>
+              <!-- need for JCommander to work -->
+              <argument>--add-opens</argument>
+              <argument>java.base/java.lang=ALL-UNNAMED</argument>
+              <argument>--add-opens</argument>
+              <argument>java.base/java.nio=ALL-UNNAMED</argument>
+              <argument>--add-opens</argument>
+              <argument>java.base/sun.nio.ch=ALL-UNNAMED</argument>
               <!-- automatically creates the classpath using all project dependencies,
               also adding the project build directory -->
               <argument>-classpath</argument>
               <classpath/>
               <argument>sg.edu.ntu.sc2002.Application</argument>
+              <!-- application command line arguments start here -->
             </arguments>
             <environmentVariables>
             </environmentVariables>
