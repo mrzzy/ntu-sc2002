@@ -56,7 +56,10 @@ public class Init {
                             .collect(Collectors.toMap(Branch::getName, Function.identity()));
             menus =
                     chain.getBranches().stream()
-                            .collect(Collectors.toMap(Branch::getName, Branch::getMenu));
+                            .collect(
+                                    Collectors.toMap(
+                                            Branch::getName,
+                                            branch -> new HashSet<>(branch.getMenu())));
             staffs =
                     chain.getBranches().stream()
                             .collect(
@@ -103,7 +106,6 @@ public class Init {
             Map<String, Branch> branches, Map<String, Set<Item>> menus) {
         branches.forEach(
                 (branchName, branch) -> {
-                    branch.getMenu().clear();
                     // override menus in branch
                     if (menus.containsKey(branchName)) {
                         branch.getMenu().clear();
@@ -118,10 +120,10 @@ public class Init {
             Map<String, Branch> branches, Map<String, Set<User>> staffs) {
         branches.forEach(
                 (branchName, branch) -> {
-                    branch.getStaffs().clear();
-                    branch.getManagers().clear();
                     // override staff in branch
                     if (staffs.containsKey(branchName)) {
+                        branch.getStaffs().clear();
+                        branch.getManagers().clear();
                         staffs.get(branchName)
                                 .forEach(
                                         user -> {

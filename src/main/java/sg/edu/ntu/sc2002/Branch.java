@@ -7,9 +7,11 @@ package sg.edu.ntu.sc2002;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.naming.LimitExceededException;
 
 /** Defines a Branch of Fast Food Restaurant {@link Chain}. */
@@ -192,6 +194,17 @@ public class Branch implements Serializable {
      */
     public Set<Item> getMenu() {
         return menu;
+    }
+
+    /**
+     * Menu of the branch, sorted in alphanumeric order of name.
+     *
+     * @return Sorted Menu of the branch.
+     */
+    public List<Item> getSortedMenu() {
+        return menu.stream()
+                .sorted(Comparator.comparing(Item::getName))
+                .collect(Collectors.toList());
     }
 
     /**

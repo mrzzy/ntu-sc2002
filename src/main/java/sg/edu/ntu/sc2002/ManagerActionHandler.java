@@ -39,7 +39,7 @@ public class ManagerActionHandler {
                 case 0:
                     return branch;
                 case 1:
-                    ViewMenuAction.viewMenu(branch.getMenu());
+                    ViewMenuAction.viewMenu(branch);
                     break;
                 case 2:
                     branch = handleAction(managerMenuActions, in, branch);

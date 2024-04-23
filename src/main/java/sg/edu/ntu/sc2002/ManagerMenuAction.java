@@ -116,7 +116,7 @@ public class ManagerMenuAction implements IManagerAction {
         int choice = Input.nextInt(in);
         Item itemToRemove = null;
         int i = 1;
-        for (Item item : branch.getMenu()) {
+        for (Item item : branch.getSortedMenu()) {
             if (choice == i) {
                 itemToRemove = item;
                 break;
@@ -144,7 +144,7 @@ public class ManagerMenuAction implements IManagerAction {
         int itemChoice = Input.nextInt(in);
         Item itemToUpdate = null;
         int i = 1;
-        for (Item item : branch.getMenu()) {
+        for (Item item : branch.getSortedMenu()) {
             if (itemChoice == i) {
                 itemToUpdate = item;
                 break;
@@ -178,7 +178,6 @@ public class ManagerMenuAction implements IManagerAction {
                         System.out.println("Enter new description:");
                         String description = null;
                         while (description == null) {
-                            in.nextLine();
                             description = in.nextLine();
                             itemToUpdate.setDescription(description);
                             System.out.println("Description updated successfully.");

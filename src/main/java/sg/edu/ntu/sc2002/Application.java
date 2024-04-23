@@ -9,12 +9,8 @@ import java.util.Scanner;
 
 /** Fast food Ordering &amp; Management System application. */
 public class Application {
-    /**
-     * Entrypoint of Fast food Ordering &amp; Management System
-     *
-     * @param args See usage information by parsing the {@code --help} flag.
-     */
-    public static void main(String[] args) {
+
+    protected static void run(String[] args, Scanner in) {
         // parse command line args
         Args arguments = new Args();
         JCommander parser = JCommander.newBuilder().addObject(arguments).build();
@@ -29,17 +25,15 @@ public class Application {
         // init or restore chain state
         Chain chain = Init.initChain(arguments);
 
-        // authentication loop
-        Scanner in = new Scanner(System.in);
+        // user authentication
         Session session;
-        while (true) {
-            try {
-                session = Session.authenticate(chain.getStaffs(), in);
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("Failed to authenticate: " + e.getMessage());
-            }
+        try {
+            session = Session.authenticate(chain.getStaffs(), in);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Failed to authenticate: " + e.getMessage());
+            return;
         }
+
         // select the branch
         Branch selectedBranch = null;
         boolean selectedValidBranch = false;
@@ -120,6 +114,16 @@ public class Application {
         Serialize.save(chain, arguments.getStatePath());
         System.out.println("Saved application state: " + arguments.getStatePath());
         in.close();
+    }
+
+    /**
+     * Entrypoint of Fast food Ordering &amp; Management System
+     *
+     * @param args See usage information by parsing the {@code --help} flag.
+     */
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        run(args, in);
         System.exit(0);
     }
 }

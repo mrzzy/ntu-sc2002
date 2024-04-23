@@ -1,18 +1,16 @@
 package sg.edu.ntu.sc2002;
 
-import java.util.Set;
-
 /** View menu of a particular branch. */
 public class ViewMenuAction {
     /**
      * View menu of a Fast Food Branch.
      *
-     * @param menu Menu of the chosen Fast Food Branch.
+     * @param branch The branch which the menu belongs to.
      */
-    public static void viewMenu(Set<Item> menu) {
+    public static void viewMenu(Branch branch) {
         System.out.println("-------------------------");
         int i = 1;
-        for (Item item : menu) {
+        for (Item item : branch.getSortedMenu()) {
             System.out.println(
                     String.format(
                             "%d) Name: %s, Category: %s, Price: %.2f, Description: %s",
