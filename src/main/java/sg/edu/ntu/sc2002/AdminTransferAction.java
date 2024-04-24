@@ -85,15 +85,6 @@ public class AdminTransferAction implements IAdminAction {
             return;
         }
 
-        if (selectedUser.getRole().code() == 'S'
-                && selectedFromBranch.getStaffs().size() == 1
-                && selectedFromBranch.getManagers().size() >= 1) {
-            System.out.println(
-                    "Cannot transfer the only remaining staff out of this branch when there exists"
-                            + " managers! Manager cannot manage 0 staffs");
-            return;
-        }
-
         // Get branch To
         System.out.println("Please select from which branch you want to transfer to:");
         System.out.println("Available branches : ");
@@ -116,7 +107,7 @@ public class AdminTransferAction implements IAdminAction {
         }
 
         // Check that the from and to branch is not the same
-        if (branchFrom == branchTo) {
+        if (branchFrom.equals(branchTo)) {
             System.out.println("The branch you are transferring from and to is the same!");
             return;
         }
@@ -138,7 +129,7 @@ public class AdminTransferAction implements IAdminAction {
         if (selectedUser.getRole().code() == 'M') {
             if (selectedToBranch.getManagers().size() >= selectedToBranch.getManagerQuota()) {
                 System.out.println(
-                        "The branch you selected to transfer to has already haxed out their manager"
+                        "The branch you selected to transfer to has already maxed out their manager"
                                 + " quota");
                 return;
             }
