@@ -52,7 +52,7 @@ public class ApplicationTest {
     public void testChangePassword() {
         // test case 25: Log in as a staff member, change the default password,
         // and log in again with the new password.
-        // change password of 'MaryL' to 'yram'
+        // change password of 'boss' to 'yram'
         String newPassword = "yram";
         Application.run(
                 new String[] {},
@@ -61,7 +61,7 @@ public class ApplicationTest {
                                         System.lineSeparator(),
                                         // login staff / admin
                                         "2",
-                                        "MaryL",
+                                        "boss",
                                         User.DEFAULT_PASSWORD,
                                         // change password
                                         "Y",
@@ -78,7 +78,7 @@ public class ApplicationTest {
                                         System.lineSeparator(),
                                         // login staff
                                         "2",
-                                        "MaryL",
+                                        "boss",
                                         newPassword,
                                         // don't change password
                                         "N",
