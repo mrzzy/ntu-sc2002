@@ -42,7 +42,7 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Add item to a menu.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch The branch which the menu belongs to.
      */
     private void addItem(Scanner in, Branch branch) {
@@ -107,7 +107,7 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Remove item from a menu.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch The branch which the menu belongs to.
      */
     private void removeItem(Scanner in, Branch branch) {
@@ -137,7 +137,7 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Update item price or description in a menu.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch The branch which the menu belongs to.
      */
     private void updateItem(Scanner in, Branch branch) {
@@ -197,7 +197,7 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in     Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */
