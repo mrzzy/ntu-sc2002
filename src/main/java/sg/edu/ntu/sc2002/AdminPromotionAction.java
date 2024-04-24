@@ -52,32 +52,36 @@ public class AdminPromotionAction implements IAdminAction {
         System.out.println("Please enter branch name to transfer to: ");
         String branch = in.next();
 
+        Branch removeBranch = null;
+        Branch assignBranch = null;
+
         for (Branch b : chain.getBranches()) {
             // Remove the user from the old branch
             if (b.getName().equals(user.getBranchBelongTo())) {
-                b.getManagers().remove(user);
+                removeBranch = b;
             }
-        }
-
-        for (Branch b : chain.getBranches()) {
-            // Add the user to the new branch
             if (b.getName().equals(branch)) {
-                // Check how many branch managers exist in this branch
-                if (b.getManagers().size() >= b.getManagerQuota()) {
-                    System.out.println(
-                            "This branch has hit it's total number of branch managers and is unable"
-                                    + " to add more");
-                    return;
-                }
-
-                // Update the branch name
-                user.setBranchBelongTo(b.getName());
-                // Add the new manager in
-                b.getManagers().add(user);
-                System.out.println("Added to new branch");
-                System.out.printf("%s has been assigned to %s\n", user.getName(), b.getName());
+                assignBranch = b;
             }
         }
+
+        // Check that the new branch has quota
+        int managerQuota = assignBranch.getManagerQuota();
+        int managerCount = assignBranch.getManagers().size();
+        if (managerCount >= managerQuota) {
+            System.out.println("This branch has hit it's total number of branch managers and is unable to add more");
+            return;
+        }
+
+        // Remove manager from old branch
+        removeBranch.getManagers().remove(user);
+        // Update the user branch name
+        user.setBranchBelongTo(assignBranch.getName());
+        // Add the new manager in
+        assignBranch.getManagers().add(user);
+
+        System.out.println("Added to new branch");
+        System.out.printf("%s has been assigned to %s\n", user.getName(), b.getName());
     }
 
     /**
