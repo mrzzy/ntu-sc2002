@@ -53,8 +53,10 @@ public class Branch implements Serializable {
     private int lastOrderId;
 
     /**
-     * Creates a new branch with the given name, location, staff quota, staffs, managers, menu, new
-     * order list, ready to pickup list, completed order list and cancelled order list.
+     * Creates a new branch with the given name, location, staff quota, staffs,
+     * managers, menu, new
+     * order list, ready to pickup list, completed order list and cancelled order
+     * list.
      */
     public Branch(
             String name,
@@ -77,16 +79,17 @@ public class Branch implements Serializable {
         this.readyToPickupList = readyToPickupList;
         this.completedOrderList = completedOrderList;
         this.cancelledOrderList = cancelledOrderList;
-        this.lastOrderId =
-                newOrderList.size()
-                        + readyToPickupList.size()
-                        + completedOrderList.size()
-                        + cancelledOrderList.size();
+        this.lastOrderId = newOrderList.size()
+                + readyToPickupList.size()
+                + completedOrderList.size()
+                + cancelledOrderList.size();
     }
 
     /**
-     * Creates a new branch with the given name, location and staff quota. Initializes staffs,
-     * managers, menu, new order list, ready to pickup list, completed order list and cancelled
+     * Creates a new branch with the given name, location and staff quota.
+     * Initializes staffs,
+     * managers, menu, new order list, ready to pickup list, completed order list
+     * and cancelled
      * order list as empty.
      */
     public Branch(String name, String location, int staffQuota) {
@@ -104,11 +107,12 @@ public class Branch implements Serializable {
     }
 
     /**
-     * Assign the given user to work in this branch. User will be assigned based on their {@link
+     * Assign the given user to work in this branch. User will be assigned based on
+     * their {@link
      * IRole}: staff or manager.
      *
      * @throws IllegalArgumentException If given user with an unsupported role.
-     * @throws LimitExceededException If assignment of staff exceeds quota.
+     * @throws LimitExceededException   If assignment of staff exceeds quota.
      */
     public void assign(User user) throws LimitExceededException {
         switch (user.getRole()) {
@@ -126,13 +130,14 @@ public class Branch implements Serializable {
             }
 
             default ->
-                    throw new IllegalArgumentException(
-                            "Refusing to assign unsupported role: " + user.getRole());
+                throw new IllegalArgumentException(
+                        "Refusing to assign unsupported role: " + user.getRole());
         }
     }
 
     /**
-     * Get the staff quota for this branch. Note that staff quota is excludes managers in the
+     * Get the staff quota for this branch. Note that staff quota is excludes
+     * managers in the
      * branch.
      */
     public int getStaffQuota() {
@@ -140,7 +145,8 @@ public class Branch implements Serializable {
     }
 
     /**
-     * Derives manager quota for this branch based on staff quota. Note that manager quota is
+     * Derives manager quota for this branch based on staff quota. Note that manager
+     * quota is
      * independent of staff quota.
      */
     public int getManagerQuota() {
@@ -194,17 +200,6 @@ public class Branch implements Serializable {
      */
     public Set<Item> getMenu() {
         return menu;
-    }
-
-    /**
-     * Menu of the branch, sorted in alphanumeric order of name.
-     *
-     * @return Sorted Menu of the branch.
-     */
-    public List<Item> getSortedMenu() {
-        return menu.stream()
-                .sorted(Comparator.comparing(Item::getName))
-                .collect(Collectors.toList());
     }
 
     /**
@@ -275,39 +270,62 @@ public class Branch implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         Branch other = (Branch) obj;
         if (name == null) {
-            if (other.name != null) return false;
-        } else if (!name.equals(other.name)) return false;
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
         if (location == null) {
-            if (other.location != null) return false;
-        } else if (!location.equals(other.location)) return false;
-        if (staffQuota != other.staffQuota) return false;
+            if (other.location != null)
+                return false;
+        } else if (!location.equals(other.location))
+            return false;
+        if (staffQuota != other.staffQuota)
+            return false;
         if (staffs == null) {
-            if (other.staffs != null) return false;
-        } else if (!staffs.equals(other.staffs)) return false;
+            if (other.staffs != null)
+                return false;
+        } else if (!staffs.equals(other.staffs))
+            return false;
         if (managers == null) {
-            if (other.managers != null) return false;
-        } else if (!managers.equals(other.managers)) return false;
+            if (other.managers != null)
+                return false;
+        } else if (!managers.equals(other.managers))
+            return false;
         if (menu == null) {
-            if (other.menu != null) return false;
-        } else if (!menu.equals(other.menu)) return false;
+            if (other.menu != null)
+                return false;
+        } else if (!menu.equals(other.menu))
+            return false;
         if (newOrderList == null) {
-            if (other.newOrderList != null) return false;
-        } else if (!newOrderList.equals(other.newOrderList)) return false;
+            if (other.newOrderList != null)
+                return false;
+        } else if (!newOrderList.equals(other.newOrderList))
+            return false;
         if (readyToPickupList == null) {
-            if (other.readyToPickupList != null) return false;
-        } else if (!readyToPickupList.equals(other.readyToPickupList)) return false;
+            if (other.readyToPickupList != null)
+                return false;
+        } else if (!readyToPickupList.equals(other.readyToPickupList))
+            return false;
         if (completedOrderList == null) {
-            if (other.completedOrderList != null) return false;
-        } else if (!completedOrderList.equals(other.completedOrderList)) return false;
+            if (other.completedOrderList != null)
+                return false;
+        } else if (!completedOrderList.equals(other.completedOrderList))
+            return false;
         if (cancelledOrderList == null) {
-            if (other.cancelledOrderList != null) return false;
-        } else if (!cancelledOrderList.equals(other.cancelledOrderList)) return false;
-        if (lastOrderId != other.lastOrderId) return false;
+            if (other.cancelledOrderList != null)
+                return false;
+        } else if (!cancelledOrderList.equals(other.cancelledOrderList))
+            return false;
+        if (lastOrderId != other.lastOrderId)
+            return false;
         return true;
     }
 

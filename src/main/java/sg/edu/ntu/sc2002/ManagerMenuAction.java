@@ -42,7 +42,7 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Add item to a menu.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch The branch which the menu belongs to.
      */
     private void addItem(Scanner in, Branch branch) {
@@ -107,16 +107,18 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Remove item from a menu.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch The branch which the menu belongs to.
      */
     private void removeItem(Scanner in, Branch branch) {
+        System.out.println("-------------------------");
+        ViewMenuAction.viewMenu(branch);
         System.out.println("-------------------------");
         System.out.println("Enter item number:");
         int choice = Input.nextInt(in);
         Item itemToRemove = null;
         int i = 1;
-        for (Item item : branch.getSortedMenu()) {
+        for (Item item : branch.getMenu()) {
             if (choice == i) {
                 itemToRemove = item;
                 break;
@@ -135,16 +137,18 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Update item price or description in a menu.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch The branch which the menu belongs to.
      */
     private void updateItem(Scanner in, Branch branch) {
+        System.out.println("-------------------------");
+        ViewMenuAction.viewMenu(branch);
         System.out.println("-------------------------");
         System.out.println("What item number do you want to update?");
         int itemChoice = Input.nextInt(in);
         Item itemToUpdate = null;
         int i = 1;
-        for (Item item : branch.getSortedMenu()) {
+        for (Item item : branch.getMenu()) {
             if (itemChoice == i) {
                 itemToUpdate = item;
                 break;
@@ -193,7 +197,7 @@ public class ManagerMenuAction implements IManagerAction {
     /**
      * Execute Action on the given Fast Food Branch.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in     Stdin scanner used by action to read user input.
      * @param branch Fast Food Branch to perform the action on.
      * @return State of Fast Food Branch post performing action.
      */

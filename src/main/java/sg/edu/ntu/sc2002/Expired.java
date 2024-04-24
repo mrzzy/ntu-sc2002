@@ -29,7 +29,8 @@ public class Expired {
     }
 
     /**
-     * Checks for expired orders in a {@link Branch} and moves them to the cancelled order list.
+     * Checks for expired orders in a {@link Branch} and moves them to the cancelled
+     * order list.
      *
      * @param branch Branch to check for expired orders.
      */
@@ -43,8 +44,7 @@ public class Expired {
             Order order = iterator.next();
             long orderTimestampMillis = order.getTimestamp().getTime();
 
-            if (currentTimeMillis - orderTimestampMillis
-                    >= 120000) { // 300000 milliseconds = 5 minutes
+            if (currentTimeMillis - orderTimestampMillis >= 120000) { // 300000 milliseconds = 5 minutes
                 order.setTimestamp(new Date());
                 branch.getCancelledOrderList().add(order);
                 iterator.remove();

@@ -10,7 +10,7 @@ public class ViewMenuAction {
     public static void viewMenu(Branch branch) {
         System.out.println("-------------------------");
         int i = 1;
-        for (Item item : branch.getSortedMenu()) {
+        for (Item item : branch.getMenu()) {
             System.out.println(
                     String.format(
                             "%d) Name: %s, Category: %s, Price: %.2f, Description: %s",
