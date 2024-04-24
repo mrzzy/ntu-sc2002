@@ -99,6 +99,8 @@
               <classpath/>
               <argument>sg.edu.ntu.sc2002.Application</argument>
               <!-- application command line arguments start here -->
+              <argument>-s</argument>
+              <argument>src/test/resources/sg/edu/ntu/sc2002/staff_list_name_change.xlsx</argument>
             </arguments>
             <environmentVariables>
             </environmentVariables>
