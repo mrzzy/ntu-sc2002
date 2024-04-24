@@ -69,7 +69,10 @@ public class AdminPromotionAction implements IAdminAction {
         int managerQuota = assignBranch.getManagerQuota();
         int managerCount = assignBranch.getManagers().size();
         if (managerCount >= managerQuota) {
-            System.out.println("This branch has hit it's total number of branch managers and is unable to add more");
+            System.out.printf(
+                    "This branch has hit it's total number of branch managers of %d with total"
+                            + " staff count of %d and is unable to add more managers.\n",
+                    managerQuota, assignBranch.getStaffs().size());
             return;
         }
 
@@ -109,20 +112,21 @@ public class AdminPromotionAction implements IAdminAction {
             return;
         }
 
+        // Promotion does not have quota checking
         // Once the branch is selected, check that there is space for
         // staff -> manager promotion, under the quota
-        if (selectedBranch.getManagers().size() >= selectedBranch.getManagerQuota()) {
-            System.out.println(
-                    "Selected branch does not have enough quota to contain more managers");
-            return;
-        }
+        // if (selectedBranch.getManagers().size() >= selectedBranch.getManagerQuota()) {
+        //     System.out.println(
+        //             "Selected branch does not have enough quota to contain more managers");
+        //     return;
+        // }
 
-        if (selectedBranch.getStaffs().size() == 1) {
-            System.out.println(
-                    "Cannot promote to branch manager if a branch only has one staff! 0 staffs at a"
-                            + " branch is not allowed");
-            return;
-        }
+        // if (selectedBranch.getStaffs().size() == 1) {
+        //     System.out.println(
+        //             "Cannot promote to branch manager if a branch only has one staff! 0 staffs at a"
+        //                     + " branch is not allowed");
+        //     return;
+        // }
 
         System.out.println("Please enter the username of the staff you want to promote:");
         System.out.println("Available staff:");
