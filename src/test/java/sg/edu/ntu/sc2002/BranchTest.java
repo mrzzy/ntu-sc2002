@@ -22,6 +22,7 @@ public class BranchTest {
 
     @Test
     public void assignManager() throws LimitExceededException {
+        branch.assign(new User("jill", new StaffRole()));
         branch.assign(new User("phil", new ManagerRole()));
     }
 
