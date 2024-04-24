@@ -129,14 +129,20 @@ public class Init {
                         staffs.get(branchName)
                                 .forEach(
                                         user -> {
-                                            try {
-                                                branch.assign(user);
-                                            } catch (LimitExceededException e) {
-                                                System.out.printf(
-                                                        "Warning: Ignoring assignment that exceeds"
-                                                                + " quota: user=%s, branch=%s\n",
-                                                        user.getUsername(), branchName);
+                                            if (user.getRole().code() == 'S') {
+                                                branch.getStaffs().add(user);
                                             }
+                                            if (user.getRole().code() == 'M') {
+                                                branch.getManagers().add(user);
+                                            }
+                                            // try {
+                                            //     branch.assign(user);
+                                            // } catch (LimitExceededException e) {
+                                            //     System.out.printf(
+                                            //             "Warning: Ignoring assignment that exceeds"
+                                            //                     + " quota: user=%s, branch=%s\n",
+                                            //             user.getUsername(), branchName);
+                                            // }
                                         });
                     }
                 });
