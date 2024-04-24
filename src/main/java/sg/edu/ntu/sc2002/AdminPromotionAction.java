@@ -1,5 +1,6 @@
 package sg.edu.ntu.sc2002;
 
+import javax.naming.LimitExceededException;
 import java.util.Scanner;
 
 public class AdminPromotionAction implements IAdminAction {
@@ -66,22 +67,30 @@ public class AdminPromotionAction implements IAdminAction {
         }
 
         // Check that the new branch has quota
-        int managerQuota = assignBranch.getManagerQuota();
-        int managerCount = assignBranch.getManagers().size();
-        if (managerCount >= managerQuota) {
+        // int managerQuota = assignBranch.getManagerQuota();
+        // int managerCount = assignBranch.getManagers().size();
+        // if (managerCount >= managerQuota) {
+        //     System.out.printf(
+        //             "This branch has hit it's total number of branch managers of %d with total"
+        //                     + " staff count of %d and is unable to add more managers.\n",
+        //             managerQuota, assignBranch.getStaffs().size());
+        //     return;
+        // }
+
+        try {
+            // Update the user branch name
+            user.setBranchBelongTo(assignBranch.getName());
+            // Add the new manager in
+            assignBranch.assign(user);
+            // Remove manager from old branch
+            removeBranch.getManagers().remove(user);
+        } catch (LimitExceededException e) {
             System.out.printf(
                     "This branch has hit it's total number of branch managers of %d with total"
                             + " staff count of %d and is unable to add more managers.\n",
-                    managerQuota, assignBranch.getStaffs().size());
+                    assignBranch.getManagerQuota(), assignBranch.getStaffs().size());
             return;
         }
-
-        // Remove manager from old branch
-        removeBranch.getManagers().remove(user);
-        // Update the user branch name
-        user.setBranchBelongTo(assignBranch.getName());
-        // Add the new manager in
-        assignBranch.getManagers().add(user);
 
         System.out.println("Added to new branch");
         System.out.printf("%s has been assigned to %s\n", user.getName(), assignBranch.getName());

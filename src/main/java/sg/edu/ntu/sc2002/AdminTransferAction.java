@@ -1,5 +1,6 @@
 package sg.edu.ntu.sc2002;
 
+import javax.naming.LimitExceededException;
 import java.util.Scanner;
 
 public class AdminTransferAction implements IAdminAction {
@@ -112,30 +113,36 @@ public class AdminTransferAction implements IAdminAction {
             return;
         }
 
+
         // If it's a staff, check the quota limit
         if (selectedUser.getRole().code() == 'S') {
-            if (selectedToBranch.getStaffs().size() >= selectedToBranch.getStaffQuota()) {
+            try {
+                // Transfer the user to this branch
+                selectedToBranch.assign(selectedUser);
+                // If successful, set the branch
+                selectedUser.setBranchBelongTo(selectedToBranch.getName());
+                // Remove from old branch
+                selectedFromBranch.getStaffs().remove(selectedUser);
+            } catch (LimitExceededException e) {
                 System.out.println(
                         "The branch you selected to transfer to has already has maxed out their"
                                 + " staff quota");
                 return;
             }
-            // Transfer
-            selectedToBranch.getStaffs().add(selectedUser);
-            selectedFromBranch.getStaffs().remove(selectedUser);
-            selectedUser.setBranchBelongTo(selectedToBranch.getName());
         }
+
         // If it's a manager, check the manager quota limit
         if (selectedUser.getRole().code() == 'M') {
-            if (selectedToBranch.getManagers().size() >= selectedToBranch.getManagerQuota()) {
+            try {
+                selectedToBranch.assign(selectedUser);
+                selectedUser.setBranchBelongTo(selectedToBranch.getName());
+                selectedFromBranch.getManagers().remove(selectedUser);
+            } catch (LimitExceededException e) {
                 System.out.println(
                         "The branch you selected to transfer to has already maxed out their manager"
                                 + " quota");
                 return;
             }
-            selectedToBranch.getManagers().add(selectedUser);
-            selectedFromBranch.getManagers().remove(selectedUser);
-            selectedUser.setBranchBelongTo(selectedToBranch.getName());
         }
 
         System.out.printf(
