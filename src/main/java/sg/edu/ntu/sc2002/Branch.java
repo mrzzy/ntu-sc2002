@@ -156,9 +156,7 @@ public class Branch implements Serializable {
             return 3;
         }
 
-        throw new IllegalStateException(
-                "Expected current staff to be between 0 - 15"
-        );
+        throw new IllegalStateException("Expected current staff to be between 0 - 15");
     }
 
     // getter

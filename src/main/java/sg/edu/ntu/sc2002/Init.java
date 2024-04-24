@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import javax.naming.LimitExceededException;
 import org.dhatim.fastexcel.reader.ReadableWorkbook;
 import org.dhatim.fastexcel.reader.Row;
 
@@ -139,7 +138,8 @@ public class Init {
                                             //     branch.assign(user);
                                             // } catch (LimitExceededException e) {
                                             //     System.out.printf(
-                                            //             "Warning: Ignoring assignment that exceeds"
+                                            //             "Warning: Ignoring assignment that
+                                            // exceeds"
                                             //                     + " quota: user=%s, branch=%s\n",
                                             //             user.getUsername(), branchName);
                                             // }

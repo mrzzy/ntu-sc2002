@@ -1,7 +1,7 @@
 package sg.edu.ntu.sc2002;
 
-import javax.naming.LimitExceededException;
 import java.util.Scanner;
+import javax.naming.LimitExceededException;
 
 public class AdminTransferAction implements IAdminAction {
     private AdminTransferMethod method;
@@ -112,7 +112,6 @@ public class AdminTransferAction implements IAdminAction {
             System.out.println("The branch you are transferring from and to is the same!");
             return;
         }
-
 
         // If it's a staff, check the quota limit
         if (selectedUser.getRole().code() == 'S') {

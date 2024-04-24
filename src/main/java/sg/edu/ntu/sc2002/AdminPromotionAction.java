@@ -1,7 +1,7 @@
 package sg.edu.ntu.sc2002;
 
-import javax.naming.LimitExceededException;
 import java.util.Scanner;
+import javax.naming.LimitExceededException;
 
 public class AdminPromotionAction implements IAdminAction {
     private AdminPromotionMethod method;
@@ -132,7 +132,8 @@ public class AdminPromotionAction implements IAdminAction {
 
         // if (selectedBranch.getStaffs().size() == 1) {
         //     System.out.println(
-        //             "Cannot promote to branch manager if a branch only has one staff! 0 staffs at a"
+        //             "Cannot promote to branch manager if a branch only has one staff! 0 staffs at
+        // a"
         //                     + " branch is not allowed");
         //     return;
         // }
