@@ -195,7 +195,7 @@ public class AdminStaffAction implements IAdminAction {
         System.out.println("Do you want to filter by branch? (Y|N)");
         char filterBranchPredicate = in.next().charAt(0);
         String branch = null;
-        if (filterBranchPredicate == 'Y') {
+        if (filterBranchPredicate == 'Y' || filterBranchPredicate == 'y') {
             while (true) {
                 System.out.println("Please input which branch you want to filter by");
                 branch = in.next();
@@ -207,14 +207,14 @@ public class AdminStaffAction implements IAdminAction {
                                 .findAny()
                                 .orElse(null);
                 if (branchExists != null) break;
-                System.out.println("BRanch does not exist! Please try again");
+                System.out.println("Branch does not exist! Please try again");
             }
         }
 
         System.out.println("Do you want to filter by role? (Y|N)");
         char filterRolePredicate = in.next().charAt(0);
         char role = 0;
-        if (filterRolePredicate == 'Y') {
+        if (filterRolePredicate == 'Y' || filterRolePredicate == 'y') {
             while (true) {
                 System.out.println("Please input which role you want to filter by (S|M)");
                 role = in.next().charAt(0);
@@ -227,7 +227,7 @@ public class AdminStaffAction implements IAdminAction {
         System.out.println("Do you want to filter by gender? (Y|N)");
         char filterGenderPredicate = in.next().charAt(0);
         char gender = 0;
-        if (filterGenderPredicate == 'Y') {
+        if (filterGenderPredicate == 'Y' || filterGenderPredicate == 'y') {
             while (true) {
                 System.out.println("Please input which gender you want to filter by (M|F)");
                 gender = in.next().charAt(0);
@@ -241,7 +241,7 @@ public class AdminStaffAction implements IAdminAction {
         char filterAgePredicate = in.next().charAt(0);
         int minAge = 0;
         int maxAge = 0;
-        if (filterAgePredicate == 'Y') {
+        if (filterAgePredicate == 'Y' || filterAgePredicate == 'y') {
             while (true) {
                 System.out.println("Please input the minimum age you want to filter by");
                 minAge = in.nextInt();
@@ -273,22 +273,22 @@ public class AdminStaffAction implements IAdminAction {
 
         // Filter users by role | gender | age
         Stream<User> staffStream = branches.stream().flatMap(b -> b.getStaffs().stream());
-        if (filterRolePredicate == 'Y')
+        if (filterRolePredicate == 'Y' || filterRolePredicate == 'y')
             staffStream = staffStream.filter(s -> s.getRole().code() == filterRole);
-        if (filterGenderPredicate == 'Y')
+        if (filterGenderPredicate == 'Y' || filterGenderPredicate == 'y')
             staffStream = staffStream.filter(s -> Gender.toCode(s.getGender()) == filterGender);
-        if (filterAgePredicate == 'Y')
+        if (filterAgePredicate == 'Y' || filterAgePredicate == 'y')
             staffStream =
                     staffStream.filter(
                             s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
         Set<User> staffs = staffStream.collect(Collectors.toSet());
 
         Stream<User> managerStream = branches.stream().flatMap(b -> b.getManagers().stream());
-        if (filterRolePredicate == 'Y')
+        if (filterRolePredicate == 'Y' || filterRolePredicate == 'y')
             managerStream = managerStream.filter(s -> s.getRole().code() == filterRole);
-        if (filterGenderPredicate == 'Y')
+        if (filterGenderPredicate == 'Y' || filterGenderPredicate == 'y')
             managerStream = managerStream.filter(s -> Gender.toCode(s.getGender()) == filterGender);
-        if (filterAgePredicate == 'Y')
+        if (filterAgePredicate == 'Y' || filterAgePredicate == 'y')
             managerStream =
                     managerStream.filter(
                             s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
