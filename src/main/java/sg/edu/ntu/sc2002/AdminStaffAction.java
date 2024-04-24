@@ -1,5 +1,6 @@
 package sg.edu.ntu.sc2002;
 
+import javax.naming.LimitExceededException;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -86,8 +87,12 @@ public class AdminStaffAction implements IAdminAction {
             return;
         }
 
-        selectedBranch.getStaffs().add(user);
-        // chain.getStaffs().put(username, user);
+        try {
+            selectedBranch.assign(user);
+        } catch (LimitExceededException e) {
+            System.out.println("Branch has reached it's staff quota, unable to add staff to this branch!");
+            return;
+        }
     }
 
     /**
