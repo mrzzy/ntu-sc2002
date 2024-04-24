@@ -142,18 +142,19 @@ public class Branch implements Serializable {
      * independent of staff quota.
      */
     public int getManagerQuota() {
-        if (staffQuota >= 1 && staffQuota <= 4) {
+        int currentStaffSize = getStaffs().size();
+        if (currentStaffSize >= 1 && currentStaffSize <= 4) {
             return 1;
         }
-        if (staffQuota >= 5 && staffQuota <= 8) {
+        if (currentStaffSize >= 5 && currentStaffSize <= 8) {
             return 2;
         }
-        if (staffQuota >= 9 && staffQuota <= 15) {
+        if (currentStaffSize >= 9 && currentStaffSize <= 15) {
             return 3;
         }
 
-        throw new IllegalStateException(
-                "Expected Staff quota assigned to branch to be within 1 - 15");
+        // Quota of 0 managers
+        return 0;
     }
 
     // getter
