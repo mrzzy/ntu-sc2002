@@ -81,7 +81,7 @@ public class AdminPromotionAction implements IAdminAction {
         assignBranch.getManagers().add(user);
 
         System.out.println("Added to new branch");
-        System.out.printf("%s has been assigned to %s\n", user.getName(), b.getName());
+        System.out.printf("%s has been assigned to %s\n", user.getName(), assignBranch.getName());
     }
 
     /**
