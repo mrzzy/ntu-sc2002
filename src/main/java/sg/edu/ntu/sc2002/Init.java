@@ -46,6 +46,9 @@ public class Init {
         Map<String, Set<User>> staffs =
                 parseStaffs(Init.readExcel(Init.class.getResource("staff_list.xlsx").getPath()));
         User admin = staffs.get("").iterator().next();
+        // Default payment methods
+        HashSet<IPaymentMethod> paymentMethods =
+                new HashSet<>(Set.of(new PayNowMethod(), new BankCardMethod()));
 
         // restore chain state if present
         if (Files.exists(Path.of(args.getStatePath()))) {
@@ -72,6 +75,7 @@ public class Init {
             // admin belongs in empty branch
             admin = chain.getAdmin();
             staffs.put("", Set.of(admin));
+            paymentMethods = (HashSet<IPaymentMethod>) chain.getPaymentMethods();
         }
 
         // read user provided overrides if any
@@ -95,11 +99,7 @@ public class Init {
                         .flatMap(Set::stream)
                         .collect(Collectors.toMap(User::getUsername, Function.identity()));
 
-        return new Chain(
-                admin,
-                staffsByName,
-                new HashSet<>(branches.values()),
-                new HashSet<>(Set.of(new PayNowMethod(), new BankCardMethod())));
+        return new Chain(admin, staffsByName, new HashSet<>(branches.values()), paymentMethods);
     }
 
     /** Override branches with with given menus. */
