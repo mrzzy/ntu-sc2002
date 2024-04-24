@@ -31,8 +31,7 @@ public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor when an Item object is created under {@link ManagerMenuAction}.
-     * Customisation is
+     * Constructor when an Item object is created under {@link ManagerMenuAction}. Customisation is
      * set to empty string as default.
      *
      * @param name
@@ -162,7 +161,13 @@ public class Item implements Serializable {
      * @return Item copy.
      */
     public Item copy() {
-        return new Item(this.name, this.price, this.description, this.customisation, this.available, this.category);
+        return new Item(
+                this.name,
+                this.price,
+                this.description,
+                this.customisation,
+                this.available,
+                this.category);
     }
 
     @Override
@@ -182,37 +187,24 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         Item other = (Item) obj;
         if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-            return false;
+            if (other.name != null) return false;
+        } else if (!name.equals(other.name)) return false;
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) return false;
         if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
+            if (other.description != null) return false;
+        } else if (!description.equals(other.description)) return false;
         if (customisation == null) {
-            if (other.customisation != null)
-                return false;
-        } else if (!customisation.equals(other.customisation))
-            return false;
-        if (available != other.available)
-            return false;
+            if (other.customisation != null) return false;
+        } else if (!customisation.equals(other.customisation)) return false;
+        if (available != other.available) return false;
         if (category == null) {
-            if (other.category != null)
-                return false;
-        } else if (!category.equals(other.category))
-            return false;
+            if (other.category != null) return false;
+        } else if (!category.equals(other.category)) return false;
         return true;
     }
 }

@@ -70,7 +70,9 @@ public class Init {
                                                 users.addAll(branch.getManagers());
                                                 return users;
                                             }));
+            // admin belongs in empty branch
             admin = chain.getAdmin();
+            staffs.put("", Set.of(admin));
         }
 
         // read user provided overrides if any
