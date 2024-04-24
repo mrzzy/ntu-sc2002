@@ -59,6 +59,11 @@ public class AdminStaffAction implements IAdminAction {
             return;
         }
 
+        if (selectedBranch.getStaffs().size() == selectedBranch.getStaffQuota()) {
+            System.out.println("Branch has reached it's staff quota to add");
+            return;
+        }
+
         System.out.print("Please enter staff age: ");
         int age = Input.nextInt(in);
         System.out.print("Please enter gender (M|F): ");
