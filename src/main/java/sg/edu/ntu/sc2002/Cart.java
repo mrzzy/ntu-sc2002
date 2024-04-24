@@ -62,4 +62,15 @@ public class Cart {
     public void removeCart(int itemIndex) {
         this.cartItems.remove(itemIndex);
     }
+
+    /**
+     * copy the cart.
+     */
+    public ArrayList<Item> copyCart() {
+        ArrayList<Item> copy = new ArrayList<Item>();
+        for (Item item : this.cartItems) {
+            copy.add(item.copy());
+        }
+        return copy;
+    }
 }
