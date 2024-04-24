@@ -100,7 +100,7 @@ public class Init {
                 admin,
                 staffsByName,
                 new HashSet<>(branches.values()),
-                Set.of(new PayNowMethod(), new BankCardMethod()));
+                new HashSet<>(Set.of(new PayNowMethod(), new BankCardMethod())));
     }
 
     /** Override branches with with given menus. */
