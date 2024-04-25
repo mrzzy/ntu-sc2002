@@ -80,10 +80,10 @@ public class AdminPromotionAction implements IAdminAction {
         try {
             // Update the user branch name
             user.setBranchBelongTo(assignBranch.getName());
-            // Add the new manager in
-            assignBranch.assign(user);
             // Remove manager from old branch
             removeBranch.getManagers().remove(user);
+            // Add the new manager in
+            assignBranch.assign(user);
         } catch (LimitExceededException e) {
             System.out.printf(
                     "This branch has hit it's total number of branch managers of %d with total"
