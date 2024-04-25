@@ -90,7 +90,8 @@ public class AdminPromotionAction implements IAdminAction {
                             + " staff count of %d and is unable to add more managers.\n",
                     assignBranch.getManagerQuota(), assignBranch.getStaffs().size());
             removeBranch.getManagers().add(user);
-            user.setBranchBelongTo(removeBranch.getName());;
+            user.setBranchBelongTo(removeBranch.getName());
+            ;
             return;
         }
 
