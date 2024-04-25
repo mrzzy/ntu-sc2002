@@ -89,6 +89,8 @@ public class AdminPromotionAction implements IAdminAction {
                     "This branch has hit it's total number of branch managers of %d with total"
                             + " staff count of %d and is unable to add more managers.\n",
                     assignBranch.getManagerQuota(), assignBranch.getStaffs().size());
+            removeBranch.getManagers().add(user);
+            user.setBranchBelongTo(removeBranch.getName());;
             return;
         }
 
