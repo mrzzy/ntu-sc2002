@@ -9,15 +9,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 
-/** Defines an application Session acquired by a User to interact with the application. */
+/**
+ * Defines an application Session acquired by a User to interact with the
+ * application.
+ */
 public record Session(IRole role, Optional<User> user) {
     /**
      * Create application Session by challenging over STDOUT.
      *
      * @param users Map of users to authenticate against.
-     * @param in Scanner used to capture user input for authentication challenge.
-     * @throws IllegalArgumentException On invalid input from user: invalid option or invalid
-     *     credentials.
+     * @param in    Scanner used to capture user input for authentication challenge.
+     * @throws IllegalArgumentException On invalid input from user: invalid option
+     *                                  or invalid
+     *                                  credentials.
      * @return Created application Session.
      */
     public static Session authenticate(Map<String, User> users, Scanner in) {
@@ -39,13 +43,11 @@ public record Session(IRole role, Optional<User> user) {
             String password = in.next().strip();
 
             // check user credentials against users map
-            Optional<User> user =
-                    Optional.ofNullable(users.get(username))
-                            .flatMap(
-                                    u ->
-                                            (u.login(username, password))
-                                                    ? Optional.of(u)
-                                                    : Optional.empty());
+            Optional<User> user = Optional.ofNullable(users.get(username))
+                    .flatMap(
+                            u -> (u.login(username, password))
+                                    ? Optional.of(u)
+                                    : Optional.empty());
             if (user.isEmpty()) {
                 throw new IllegalArgumentException("Invalid username or password.");
             }

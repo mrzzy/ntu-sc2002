@@ -9,7 +9,12 @@ import java.util.Scanner;
 
 /** Fast food Ordering &amp; Management System application. */
 public class Application {
-
+    /**
+     * Run the Fast food Ordering Management System application.
+     * 
+     * @param args Command line arguments.
+     * @param in   Stdin scanner used by action to read user input.
+     */
     protected static void run(String[] args, Scanner in) {
         // parse command line args
         Args arguments = new Args();

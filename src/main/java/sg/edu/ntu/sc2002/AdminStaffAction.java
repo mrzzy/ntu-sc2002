@@ -6,9 +6,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.naming.LimitExceededException;
 
+/**
+ * Action to be performed by an Admin Staff.
+ * 
+ */
 public class AdminStaffAction implements IAdminAction {
     private AdminStaffMethod method;
 
+    /**
+     * Constructor for AdminStaffAction.
+     *
+     * @param method AdminStaffMethod to be executed.
+     */
     public AdminStaffAction(AdminStaffMethod method) {
         this.method = method;
     }
@@ -37,7 +46,7 @@ public class AdminStaffAction implements IAdminAction {
     /**
      * Adds a new staff to a branch
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void addStaff(Scanner in, Chain chain) {
@@ -50,11 +59,10 @@ public class AdminStaffAction implements IAdminAction {
         System.out.print("Please enter staff branch: ");
         String branch = in.next();
 
-        Branch selectedBranch =
-                chain.getBranches().stream()
-                        .filter(b -> branch.equals(b.getName()))
-                        .findAny()
-                        .orElse(null);
+        Branch selectedBranch = chain.getBranches().stream()
+                .filter(b -> branch.equals(b.getName()))
+                .findAny()
+                .orElse(null);
         if (selectedBranch == null) {
             System.out.println("Branch does not exist.");
             return;
@@ -99,7 +107,7 @@ public class AdminStaffAction implements IAdminAction {
     /**
      * Edits the details of an existing staff
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void editStaff(Scanner in, Chain chain) {
@@ -114,12 +122,11 @@ public class AdminStaffAction implements IAdminAction {
         }
         User user = chain.getStaffs().get(username);
 
-        User branchUser =
-                chain.getBranches().stream()
-                        .flatMap(b -> b.getStaffs().stream())
-                        .filter(s -> username.equals(s.getUsername()))
-                        .findAny()
-                        .orElse(null);
+        User branchUser = chain.getBranches().stream()
+                .flatMap(b -> b.getStaffs().stream())
+                .filter(s -> username.equals(s.getUsername()))
+                .findAny()
+                .orElse(null);
         if (branchUser == null) {
             System.out.println("This user does not exist");
             return;
@@ -133,7 +140,8 @@ public class AdminStaffAction implements IAdminAction {
             System.out.println("4) Edit password");
             int choice = Input.nextInt(in);
 
-            if (choice == 0) break;
+            if (choice == 0)
+                break;
             if (choice == 1) {
                 System.out.println("Please enter new name: ");
                 String newName = in.next();
@@ -148,7 +156,7 @@ public class AdminStaffAction implements IAdminAction {
             }
             if (choice == 3) {
                 System.out.println("Please enter new gender: ");
-                // TODO : foolproof this
+
                 char genderCode = in.next().charAt(0);
                 if (genderCode != 'M' && genderCode != 'F') {
                     System.out.println("Gender can only be M or F!");
@@ -169,7 +177,7 @@ public class AdminStaffAction implements IAdminAction {
     /**
      * Remove a staff, given their username
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void removeStaff(Scanner in, Chain chain) {
@@ -195,9 +203,10 @@ public class AdminStaffAction implements IAdminAction {
     }
 
     /**
-     * List all staffs out, with options to filter the list by branch, role, gender, age
+     * List all staffs out, with options to filter the list by branch, role, gender,
+     * age
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void listStaffAll(Scanner in, Chain chain) {
@@ -212,12 +221,12 @@ public class AdminStaffAction implements IAdminAction {
                 branch = in.next();
 
                 String finalBranch = branch;
-                Branch branchExists =
-                        chain.getBranches().stream()
-                                .filter(b -> finalBranch.equals(b.getName()))
-                                .findAny()
-                                .orElse(null);
-                if (branchExists != null) break;
+                Branch branchExists = chain.getBranches().stream()
+                        .filter(b -> finalBranch.equals(b.getName()))
+                        .findAny()
+                        .orElse(null);
+                if (branchExists != null)
+                    break;
                 System.out.println("Branch does not exist! Please try again");
             }
         }
@@ -230,7 +239,8 @@ public class AdminStaffAction implements IAdminAction {
                 System.out.println("Please input which role you want to filter by (S|M)");
                 role = in.next().charAt(0);
                 // If valid role, then break
-                if (role == 'S' || role == 'M') break;
+                if (role == 'S' || role == 'M')
+                    break;
                 System.out.println("Role to filter by is neither S or M. Cannot filter by this");
             }
         }
@@ -243,7 +253,8 @@ public class AdminStaffAction implements IAdminAction {
                 System.out.println("Please input which gender you want to filter by (M|F)");
                 gender = in.next().charAt(0);
                 // If valid role, then break
-                if (gender == 'M' || gender == 'F') break;
+                if (gender == 'M' || gender == 'F')
+                    break;
                 System.out.println("Gender to filter by is neither M or F. Cannot filter by this");
             }
         }
@@ -289,9 +300,8 @@ public class AdminStaffAction implements IAdminAction {
         if (filterGenderPredicate == 'Y' || filterGenderPredicate == 'y')
             staffStream = staffStream.filter(s -> Gender.toCode(s.getGender()) == filterGender);
         if (filterAgePredicate == 'Y' || filterAgePredicate == 'y')
-            staffStream =
-                    staffStream.filter(
-                            s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
+            staffStream = staffStream.filter(
+                    s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
         Set<User> staffs = staffStream.collect(Collectors.toSet());
 
         Stream<User> managerStream = branches.stream().flatMap(b -> b.getManagers().stream());
@@ -300,9 +310,8 @@ public class AdminStaffAction implements IAdminAction {
         if (filterGenderPredicate == 'Y' || filterGenderPredicate == 'y')
             managerStream = managerStream.filter(s -> Gender.toCode(s.getGender()) == filterGender);
         if (filterAgePredicate == 'Y' || filterAgePredicate == 'y')
-            managerStream =
-                    managerStream.filter(
-                            s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
+            managerStream = managerStream.filter(
+                    s -> s.getAge() >= filterMinAge && s.getAge() <= filterMaxAge);
         Set<User> managers = managerStream.collect(Collectors.toSet());
 
         if (staffs.size() == 0 && managers.size() == 0) {
@@ -335,7 +344,7 @@ public class AdminStaffAction implements IAdminAction {
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */

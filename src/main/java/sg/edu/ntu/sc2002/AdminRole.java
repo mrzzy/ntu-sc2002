@@ -26,6 +26,11 @@ public class AdminRole implements IRole {
                 Arrays.asList(new AdminTransferAction(AdminTransferMethod.TRANSFER_STAFF)));
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     * 
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<IAdminAction> getPromotionAction() {
         return new ArrayList<IAdminAction>(
                 Arrays.asList(
@@ -33,6 +38,11 @@ public class AdminRole implements IRole {
                         new AdminPromotionAction(AdminPromotionMethod.PROMOTE_STAFF)));
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     * 
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<IAdminAction> getStaffAction() {
         return new ArrayList<IAdminAction>(
                 Arrays.asList(
@@ -42,6 +52,11 @@ public class AdminRole implements IRole {
                         new AdminStaffAction(AdminStaffMethod.LIST_STAFF_ALL)));
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     * 
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<IAdminAction> getPaymentAction() {
         return new ArrayList<IAdminAction>(
                 Arrays.asList(
@@ -49,6 +64,11 @@ public class AdminRole implements IRole {
                         new AdminPaymentAction(AdminPaymentMethod.REMOVE_PAYMENT)));
     }
 
+    /**
+     * Get actions that the role is authorised to take.
+     * 
+     * @return Set of actions that the role is authorised to take.
+     */
     public static List<IAdminAction> getBranchAction() {
         return new ArrayList<IAdminAction>(
                 Arrays.asList(

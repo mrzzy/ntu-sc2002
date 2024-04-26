@@ -63,7 +63,11 @@ public class Cart {
         this.cartItems.remove(itemIndex);
     }
 
-    /** copy the cart. */
+    /**
+     * copy the cart.
+     * 
+     * @return a copy of the cart.
+     */
     public ArrayList<Item> copyCart() {
         ArrayList<Item> copy = new ArrayList<Item>();
         for (Item item : this.cartItems) {

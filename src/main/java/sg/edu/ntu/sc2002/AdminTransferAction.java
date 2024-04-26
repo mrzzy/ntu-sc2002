@@ -3,9 +3,17 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import javax.naming.LimitExceededException;
 
+/**
+ * Implementation of the {@link IAdminAction} interface.
+ */
 public class AdminTransferAction implements IAdminAction {
     private AdminTransferMethod method;
 
+    /**
+     * Constructor for AdminTransferAction.
+     *
+     * @param method AdminTransferMethod to be executed.
+     */
     public AdminTransferAction(AdminTransferMethod method) {
         this.method = method;
     }
@@ -26,10 +34,11 @@ public class AdminTransferAction implements IAdminAction {
     }
 
     /**
-     * Transfer a staff from one branch to another branch, can only transfer within the
+     * Transfer a staff from one branch to another branch, can only transfer within
+     * the
      * staff/manager quota limits
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void transferStaff(Scanner in, Chain chain) {
@@ -154,7 +163,7 @@ public class AdminTransferAction implements IAdminAction {
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in Stdin scanner used by action to read user input.
+     * @param in    Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */
