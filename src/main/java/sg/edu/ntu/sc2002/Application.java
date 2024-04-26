@@ -28,16 +28,25 @@ public class Application {
 
         System.out.println("Fast food Ordering & Management System");
         // init or restore chain state
-        Chain chain = Init.initChain(arguments);
-
+        Chain chain;
         // user authentication
         Session session;
         try {
+            chain = Init.initChain(arguments);
             session = Session.authenticate(chain.getStaffs(), in);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             System.out.println("Failed to authenticate: " + e.getMessage());
             return;
         }
+
+        // user authentication
+        // Session session;
+        // try {
+        //     session = Session.authenticate(chain.getStaffs(), in);
+        // } catch (IllegalArgumentException e) {
+        //     System.out.println("Failed to authenticate: " + e.getMessage());
+        //     return;
+        // }
 
         // select the branch
         Branch selectedBranch = null;

@@ -8,6 +8,8 @@ package sg.edu.ntu.sc2002;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -37,14 +39,14 @@ public class Init {
      * @param args User provided arguments on how state should be initialised.
      * @return Initialised Fast Food Chain state.
      */
-    public static Chain initChain(Args args) {
+    public static Chain initChain(Args args) throws MalformedURLException {
         // read init chain state from resources
         Map<String, Branch> branches =
-                parseBranches(Init.readExcel(Init.class.getResource("branch_list.xlsx").getPath()));
+                parseBranches(Init.readExcel(Init.class.getResource("branch_list.xlsx")));
         Map<String, Set<Item>> menus =
-                parseMenus(Init.readExcel(Init.class.getResource("menu_list.xlsx").getPath()));
+                parseMenus(Init.readExcel(Init.class.getResource("menu_list.xlsx")));
         Map<String, Set<User>> staffs =
-                parseStaffs(Init.readExcel(Init.class.getResource("staff_list.xlsx").getPath()));
+                parseStaffs(Init.readExcel(Init.class.getResource("staff_list.xlsx")));
         User admin = staffs.get("").iterator().next();
         // Default payment methods
         HashSet<IPaymentMethod> paymentMethods =
@@ -80,13 +82,13 @@ public class Init {
 
         // read user provided overrides if any
         if (args.getBranchPath().length() > 0) {
-            branches = parseBranches(Init.readExcel(args.getBranchPath()));
+            branches = parseBranches(Init.readExcel(Path.of(args.getBranchPath()).toUri().toURL()));
         }
         if (args.getStaffPath().length() > 0) {
-            staffs = parseStaffs(Init.readExcel(args.getStaffPath()));
+            staffs = parseStaffs(Init.readExcel(Path.of(args.getStaffPath()).toUri().toURL()));
         }
         if (args.getMenuPath().length() > 0) {
-            menus = parseMenus(Init.readExcel(args.getMenuPath()));
+            menus = parseMenus(Init.readExcel(Path.of(args.getMenuPath()).toUri().toURL()));
         }
 
         // override menus & staff in branches
@@ -219,10 +221,10 @@ public class Init {
     }
 
     /** Read Excel workbook at the given path as a list of rows. */
-    protected static List<Row> readExcel(String path) {
+    protected static List<Row> readExcel(URL url) {
         // read init data excel workbooks
         try {
-            InputStream stream = new FileInputStream(path);
+            InputStream stream = url.openStream();
             ReadableWorkbook workbook = new ReadableWorkbook(stream);
             List<Row> rows =
                     workbook.getFirstSheet()
