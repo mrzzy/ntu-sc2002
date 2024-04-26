@@ -38,7 +38,7 @@ public class Chain implements Serializable {
 
     /**
      * Get the admin user of the Fast Food Chain
-     * 
+     *
      * @return Admin user of the Fast Food Chain
      */
     public User getAdmin() {
@@ -47,7 +47,7 @@ public class Chain implements Serializable {
 
     /**
      * Get the branches of the Fast Food Chain
-     * 
+     *
      * @return Branches of the Fast Food Chain
      */
     public Set<Branch> getBranches() {
@@ -56,7 +56,7 @@ public class Chain implements Serializable {
 
     /**
      * Get the payment methods of the Fast Food Chain
-     * 
+     *
      * @return Payment methods of the Fast Food Chain
      */
     public Set<IPaymentMethod> getPaymentMethods() {
@@ -65,7 +65,7 @@ public class Chain implements Serializable {
 
     /**
      * Get the staffs of the Fast Food Chain
-     * 
+     *
      * @return Staffs of the Fast Food Chain
      */
     public Map<String, User> getStaffs() {
@@ -85,33 +85,22 @@ public class Chain implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         Chain other = (Chain) obj;
         if (admin == null) {
-            if (other.admin != null)
-                return false;
-        } else if (!admin.equals(other.admin))
-            return false;
+            if (other.admin != null) return false;
+        } else if (!admin.equals(other.admin)) return false;
         if (staffs == null) {
-            if (other.staffs != null)
-                return false;
-        } else if (!staffs.equals(other.staffs))
-            return false;
+            if (other.staffs != null) return false;
+        } else if (!staffs.equals(other.staffs)) return false;
         if (branches == null) {
-            if (other.branches != null)
-                return false;
-        } else if (!branches.equals(other.branches))
-            return false;
+            if (other.branches != null) return false;
+        } else if (!branches.equals(other.branches)) return false;
         if (paymentMethods == null) {
-            if (other.paymentMethods != null)
-                return false;
-        } else if (!paymentMethods.equals(other.paymentMethods))
-            return false;
+            if (other.paymentMethods != null) return false;
+        } else if (!paymentMethods.equals(other.paymentMethods)) return false;
         return true;
     }
 }

@@ -3,9 +3,7 @@ package sg.edu.ntu.sc2002;
 import java.util.Scanner;
 import javax.naming.LimitExceededException;
 
-/**
- * Implementation of the {@link IAdminAction} interface.
- */
+/** Implementation of the {@link IAdminAction} interface. */
 public class AdminPromotionAction implements IAdminAction {
     private AdminPromotionMethod method;
 
@@ -34,7 +32,7 @@ public class AdminPromotionAction implements IAdminAction {
     /**
      * Assigns a manager to a branch given that there is enough quota
      *
-     * @param in    Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void assignManager(Scanner in, Chain chain) {
@@ -106,7 +104,7 @@ public class AdminPromotionAction implements IAdminAction {
     /**
      * Promotes a staff to a manager
      *
-     * @param in    Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      */
     private void promoteStaff(Scanner in, Chain chain) {
@@ -182,7 +180,7 @@ public class AdminPromotionAction implements IAdminAction {
     /**
      * Execute Action on the given Fast Food Chain.
      *
-     * @param in    Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      * @param chain Fast Food Chain to perform the action on.
      * @return State of Fast Food Chain post performing action.
      */

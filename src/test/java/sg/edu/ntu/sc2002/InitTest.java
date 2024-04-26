@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,20 +22,18 @@ import org.junit.jupiter.api.Test;
 
 public class InitTest {
     private Map<String, Branch> branches =
-            Init.parseBranches(
-                    Init.readExcel(Init.class.getResource("branch_list.xlsx").getPath()));
+            Init.parseBranches(Init.readExcel(Init.class.getResource("branch_list.xlsx")));
     private Map<String, Set<Item>> menus =
-            Init.parseMenus(Init.readExcel(Init.class.getResource("menu_list.xlsx").getPath()));
+            Init.parseMenus(Init.readExcel(Init.class.getResource("menu_list.xlsx")));
     private Map<String, Set<User>> staffs =
-            Init.parseStaffs(Init.readExcel(Init.class.getResource("staff_list.xlsx").getPath()));
+            Init.parseStaffs(Init.readExcel(Init.class.getResource("staff_list.xlsx")));
 
     @Test
     public void testReadExcel() {
         // check that only non empty rows where read
-        assertEquals(Init.readExcel(Init.class.getResource("staff_list.xlsx").getPath()).size(), 8);
-        assertEquals(Init.readExcel(Init.class.getResource("menu_list.xlsx").getPath()).size(), 9);
-        assertEquals(
-                Init.readExcel(Init.class.getResource("branch_list.xlsx").getPath()).size(), 4);
+        assertEquals(Init.readExcel(Init.class.getResource("staff_list.xlsx")).size(), 8);
+        assertEquals(Init.readExcel(Init.class.getResource("menu_list.xlsx")).size(), 9);
+        assertEquals(Init.readExcel(Init.class.getResource("branch_list.xlsx")).size(), 4);
     }
 
     @Test
@@ -91,7 +90,7 @@ public class InitTest {
     }
 
     @Test
-    public void testInitChainResources() {
+    public void testInitChainResources() throws MalformedURLException {
         Chain chain = Init.initChain(new Args());
         assertEquals(
                 chain.getAdmin(),
@@ -134,7 +133,7 @@ public class InitTest {
     }
 
     @Test
-    public void testInitChainOverride() {
+    public void testInitChainOverride() throws MalformedURLException {
         Chain chain =
                 Init.initChain(
                         new Args() {

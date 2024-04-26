@@ -28,7 +28,7 @@ public class AdminRole implements IRole {
 
     /**
      * Get actions that the role is authorised to take.
-     * 
+     *
      * @return Set of actions that the role is authorised to take.
      */
     public static List<IAdminAction> getPromotionAction() {
@@ -40,7 +40,7 @@ public class AdminRole implements IRole {
 
     /**
      * Get actions that the role is authorised to take.
-     * 
+     *
      * @return Set of actions that the role is authorised to take.
      */
     public static List<IAdminAction> getStaffAction() {
@@ -54,7 +54,7 @@ public class AdminRole implements IRole {
 
     /**
      * Get actions that the role is authorised to take.
-     * 
+     *
      * @return Set of actions that the role is authorised to take.
      */
     public static List<IAdminAction> getPaymentAction() {
@@ -66,7 +66,7 @@ public class AdminRole implements IRole {
 
     /**
      * Get actions that the role is authorised to take.
-     * 
+     *
      * @return Set of actions that the role is authorised to take.
      */
     public static List<IAdminAction> getBranchAction() {

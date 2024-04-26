@@ -11,9 +11,9 @@ import java.util.Scanner;
 public class Application {
     /**
      * Run the Fast food Ordering Management System application.
-     * 
+     *
      * @param args Command line arguments.
-     * @param in   Stdin scanner used by action to read user input.
+     * @param in Stdin scanner used by action to read user input.
      */
     protected static void run(String[] args, Scanner in) {
         // parse command line args

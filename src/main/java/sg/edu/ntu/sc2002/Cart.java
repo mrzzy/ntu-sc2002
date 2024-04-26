@@ -65,7 +65,7 @@ public class Cart {
 
     /**
      * copy the cart.
-     * 
+     *
      * @return a copy of the cart.
      */
     public ArrayList<Item> copyCart() {
